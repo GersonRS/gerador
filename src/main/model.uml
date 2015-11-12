@@ -1,48 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_Vg4sIISOEeWtOdWQEGeBEQ" name="Model">
-  <packageImport>
+  <packageImport xmi:id="_CcrbYIlwEeW895OJNim2Fg">
     <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
   </packageImport>
-  <packagedElement xmi:type="uml:Package" name="main">
+  <packagedElement xmi:type="uml:Package" xmi:id="_CcrbYYlwEeW895OJNim2Fg" name="main">
     <packagedElement xmi:type="uml:Class" xmi:id="Teste" name="Teste">
-      <generalization general="Teste2"/>
-      <ownedAttribute name="num" type="int">
-        <defaultValue xmi:type="uml:LiteralInteger" value="9"/>
+      <generalization xmi:id="_CcrbYolwEeW895OJNim2Fg" general="Teste2"/>
+      <ownedAttribute xmi:id="_CcrbY4lwEeW895OJNim2Fg" name="num" type="int">
+        <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_CcrbZIlwEeW895OJNim2Fg" value="9"/>
       </ownedAttribute>
-      <ownedAttribute  name="palavra" type="String">
-        <defaultValue xmi:type="uml:LiteralString" value="&quot;hahaha&quot;"/>
+      <ownedAttribute xmi:id="_CcrbZYlwEeW895OJNim2Fg" name="palavra" type="String">
+        <defaultValue xmi:type="uml:LiteralString" xmi:id="_CcrbZolwEeW895OJNim2Fg" value="&quot;hahaha&quot;"/>
       </ownedAttribute>
-      <ownedAttribute name="test" type="Teste2"/>
-      <ownedAttribute name="inteiro" type="int"/>
-      <ownedAttribute name="n" type="int">
-      	<defaultValue xmi:type="uml:LiteralInteger" value="86"/>
+      <ownedAttribute xmi:id="_CcrbZ4lwEeW895OJNim2Fg" name="test" type="Teste2"/>
+      <ownedAttribute xmi:id="_CcrbaIlwEeW895OJNim2Fg" name="inteiro" type="int"/>
+      <ownedAttribute xmi:id="_CcrbaYlwEeW895OJNim2Fg" name="n" type="int">
+        <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_CcrbaolwEeW895OJNim2Fg" value="86"/>
       </ownedAttribute>
-      <ownedOperation name="Operation1" visibility="protected">
-        <ownedParameter name="n" type="int"/>
-        <ownedParameter name="aa">
+      <ownedOperation xmi:id="_Ccrba4lwEeW895OJNim2Fg" name="Operation1" visibility="protected">
+        <ownedParameter xmi:id="_CcrbbIlwEeW895OJNim2Fg" name="n" type="int"/>
+        <ownedParameter xmi:id="_CcrbbYlwEeW895OJNim2Fg" name="aa">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
         </ownedParameter>
-        <ownedParameter name="s" direction="return">
+        <ownedParameter xmi:id="_CcrbbolwEeW895OJNim2Fg" name="s" direction="return">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
         </ownedParameter>
       </ownedOperation>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="Teste2" name="Teste2">
-      <ownedAttribute name="nome">
+      <ownedAttribute xmi:id="_Ccrbb4lwEeW895OJNim2Fg" name="nome">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
       </ownedAttribute>
-      <ownedAttribute name="outro" type="String"/>
-      <ownedOperation name="Operation" concurrency="concurrent">
-        <ownedParameter name="nome">
+      <ownedAttribute xmi:id="_CcrbcIlwEeW895OJNim2Fg" name="outro" type="String"/>
+      <ownedOperation xmi:id="_CcrbcYlwEeW895OJNim2Fg" name="Operation" concurrency="concurrent">
+        <ownedParameter xmi:id="_CcrbcolwEeW895OJNim2Fg" name="nome">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
         </ownedParameter>
-        <ownedParameter name="segundoNome">
+        <ownedParameter xmi:id="_Ccrbc4lwEeW895OJNim2Fg" name="segundoNome">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
         </ownedParameter>
       </ownedOperation>
     </packagedElement>
     <packagedElement xmi:type="uml:PrimitiveType" xmi:id="String" name="String"/>
     <packagedElement xmi:type="uml:PrimitiveType" xmi:id="Integer" name="Integer"/>
-  	<packagedElement xmi:type="uml:PrimitiveType" xmi:id="int" name="int"/>
+    <packagedElement xmi:type="uml:PrimitiveType" xmi:id="int" name="int"/>
   </packagedElement>
 </uml:Model>

@@ -27,6 +27,7 @@
 // [protected ('for imports')]
 import java.util.*;
 import rpg.*;
+import java.awt.Graphics2D;
 // [/protected]
 [/template]
 

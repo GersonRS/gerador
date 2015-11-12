@@ -1,6 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Profile xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_UM36MITIEeWh7p0Tn9DKLw" name="Profile" metaclassReference="_YMLBUITIEeWh7p0Tn9DKLw _VaFRoIlREeWD0pc--njHrg" metamodelReference="_UM36MYTIEeWh7p0Tn9DKLw">
+<uml:Profile xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_UM36MITIEeWh7p0Tn9DKLw" name="Profile" metaclassReference="_YMLBUITIEeWh7p0Tn9DKLw" metamodelReference="_UM36MYTIEeWh7p0Tn9DKLw">
   <eAnnotations xmi:id="_vluhsITIEeWh7p0Tn9DKLw" source="http://www.eclipse.org/uml2/2.0.0/UML">
+    <contents xmi:type="ecore:EPackage" xmi:id="_IDwYoIlwEeW895OJNim2Fg" name="Profile" nsURI="http:///schemas/Profile/_H-5GwIlwEeW895OJNim2Fg/4" nsPrefix="Profile">
+      <eAnnotations xmi:id="_IDwYr4lwEeW895OJNim2Fg" source="PapyrusVersion">
+        <details xmi:id="_IDwYsIlwEeW895OJNim2Fg" key="Version" value="0.0.5"/>
+        <details xmi:id="_IDwYsYlwEeW895OJNim2Fg" key="Comment" value=""/>
+        <details xmi:id="_IDwYsolwEeW895OJNim2Fg" key="Copyright" value=""/>
+        <details xmi:id="_IDwYs4lwEeW895OJNim2Fg" key="Date" value="2015-11-12"/>
+        <details xmi:id="_IDwYtIlwEeW895OJNim2Fg" key="Author" value=""/>
+      </eAnnotations>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_IDwYoYlwEeW895OJNim2Fg" name="Personagem" eSuperTypes="_IDwYqIlwEeW895OJNim2Fg">
+        <eAnnotations xmi:id="_IDwYoolwEeW895OJNim2Fg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_Yy2m0ITIEeWh7p0Tn9DKLw"/>
+        <eAnnotations xmi:id="_IDwYo4lwEeW895OJNim2Fg" source="duplicates">
+          <contents xmi:type="ecore:EReference" xmi:id="_IDwYpIlwEeW895OJNim2Fg" name="base_Class" ordered="false" lowerBound="1">
+            <eAnnotations xmi:id="_IDwYpYlwEeW895OJNim2Fg" source="redefines" references="_IDwYqolwEeW895OJNim2Fg"/>
+            <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          </contents>
+        </eAnnotations>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EClass" xmi:id="_IDwYqIlwEeW895OJNim2Fg" name="Elemento">
+        <eAnnotations xmi:id="_IDwYqYlwEeW895OJNim2Fg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_gPhMsITIEeWh7p0Tn9DKLw"/>
+        <eStructuralFeatures xmi:type="ecore:EReference" xmi:id="_IDwYqolwEeW895OJNim2Fg" name="base_Class" ordered="false" lowerBound="1">
+          <eType xmi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+        </eStructuralFeatures>
+      </eClassifiers>
+      <eClassifiers xmi:type="ecore:EDataType" xmi:id="_IDwYrIlwEeW895OJNim2Fg" name="Obstaculo" instanceClassName="Obstaculo">
+        <eAnnotations xmi:id="_IDwYrYlwEeW895OJNim2Fg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_niXvQITIEeWh7p0Tn9DKLw"/>
+      </eClassifiers>
+    </contents>
     <contents xmi:type="ecore:EPackage" xmi:id="_bof7sIlREeWD0pc--njHrg" name="Profile" nsURI="http:///schemas/Profile/_bmRHEIlREeWD0pc--njHrg/3" nsPrefix="Profile">
       <eAnnotations xmi:id="_bof7w4lREeWD0pc--njHrg" source="PapyrusVersion">
         <details xmi:id="_bof7xIlREeWD0pc--njHrg" key="Version" value="0.0.4"/>
@@ -28,7 +55,7 @@
         <eAnnotations xmi:id="_bof7vYlREeWD0pc--njHrg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_niXvQITIEeWh7p0Tn9DKLw"/>
       </eClassifiers>
       <eClassifiers xmi:type="ecore:EDataType" xmi:id="_bof7volREeWD0pc--njHrg" name="Graphics2D" instanceClassName="Graphics2D">
-        <eAnnotations xmi:id="_bof7v4lREeWD0pc--njHrg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_1y6PkIlQEeWD0pc--njHrg"/>
+        <eAnnotations xmi:id="_bof7v4lREeWD0pc--njHrg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
     </contents>
     <contents xmi:type="ecore:EPackage" xmi:id="_4uEZIIlQEeWD0pc--njHrg" name="Profile" nsURI="http:///schemas/Profile/_30fs0IlQEeWD0pc--njHrg/2" nsPrefix="Profile">
@@ -58,7 +85,7 @@
         <eAnnotations xmi:id="_4uEZLYlQEeWD0pc--njHrg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_niXvQITIEeWh7p0Tn9DKLw"/>
       </eClassifiers>
       <eClassifiers xmi:type="ecore:EDataType" xmi:id="_4uEZLolQEeWD0pc--njHrg" name="Graphics2D" instanceClassName="Graphics2D">
-        <eAnnotations xmi:id="_4uEZL4lQEeWD0pc--njHrg" source="http://www.eclipse.org/uml2/2.0.0/UML" references="_1y6PkIlQEeWD0pc--njHrg"/>
+        <eAnnotations xmi:id="_4uEZL4lQEeWD0pc--njHrg" source="http://www.eclipse.org/uml2/2.0.0/UML"/>
       </eClassifiers>
     </contents>
     <contents xmi:type="ecore:EPackage" xmi:id="_1wi-8IgaEeWPK40kq4TYnA" name="Profile" nsURI="http:///schemas/Profile/_0mEI0IgaEeWPK40kq4TYnA/1" nsPrefix="Profile">
@@ -113,9 +140,6 @@
   <elementImport xmi:id="_YMLBUITIEeWh7p0Tn9DKLw" alias="Class">
     <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Class"/>
   </elementImport>
-  <elementImport xmi:id="_VaFRoIlREeWD0pc--njHrg" alias="PrimitiveType">
-    <importedElement xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#PrimitiveType"/>
-  </elementImport>
   <packageImport xmi:id="_UM36MYTIEeWh7p0Tn9DKLw">
     <importedPackage xmi:type="uml:Model" href="pathmap://UML_METAMODELS/UML.metamodel.uml#_0"/>
   </packageImport>
@@ -142,6 +166,4 @@
   <packagedElement xmi:type="uml:Extension" xmi:id="_w-lr0YgaEeWPK40kq4TYnA" name="E_Personagem_Class1" memberEnd="_w-lr0ogaEeWPK40kq4TYnA _w-lr0IgaEeWPK40kq4TYnA">
     <ownedEnd xmi:type="uml:ExtensionEnd" xmi:id="_w-lr0ogaEeWPK40kq4TYnA" name="extension_Personagem" type="_Yy2m0ITIEeWh7p0Tn9DKLw" aggregation="composite" association="_w-lr0YgaEeWPK40kq4TYnA"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_1y6PkIlQEeWD0pc--njHrg" name="Graphics2D"/>
-  <packagedElement xmi:type="uml:DataType" xmi:id="_aJb8sIlREeWD0pc--njHrg" name="Graphics"/>
 </uml:Profile>
