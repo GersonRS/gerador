@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_Vg4sIISOEeWtOdWQEGeBEQ" name="Model">
+  <packageImport>
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Package" name="main">
+    <packagedElement xmi:type="uml:Class" xmi:id="Teste" name="Teste">
+      <generalization general="Teste2"/>
+      <ownedAttribute name="num" type="int">
+        <defaultValue xmi:type="uml:LiteralInteger" value="9"/>
+      </ownedAttribute>
+      <ownedAttribute  name="palavra" type="String">
+        <defaultValue xmi:type="uml:LiteralString" value="&quot;hahaha&quot;"/>
+      </ownedAttribute>
+      <ownedAttribute name="test" type="Teste2"/>
+      <ownedAttribute name="inteiro" type="int"/>
+      <ownedAttribute name="n" type="int">
+      	<defaultValue xmi:type="uml:LiteralInteger" value="86"/>
+      </ownedAttribute>
+      <ownedOperation name="Operation1" visibility="protected">
+        <ownedParameter name="n" type="int"/>
+        <ownedParameter name="aa">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+        <ownedParameter name="s" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="Teste2" name="Teste2">
+      <ownedAttribute name="nome">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+      <ownedAttribute name="outro" type="String"/>
+      <ownedOperation name="Operation" concurrency="concurrent">
+        <ownedParameter name="nome">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+        <ownedParameter name="segundoNome">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:PrimitiveType" xmi:id="String" name="String"/>
+    <packagedElement xmi:type="uml:PrimitiveType" xmi:id="Integer" name="Integer"/>
+  	<packagedElement xmi:type="uml:PrimitiveType" xmi:id="int" name="int"/>
+  </packagedElement>
+</uml:Model>

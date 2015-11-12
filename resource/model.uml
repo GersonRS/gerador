@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_3BOj0IkDEeW68-rLcCPRqw" name="Model">
+  <packageImport xmi:id="_3BOj0YkDEeW68-rLcCPRqw">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Package" xmi:id="_7L0U8IkDEeW68-rLcCPRqw" name="game"/>
+  <packagedElement xmi:type="uml:Model" xmi:id="_9gHS0IkDEeW68-rLcCPRqw" name="coreBase">
+    <packagedElement xmi:type="uml:Class" xmi:id="_Gh4_4IkFEeW68-rLcCPRqw" name="GameBase" clientDependency="_rZIIkIlhEeW8q8DTHKD6Ow" isAbstract="true">
+      <ownedAttribute xmi:id="_Bpy40IljEeW8q8DTHKD6Ow" name="scenery" type="_AlIW0IljEeW8q8DTHKD6Ow" aggregation="composite" association="_Bpy404ljEeW8q8DTHKD6Ow">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Bpy40YljEeW8q8DTHKD6Ow" value="*"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Bpy40oljEeW8q8DTHKD6Ow"/>
+      </ownedAttribute>
+      <interfaceRealization xmi:id="_rZIIkIlhEeW8q8DTHKD6Ow" name="InterfaceRealization1" supplier="_QWLVEIlgEeW8q8DTHKD6Ow" client="_Gh4_4IkFEeW68-rLcCPRqw" contract="_QWLVEIlgEeW8q8DTHKD6Ow"/>
+      <ownedOperation xmi:id="_iHZuQIlQEeWD0pc--njHrg" name="onLoad" isAbstract="true"/>
+      <ownedOperation xmi:id="_j5zgAIlQEeWD0pc--njHrg" name="onUpdate" isAbstract="true">
+        <ownedParameter xmi:id="_opwA8IlQEeWD0pc--njHrg" name="currentTick" isUnique="false">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:id="_rAyUUIlREeWD0pc--njHrg" name="onRender" isAbstract="true">
+        <ownedParameter xmi:id="_0t6g8IlREeWD0pc--njHrg" name="g" type="_Gh4_4IkFEeW68-rLcCPRqw" isUnique="false"/>
+      </ownedOperation>
+      <ownedOperation xmi:id="_1tu_MIlREeWD0pc--njHrg" name="onRenderHud" isAbstract="true">
+        <ownedParameter xmi:id="_4XpAsIlREeWD0pc--njHrg" name="g" type="_Gh4_4IkFEeW68-rLcCPRqw" isUnique="false"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_63km0IlREeWD0pc--njHrg" name="Elemento" clientDependency="_7OZ_MIlhEeW8q8DTHKD6Ow" isAbstract="true">
+      <ownedAttribute xmi:id="_6LrBwIlfEeW8q8DTHKD6Ow" name="gameBase" type="_Gh4_4IkFEeW68-rLcCPRqw" association="_6LrBw4lfEeW8q8DTHKD6Ow">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_6LrBwYlfEeW8q8DTHKD6Ow" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_6LrBwolfEeW8q8DTHKD6Ow" value="1"/>
+      </ownedAttribute>
+      <interfaceRealization xmi:id="_7OZ_MIlhEeW8q8DTHKD6Ow" name="InterfaceRealization2" supplier="_4xDL8IlhEeW8q8DTHKD6Ow" client="_63km0IlREeWD0pc--njHrg" contract="_4xDL8IlhEeW8q8DTHKD6Ow"/>
+      <ownedOperation xmi:id="__Iaw8IlREeWD0pc--njHrg" name="update" isAbstract="true">
+        <ownedParameter xmi:id="_DUgW4IlSEeWD0pc--njHrg" name="currentTick" isUnique="false">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:id="_OswBgIlSEeWD0pc--njHrg" name="render" isAbstract="true">
+        <ownedParameter xmi:id="_R8JVsIlSEeWD0pc--njHrg" name="g" type="_Gh4_4IkFEeW68-rLcCPRqw" isUnique="false"/>
+      </ownedOperation>
+      <ownedOperation xmi:id="_WaiMkIlSEeWD0pc--njHrg" name="Elemento">
+        <ownedParameter xmi:id="_-3KMYIlSEeWD0pc--njHrg" name="x" isUnique="false">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+        <ownedParameter xmi:id="_B-Nc4IlTEeWD0pc--njHrg" name="y" isUnique="false">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+        <ownedParameter xmi:id="_SEqjEIlTEeWD0pc--njHrg" name="width" isUnique="false">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+        <ownedParameter xmi:id="_TzVEUIlTEeWD0pc--njHrg" name="height" isUnique="false">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+        <ownedParameter xmi:id="_bUCcsIlTEeWD0pc--njHrg" name="Construtor" type="_XeXysIlTEeWD0pc--njHrg" isUnique="false" direction="return"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_XeXysIlTEeWD0pc--njHrg" name=" "/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_MGwEEIlcEeW8q8DTHKD6Ow" name="Personagem">
+      <generalization xmi:id="_bluTgIlcEeW8q8DTHKD6Ow" general="_63km0IlREeWD0pc--njHrg"/>
+      <ownedOperation xmi:id="_W_mc8IlcEeW8q8DTHKD6Ow" name="carregaImagem" visibility="package">
+        <ownedParameter xmi:id="_aUDQQIlcEeW8q8DTHKD6Ow" name="img" isUnique="false">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        </ownedParameter>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_6LrBw4lfEeW8q8DTHKD6Ow" name="gameBase_elemento_1" memberEnd="_6LrBxIlfEeW8q8DTHKD6Ow _6LrBwIlfEeW8q8DTHKD6Ow">
+      <ownedEnd xmi:id="_6LrBxIlfEeW8q8DTHKD6Ow" name="elemento" type="_63km0IlREeWD0pc--njHrg" association="_6LrBw4lfEeW8q8DTHKD6Ow">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_6LrBxYlfEeW8q8DTHKD6Ow" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_6LrBxolfEeW8q8DTHKD6Ow" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="__DaMw4lfEeW8q8DTHKD6Ow" name="elemento_gameBase_1"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_KJvA8IlgEeW8q8DTHKD6Ow" name="Obstaculo">
+      <generalization xmi:id="_LpMokIlgEeW8q8DTHKD6Ow" general="_63km0IlREeWD0pc--njHrg"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_QWLVEIlgEeW8q8DTHKD6Ow" name="Interacao" isAbstract="true">
+      <generalization xmi:id="_0HN6EIlhEeW8q8DTHKD6Ow" general="_dQjEUIlhEeW8q8DTHKD6Ow"/>
+      <generalization xmi:id="_0zwP8IlhEeW8q8DTHKD6Ow" general="_f_7bsIlhEeW8q8DTHKD6Ow"/>
+      <ownedOperation xmi:id="_VOcrkIlgEeW8q8DTHKD6Ow" name="isPressed" isAbstract="true">
+        <ownedParameter xmi:id="_dAfrkIlgEeW8q8DTHKD6Ow" name="return" isUnique="false" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+        <ownedParameter xmi:id="_gOre0IlgEeW8q8DTHKD6Ow" name="keyId" isUnique="false">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+      </ownedOperation>
+      <ownedOperation xmi:id="_m7MksIlhEeW8q8DTHKD6Ow" name="isJustPressed"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_dQjEUIlhEeW8q8DTHKD6Ow" name="KeyListener"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_f_7bsIlhEeW8q8DTHKD6Ow" name="MouseInputListener"/>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_4xDL8IlhEeW8q8DTHKD6Ow" name="Acao">
+      <generalization xmi:id="_xhy6gIliEeW8q8DTHKD6Ow" general="_ZUmWsIliEeW8q8DTHKD6Ow"/>
+      <generalization xmi:id="_yJ8foIliEeW8q8DTHKD6Ow" general="_k3VaEIliEeW8q8DTHKD6Ow"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_ZUmWsIliEeW8q8DTHKD6Ow" name="Movimento" isAbstract="true">
+      <ownedOperation xmi:id="_cnK6sIliEeW8q8DTHKD6Ow" name="mover" isAbstract="true">
+        <ownedParameter xmi:id="_htCoUIliEeW8q8DTHKD6Ow" name="i" type="_QWLVEIlgEeW8q8DTHKD6Ow" isUnique="false"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_k3VaEIliEeW8q8DTHKD6Ow" name="Colisao" isAbstract="true">
+      <ownedOperation xmi:id="_mM43wIliEeW8q8DTHKD6Ow" name="getColisao" isAbstract="true">
+        <ownedParameter xmi:id="_vAVqYIliEeW8q8DTHKD6Ow" name="return" type="_Gh4_4IkFEeW68-rLcCPRqw" isUnique="false" direction="return"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_8x2Sc4liEeW8q8DTHKD6Ow" name="scenery_gameBase_1" memberEnd="_8x2SdIliEeW8q8DTHKD6Ow">
+      <ownedEnd xmi:id="_8x2SdIliEeW8q8DTHKD6Ow" name="scenery" association="_8x2Sc4liEeW8q8DTHKD6Ow">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8x2SdYliEeW8q8DTHKD6Ow" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8x2SdoliEeW8q8DTHKD6Ow" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_AlIW0IljEeW8q8DTHKD6Ow" name="Scenery"/>
+    <packagedElement xmi:type="uml:Association" xmi:id="_Bpy404ljEeW8q8DTHKD6Ow" name="gameBase_scenery_1" memberEnd="_Bpy40IljEeW8q8DTHKD6Ow"/>
+  </packagedElement>
+  <profileApplication xmi:id="_DecygIlREeWD0pc--njHrg">
+    <eAnnotations xmi:id="_DfCoYIlREeWD0pc--njHrg" source="http://www.eclipse.org/uml2/2.0.0/UML">
+      <references xmi:type="ecore:EPackage" href="tipos.profile.uml#_4uEZIIlQEeWD0pc--njHrg"/>
+    </eAnnotations>
+    <appliedProfile href="tipos.profile.uml#_UM36MITIEeWh7p0Tn9DKLw"/>
+  </profileApplication>
+</uml:Model>
