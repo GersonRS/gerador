@@ -3,6 +3,43 @@
 [/comment]
 [module common('http://www.eclipse.org/uml2/3.0.0/UML')/]
 
+[template public operationBody(o : Operation)]
+    /**
+     *[for (cmt : Comment | o.ownedComment)] [cmt._body/][/for]
+[for (p : Parameter | o.ownedParameter) ? (p.direction <> ParameterDirectionKind::return)]
+[paramOperationComment(p)/]
+[/for]
+[if (not o.type.oclIsUndefined())]
+[returnOperationComment()/]
+[/if]
+     */
+[if (o.isAbstract)]
+	[if (o.isUnique)]
+	[o.visibility/] [o.returnTypeOperation()/]([o.getInParameter()/]) {
+		[if (not o.type.oclIsUndefined())]
+        // TODO should be implemented
+        return null;
+		[else]
+        // TODO should be implemented
+		[/if]
+    }
+	[else]
+    	[o.visibility/] abstract [o.returnTypeOperation()/]([o.getInParameter()/]);
+	[/if]
+[else]
+    [o.visibility/] [o.returnTypeOperation()/]([o.getInParameter()/]) {
+        // [protected ('for operation '.concat(o.name))]
+		[if (not o.type.oclIsUndefined())]
+        // TODO should be implemented
+        return null;
+		[else]
+        // TODO should be implemented
+		[/if]
+        // [/protected]
+    }
+[/if]
+[/template]
+
 [template public packagePath(cl : Classifier)]
 [cl.getNearestPackage().normalizeName()/]
 [/template]

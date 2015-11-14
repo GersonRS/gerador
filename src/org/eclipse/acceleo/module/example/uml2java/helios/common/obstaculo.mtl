@@ -10,7 +10,17 @@
 [_commentBodyBlock()/]
 
 import java.awt.Graphics2D;
+[for (superC : Class | c.superClass)]
+[for (i : InterfaceRealization | superC.interfaceRealization)]
+[for (interface : Interface | i.contract)]
+[for (cl : Classifier | interface.general)]
+[if (cl.name = 'Colisao')]
 import java.awt.geom.Rectangle2D;
+[/if]
+[/for]
+[/for]
+[/for]
+[/for]
 
 /**
  * 
@@ -29,25 +39,43 @@ public class Obstaculo extends Elemento {
 		this.visivel = true;
 	}
 
-	@Override
-	public Rectangle2D.Double getColisao() {
-		return getPos();
-	}
-
-	@Override
-	public void mover(Interacao i) {
-
-	}
-
-	@Override
-	public void update(int currentTick) {
-
-	}
-
-	@Override
-	public void render(Graphics2D g) {
-
-	}
+[if (not c.isAbstract)]
+[for (superC : Class | c.superClass)]
+	[for (s : Class | superC.superClass)]
+		[for (o : Operation | s.ownedOperation)]
+			[if (o.isAbstract)]
+				[o.setIsUnique(true)/]
+[o.operationBody()/]
+			[/if]
+		[/for]
+		[for (i : Interface | s.getImplementedInterfaces())]
+			[for (sI: Interface | i.general)]
+				[for (o : Operation | sI.ownedOperation)]
+[o.operationBody()/]
+				[/for]
+			[/for]
+		[/for]
+	[/for]
+	[for (o : Operation | superC.ownedOperation)]
+		[if (o.isAbstract)]
+			[o.setIsUnique(true)/]
+[o.operationBody()/]
+		[/if]
+	[/for]
+	[for (i : Interface | superC.getImplementedInterfaces())]
+		[for (superI: Interface | i.general)]
+			[for (o : Operation | superI.ownedOperation)]
+[o.operationBody()/]
+			[/for]
+		[/for]
+	[/for]
+[/for]
+[/if]
+[for (interf : Interface | c.getImplementedInterfaces())]
+[for (o : Operation | interf.ownedOperation)]
+[o.operationBody()/]
+[/for]
+[/for]
 
 }
 [/template]

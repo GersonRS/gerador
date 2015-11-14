@@ -13,8 +13,9 @@
       <generalization xmi:id="_x7urMIlnEeW895OJNim2Fg" general="KeyListener"/>
       <generalization xmi:id="_yZMqUIlnEeW895OJNim2Fg" general="MouseInputListener"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_qBZ48IlnEeW895OJNim2Fg" name="GameBase" clientDependency="_ISgYkIlrEeW895OJNim2Fg" isAbstract="true">
+    <packagedElement xmi:type="uml:Class" xmi:id="_qBZ48IlnEeW895OJNim2Fg" name="GameBase" clientDependency="_ISgYkIlrEeW895OJNim2Fg _BboJkIraEeWsdOYnHSCEsQ" isAbstract="true">
       <interfaceRealization xmi:id="_ISgYkIlrEeW895OJNim2Fg" name="InterfaceRealization1" supplier="_QWLVEIlgEeW8q8DTHKD6Ow" client="_qBZ48IlnEeW895OJNim2Fg" contract="_QWLVEIlgEeW8q8DTHKD6Ow"/>
+      <interfaceRealization xmi:id="_BboJkIraEeWsdOYnHSCEsQ" name="InterfaceRealization2" supplier="_4xDL8IlhEeW8q8DTHKD6Ow" client="_qBZ48IlnEeW895OJNim2Fg" contract="_4xDL8IlhEeW8q8DTHKD6Ow"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_xeanoIloEeW895OJNim2Fg" name="Cenario"/>
     <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_XeXysIlTEeWD0pc--njHrg" name=""/>

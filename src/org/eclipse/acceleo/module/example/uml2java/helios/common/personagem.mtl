@@ -11,7 +11,17 @@
 
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
+[for (superC : Class | c.superClass)]
+[for (i : InterfaceRealization | superC.interfaceRealization)]
+[for (interface : Interface | i.contract)]
+[for (cl : Classifier | interface.general)]
+[if (cl.name = 'Colisao')]
 import java.awt.geom.Rectangle2D;
+[/if]
+[/for]
+[/for]
+[/for]
+[/for]
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -110,8 +120,13 @@ public abstract class Personagem extends Elemento {
 		} else if (speed.y > maxSpeed.y) {
 			speed.y = maxSpeed.y;
 		}
-		//
+		
 		if (speed.y < 0) {
+[for (superC : Class | c.superClass)]
+[for (i : InterfaceRealization | superC.interfaceRealization)]
+[for (interface : Interface | i.contract)]
+[for (cl : Classifier | interface.general)]
+[if (cl.name = 'Colisao')]
 			if (getCollidingEntities()['[ABOVE]'/] != null) {
 				getPos().y = getCollidingEntities()['[ABOVE]'/].getColisao().getY()
 						+ getCollidingEntities()['[ABOVE]'/].getColisao()
@@ -119,48 +134,123 @@ public abstract class Personagem extends Elemento {
 				speed.y = 0;
 				acceleration.y = 0;
 			} else {
+[/if]
+[/for]
+[/for]
+[/for]
+[/for]
 				speed.y += friction;
 				if (speed.y > 0) {
 					speed.y = 0;
 				}
+[for (superC : Class | c.superClass)]
+[for (i : InterfaceRealization | superC.interfaceRealization)]
+[for (interface : Interface | i.contract)]
+[for (cl : Classifier | interface.general)]
+[if (cl.name = 'Colisao')]
 			}
+[/if]
+[/for]
+[/for]
+[/for]
+[/for]
 		} else if (speed.y > 0) {
+[for (superC : Class | c.superClass)]
+[for (i : InterfaceRealization | superC.interfaceRealization)]
+[for (interface : Interface | i.contract)]
+[for (cl : Classifier | interface.general)]
+[if (cl.name = 'Colisao')]
 			if (getCollidingEntities()['[BELOW]'/] != null) {
 				getPos().y = getCollidingEntities()['[BELOW]'/].getColisao().getY()
 						- getPos().height + 0.1;
 				speed.y = 0;
 				acceleration.y = 0;
 			} else {
+[/if]
+[/for]
+[/for]
+[/for]
+[/for]
 				speed.y -= friction;
 				if (speed.y < 0) {
 					speed.y = 0;
 				}
+[for (superC : Class | c.superClass)]
+[for (i : InterfaceRealization | superC.interfaceRealization)]
+[for (interface : Interface | i.contract)]
+[for (cl : Classifier | interface.general)]
+[if (cl.name = 'Colisao')]
 			}
+[/if]
+[/for]
+[/for]
+[/for]
+[/for]
 		}
 		if (speed.x < 0) {
+[for (superC : Class | c.superClass)]
+[for (i : InterfaceRealization | superC.interfaceRealization)]
+[for (interface : Interface | i.contract)]
+[for (cl : Classifier | interface.general)]
+[if (cl.name = 'Colisao')]
 			if (getCollidingEntities()['[LEFT]'/] != null) {
 				getPos().x = getCollidingEntities()['[LEFT]'/].getPos().x
 						+ getCollidingEntities()['[LEFT]'/].getPos().width - 0.1;
 				speed.x = 0;
 				acceleration.x = 0;
 			} else {
+[/if]
+[/for]
+[/for]
+[/for]
+[/for]
 				speed.x += friction;
 				if (speed.x > 0) {
 					speed.x = 0;
 				}
+[for (superC : Class | c.superClass)]
+[for (i : InterfaceRealization | superC.interfaceRealization)]
+[for (interface : Interface | i.contract)]
+[for (cl : Classifier | interface.general)]
+[if (cl.name = 'Colisao')]
 			}
+[/if]
+[/for]
+[/for]
+[/for]
+[/for]
 		} else if (speed.x > 0) {
+[for (superC : Class | c.superClass)]
+[for (i : InterfaceRealization | superC.interfaceRealization)]
+[for (interface : Interface | i.contract)]
+[for (cl : Classifier | interface.general)]
+[if (cl.name = 'Colisao')]
 			if (getCollidingEntities()['[RIGHT]'/] != null) {
 				getPos().x = getCollidingEntities()['[RIGHT]'/].getPos().x
 						- getPos().width + 0.1;
 				speed.x = 0;
 				acceleration.x = 0;
 			} else {
+[/if]
+[/for]
+[/for]
+[/for]
+[/for]
 				speed.x -= friction;
 				if (speed.x < 0) {
 					speed.x = 0;
 				}
+[for (superC : Class | c.superClass)]
+[for (i : InterfaceRealization | superC.interfaceRealization)]
+[for (interface : Interface | i.contract)]
+[for (cl : Classifier | interface.general)]
+[if (cl.name = 'Colisao')]
 			}
+[/if]
+[/for]
+[/for]
+[/for]
+[/for]
 		}
 		getPos().x += speed.x;
 		getPos().y += speed.y;
@@ -202,6 +292,11 @@ public abstract class Personagem extends Elemento {
 				(int) ((direction * getPos().height) + getPos().height), null);
 	}
 
+[for (superC : Class | c.superClass)]
+[for (i : InterfaceRealization | superC.interfaceRealization)]
+[for (interface : Interface | i.contract)]
+[for (cl : Classifier | interface.general)]
+[if (cl.name = 'Colisao')]
 	@Override
 	public Rectangle2D.Double getColisao() {
 		Rectangle2D.Double r = new Rectangle2D.Double();
@@ -211,6 +306,11 @@ public abstract class Personagem extends Elemento {
 		r.height = getPos().height / 2;
 		return r;
 	}
+[/if]
+[/for]
+[/for]
+[/for]
+[/for]
 
 }
 [/template]

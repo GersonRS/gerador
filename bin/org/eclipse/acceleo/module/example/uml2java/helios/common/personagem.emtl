@@ -21,47 +21,677 @@
           <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
         </argument>
       </body>
-      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;&#xA;import java.awt.Graphics2D;&#xA;import java.awt.geom.Point2D;&#xA;import java.awt.geom.Rectangle2D;&#xA;import java.awt.image.BufferedImage;&#xA;import java.io.IOException;&#xA;&#xA;import javax.imageio.ImageIO;&#xA;&#xA;/**&#xA; * &#xA; * Elemento Personagem especializado do jogo.&#xA; * &#xA; */&#xA;public abstract class Personagem extends Elemento {&#xA;&#xA;&#x9;protected BufferedImage image;&#xA;&#x9;protected final int ABOVE = 0;&#xA;&#x9;protected final int RIGHT = 1;&#xA;&#x9;protected final int BELOW = 2;&#xA;&#x9;protected final int LEFT = 3;&#xA;&#x9;protected Point2D.Double speed;&#xA;&#x9;protected Point2D.Double acceleration;&#xA;&#x9;protected Point2D.Double maxSpeed;&#xA;&#x9;protected double friction;&#xA;&#x9;protected int animates;&#xA;&#x9;protected int numFrames;&#xA;&#x9;protected int direction;&#xA;&#x9;protected int state;&#xA;&#x9;protected final int STATE_STANDING = 0;&#xA;&#x9;protected final int STATE_WALKING = 1;&#xA;&#x9;protected final int STATE_ATACK = 2;&#xA;&#x9;private int stepInterval;&#xA;&#x9;private int lastStepTick;&#xA;&#xA;&#x9;/**&#xA;&#x9; * &#xA;&#x9; * Crie um novo Personagem.&#xA;&#x9; * &#xA;&#x9; */&#xA;&#x9;public Personagem(){&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * &#xA;&#x9; * Crie um novo Elemento.&#xA;&#x9; * &#xA;&#x9; * @param x&#xA;&#x9; *            posição x do personagem&#xA;&#x9; * @param y&#xA;&#x9; *            posição y do personagem&#xA;&#x9; * @param width&#xA;&#x9; *            largura do personagem&#xA;&#x9; * @param height&#xA;&#x9; *            altura do personagem&#xA;&#x9; * @param numframes&#xA;&#x9; *            numero de frames que existe na sprite do personagem&#xA;&#x9; * @param img&#xA;&#x9; *            nome da imagem da sprite do personagem&#xA;&#x9; *            &#xA;&#x9; */&#xA;&#x9;public Personagem(int x, int y, int width, int height, int numFrames,&#xA;&#x9;&#x9;&#x9;String img) throws IOException {&#xA;&#x9;&#x9;super(x, y, width, height);&#xA;&#x9;&#x9;this.numFrames = numFrames;&#xA;&#x9;&#x9;this.friction = 0.3;&#xA;&#x9;&#x9;this.stepInterval = 20;&#xA;&#x9;&#x9;this.setAtivo(true);&#xA;&#x9;&#x9;this.visivel = true;&#xA;&#x9;&#x9;speed = new Point2D.Double();&#xA;&#x9;&#x9;acceleration = new Point2D.Double();&#xA;&#x9;&#x9;maxSpeed = new Point2D.Double(2, 2);&#xA;&#x9;&#x9;carregaImagem(img);&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * &#xA;&#x9; * metodo que carrega a imagem da sprite do personagem.&#xA;&#x9; * &#xA;&#x9; * @param img&#xA;&#x9; *            nome da imagem.&#xA;&#x9; * &#xA;&#x9; */&#xA;&#x9;private void carregaImagem(String img) throws IOException {&#xA;&#x9;&#x9;image = ImageIO.read(getClass().getClassLoader().getResource(&#xA;&#x9;&#x9;&#x9;&#x9;&quot;images/&quot; + img + &quot;.png&quot;));&#xA;&#x9;}&#xA;&#xA;&#x9;@Override&#xA;&#x9;public void update(int currentTick) {&#xA;&#x9;&#x9;speed.x += acceleration.x;&#xA;&#x9;&#x9;if (speed.x &lt; -maxSpeed.x) {&#xA;&#x9;&#x9;&#x9;speed.x = -maxSpeed.x;&#xA;&#x9;&#x9;} else if (speed.x > maxSpeed.x) {&#xA;&#x9;&#x9;&#x9;speed.x = maxSpeed.x;&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;speed.y += acceleration.y;&#xA;&#x9;&#x9;if (speed.y &lt; -maxSpeed.y) {&#xA;&#x9;&#x9;&#x9;speed.y = -maxSpeed.y;&#xA;&#x9;&#x9;} else if (speed.y > maxSpeed.y) {&#xA;&#x9;&#x9;&#x9;speed.y = maxSpeed.y;&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;//&#xA;&#x9;&#x9;if (speed.y &lt; 0) {&#xA;&#x9;&#x9;&#x9;if (getCollidingEntities()"/>
-      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[ABOVE]">
-        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;&#xA;import java.awt.Graphics2D;&#xA;import java.awt.geom.Point2D;&#xA;"/>
+      <body xsi:type="mtl:ForBlock">
+        <body xsi:type="mtl:ForBlock">
+          <body xsi:type="mtl:ForBlock">
+            <body xsi:type="mtl:ForBlock">
+              <body xsi:type="mtl:IfBlock">
+                <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="import java.awt.geom.Rectangle2D;&#xA;"/>
+                <ifExpr xsi:type="ocl.ecore:OperationCallExp">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+                  <source xsi:type="ocl.ecore:PropertyCallExp">
+                    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                    <source xsi:type="ocl.ecore:VariableExp" name="cl" referredVariable="/0/generateClassPersonagem/@body.4/@body.0/@body.0/@body.0/cl">
+                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+                    </source>
+                    <referredProperty xsi:type="ecore:EAttribute" href="http://www.eclipse.org/uml2/3.0.0/UML#//NamedElement/name"/>
+                  </source>
+                  <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="Colisao">
+                    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                  </argument>
+                  <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/="/>
+                </ifExpr>
+              </body>
+              <loopVariable name="cl">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+              </loopVariable>
+              <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/8/Set(Classifier)">
+                <source xsi:type="ocl.ecore:VariableExp" name="interface" referredVariable="/0/generateClassPersonagem/@body.4/@body.0/@body.0/interface">
+                  <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+                </source>
+                <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier/general"/>
+              </iterSet>
+            </body>
+            <loopVariable name="interface">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+            </loopVariable>
+            <iterSet xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+              <source xsi:type="ocl.ecore:VariableExp" name="i" referredVariable="/0/generateClassPersonagem/@body.4/@body.0/i">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+              </source>
+              <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization/contract"/>
+            </iterSet>
+          </body>
+          <loopVariable name="i">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+          </loopVariable>
+          <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/8/Set(InterfaceRealization)">
+            <source xsi:type="ocl.ecore:VariableExp" name="superC" referredVariable="/0/generateClassPersonagem/@body.4/superC">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+            </source>
+            <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//BehavioredClassifier/interfaceRealization"/>
+          </iterSet>
+        </body>
+        <loopVariable name="superC">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+        </loopVariable>
+        <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/8/Set(Class)">
+          <source xsi:type="ocl.ecore:VariableExp" name="c" referredVariable="/0/generateClassPersonagem/c">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          </source>
+          <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class/superClass"/>
+        </iterSet>
       </body>
-      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" != null) {&#xA;&#x9;&#x9;&#x9;&#x9;getPos().y = getCollidingEntities()"/>
-      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[ABOVE]">
-        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="import java.awt.image.BufferedImage;&#xA;import java.io.IOException;&#xA;&#xA;import javax.imageio.ImageIO;&#xA;&#xA;/**&#xA; * &#xA; * Elemento Personagem especializado do jogo.&#xA; * &#xA; */&#xA;public abstract class Personagem extends Elemento {&#xA;&#xA;&#x9;protected BufferedImage image;&#xA;&#x9;protected final int ABOVE = 0;&#xA;&#x9;protected final int RIGHT = 1;&#xA;&#x9;protected final int BELOW = 2;&#xA;&#x9;protected final int LEFT = 3;&#xA;&#x9;protected Point2D.Double speed;&#xA;&#x9;protected Point2D.Double acceleration;&#xA;&#x9;protected Point2D.Double maxSpeed;&#xA;&#x9;protected double friction;&#xA;&#x9;protected int animates;&#xA;&#x9;protected int numFrames;&#xA;&#x9;protected int direction;&#xA;&#x9;protected int state;&#xA;&#x9;protected final int STATE_STANDING = 0;&#xA;&#x9;protected final int STATE_WALKING = 1;&#xA;&#x9;protected final int STATE_ATACK = 2;&#xA;&#x9;private int stepInterval;&#xA;&#x9;private int lastStepTick;&#xA;&#xA;&#x9;/**&#xA;&#x9; * &#xA;&#x9; * Crie um novo Personagem.&#xA;&#x9; * &#xA;&#x9; */&#xA;&#x9;public Personagem(){&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * &#xA;&#x9; * Crie um novo Elemento.&#xA;&#x9; * &#xA;&#x9; * @param x&#xA;&#x9; *            posição x do personagem&#xA;&#x9; * @param y&#xA;&#x9; *            posição y do personagem&#xA;&#x9; * @param width&#xA;&#x9; *            largura do personagem&#xA;&#x9; * @param height&#xA;&#x9; *            altura do personagem&#xA;&#x9; * @param numframes&#xA;&#x9; *            numero de frames que existe na sprite do personagem&#xA;&#x9; * @param img&#xA;&#x9; *            nome da imagem da sprite do personagem&#xA;&#x9; *            &#xA;&#x9; */&#xA;&#x9;public Personagem(int x, int y, int width, int height, int numFrames,&#xA;&#x9;&#x9;&#x9;String img) throws IOException {&#xA;&#x9;&#x9;super(x, y, width, height);&#xA;&#x9;&#x9;this.numFrames = numFrames;&#xA;&#x9;&#x9;this.friction = 0.3;&#xA;&#x9;&#x9;this.stepInterval = 20;&#xA;&#x9;&#x9;this.setAtivo(true);&#xA;&#x9;&#x9;this.visivel = true;&#xA;&#x9;&#x9;speed = new Point2D.Double();&#xA;&#x9;&#x9;acceleration = new Point2D.Double();&#xA;&#x9;&#x9;maxSpeed = new Point2D.Double(2, 2);&#xA;&#x9;&#x9;carregaImagem(img);&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * &#xA;&#x9; * metodo que carrega a imagem da sprite do personagem.&#xA;&#x9; * &#xA;&#x9; * @param img&#xA;&#x9; *            nome da imagem.&#xA;&#x9; * &#xA;&#x9; */&#xA;&#x9;private void carregaImagem(String img) throws IOException {&#xA;&#x9;&#x9;image = ImageIO.read(getClass().getClassLoader().getResource(&#xA;&#x9;&#x9;&#x9;&#x9;&quot;images/&quot; + img + &quot;.png&quot;));&#xA;&#x9;}&#xA;&#xA;&#x9;@Override&#xA;&#x9;public void update(int currentTick) {&#xA;&#x9;&#x9;speed.x += acceleration.x;&#xA;&#x9;&#x9;if (speed.x &lt; -maxSpeed.x) {&#xA;&#x9;&#x9;&#x9;speed.x = -maxSpeed.x;&#xA;&#x9;&#x9;} else if (speed.x > maxSpeed.x) {&#xA;&#x9;&#x9;&#x9;speed.x = maxSpeed.x;&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;speed.y += acceleration.y;&#xA;&#x9;&#x9;if (speed.y &lt; -maxSpeed.y) {&#xA;&#x9;&#x9;&#x9;speed.y = -maxSpeed.y;&#xA;&#x9;&#x9;} else if (speed.y > maxSpeed.y) {&#xA;&#x9;&#x9;&#x9;speed.y = maxSpeed.y;&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;&#xA;&#x9;&#x9;if (speed.y &lt; 0) {&#xA;"/>
+      <body xsi:type="mtl:ForBlock">
+        <body xsi:type="mtl:ForBlock">
+          <body xsi:type="mtl:ForBlock">
+            <body xsi:type="mtl:ForBlock">
+              <body xsi:type="mtl:IfBlock">
+                <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;&#x9;&#x9;if (getCollidingEntities()"/>
+                <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[ABOVE]">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                </body>
+                <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" != null) {&#xA;&#x9;&#x9;&#x9;&#x9;getPos().y = getCollidingEntities()"/>
+                <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[ABOVE]">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                </body>
+                <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=".getColisao().getY()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;+ getCollidingEntities()"/>
+                <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[ABOVE]">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                </body>
+                <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=".getColisao()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;.getHeight() - getColisao().getHeight() - 0.1;&#xA;&#x9;&#x9;&#x9;&#x9;speed.y = 0;&#xA;&#x9;&#x9;&#x9;&#x9;acceleration.y = 0;&#xA;&#x9;&#x9;&#x9;} else {&#xA;"/>
+                <ifExpr xsi:type="ocl.ecore:OperationCallExp">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+                  <source xsi:type="ocl.ecore:PropertyCallExp">
+                    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                    <source xsi:type="ocl.ecore:VariableExp" name="cl" referredVariable="/0/generateClassPersonagem/@body.6/@body.0/@body.0/@body.0/cl">
+                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+                    </source>
+                    <referredProperty xsi:type="ecore:EAttribute" href="http://www.eclipse.org/uml2/3.0.0/UML#//NamedElement/name"/>
+                  </source>
+                  <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="Colisao">
+                    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                  </argument>
+                  <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/="/>
+                </ifExpr>
+              </body>
+              <loopVariable name="cl">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+              </loopVariable>
+              <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/8/Set(Classifier)">
+                <source xsi:type="ocl.ecore:VariableExp" name="interface" referredVariable="/0/generateClassPersonagem/@body.6/@body.0/@body.0/interface">
+                  <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+                </source>
+                <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier/general"/>
+              </iterSet>
+            </body>
+            <loopVariable name="interface">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+            </loopVariable>
+            <iterSet xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+              <source xsi:type="ocl.ecore:VariableExp" name="i" referredVariable="/0/generateClassPersonagem/@body.6/@body.0/i">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+              </source>
+              <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization/contract"/>
+            </iterSet>
+          </body>
+          <loopVariable name="i">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+          </loopVariable>
+          <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/8/Set(InterfaceRealization)">
+            <source xsi:type="ocl.ecore:VariableExp" name="superC" referredVariable="/0/generateClassPersonagem/@body.6/superC">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+            </source>
+            <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//BehavioredClassifier/interfaceRealization"/>
+          </iterSet>
+        </body>
+        <loopVariable name="superC">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+        </loopVariable>
+        <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/8/Set(Class)">
+          <source xsi:type="ocl.ecore:VariableExp" name="c" referredVariable="/0/generateClassPersonagem/c">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          </source>
+          <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class/superClass"/>
+        </iterSet>
       </body>
-      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=".getColisao().getY()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;+ getCollidingEntities()"/>
-      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[ABOVE]">
-        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;&#x9;&#x9;&#x9;speed.y += friction;&#xA;&#x9;&#x9;&#x9;&#x9;if (speed.y > 0) {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;speed.y = 0;&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;"/>
+      <body xsi:type="mtl:ForBlock">
+        <body xsi:type="mtl:ForBlock">
+          <body xsi:type="mtl:ForBlock">
+            <body xsi:type="mtl:ForBlock">
+              <body xsi:type="mtl:IfBlock">
+                <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;&#x9;&#x9;}&#xA;"/>
+                <ifExpr xsi:type="ocl.ecore:OperationCallExp">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+                  <source xsi:type="ocl.ecore:PropertyCallExp">
+                    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                    <source xsi:type="ocl.ecore:VariableExp" name="cl" referredVariable="/0/generateClassPersonagem/@body.8/@body.0/@body.0/@body.0/cl">
+                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+                    </source>
+                    <referredProperty xsi:type="ecore:EAttribute" href="http://www.eclipse.org/uml2/3.0.0/UML#//NamedElement/name"/>
+                  </source>
+                  <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="Colisao">
+                    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                  </argument>
+                  <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/="/>
+                </ifExpr>
+              </body>
+              <loopVariable name="cl">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+              </loopVariable>
+              <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/8/Set(Classifier)">
+                <source xsi:type="ocl.ecore:VariableExp" name="interface" referredVariable="/0/generateClassPersonagem/@body.8/@body.0/@body.0/interface">
+                  <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+                </source>
+                <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier/general"/>
+              </iterSet>
+            </body>
+            <loopVariable name="interface">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+            </loopVariable>
+            <iterSet xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+              <source xsi:type="ocl.ecore:VariableExp" name="i" referredVariable="/0/generateClassPersonagem/@body.8/@body.0/i">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+              </source>
+              <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization/contract"/>
+            </iterSet>
+          </body>
+          <loopVariable name="i">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+          </loopVariable>
+          <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/8/Set(InterfaceRealization)">
+            <source xsi:type="ocl.ecore:VariableExp" name="superC" referredVariable="/0/generateClassPersonagem/@body.8/superC">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+            </source>
+            <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//BehavioredClassifier/interfaceRealization"/>
+          </iterSet>
+        </body>
+        <loopVariable name="superC">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+        </loopVariable>
+        <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/8/Set(Class)">
+          <source xsi:type="ocl.ecore:VariableExp" name="c" referredVariable="/0/generateClassPersonagem/c">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          </source>
+          <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class/superClass"/>
+        </iterSet>
       </body>
-      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=".getColisao()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;.getHeight() - getColisao().getHeight() - 0.1;&#xA;&#x9;&#x9;&#x9;&#x9;speed.y = 0;&#xA;&#x9;&#x9;&#x9;&#x9;acceleration.y = 0;&#xA;&#x9;&#x9;&#x9;} else {&#xA;&#x9;&#x9;&#x9;&#x9;speed.y += friction;&#xA;&#x9;&#x9;&#x9;&#x9;if (speed.y > 0) {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;speed.y = 0;&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;} else if (speed.y > 0) {&#xA;&#x9;&#x9;&#x9;if (getCollidingEntities()"/>
-      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[BELOW]">
-        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;&#x9;} else if (speed.y > 0) {&#xA;"/>
+      <body xsi:type="mtl:ForBlock">
+        <body xsi:type="mtl:ForBlock">
+          <body xsi:type="mtl:ForBlock">
+            <body xsi:type="mtl:ForBlock">
+              <body xsi:type="mtl:IfBlock">
+                <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;&#x9;&#x9;if (getCollidingEntities()"/>
+                <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[BELOW]">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                </body>
+                <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" != null) {&#xA;&#x9;&#x9;&#x9;&#x9;getPos().y = getCollidingEntities()"/>
+                <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[BELOW]">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                </body>
+                <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=".getColisao().getY()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;- getPos().height + 0.1;&#xA;&#x9;&#x9;&#x9;&#x9;speed.y = 0;&#xA;&#x9;&#x9;&#x9;&#x9;acceleration.y = 0;&#xA;&#x9;&#x9;&#x9;} else {&#xA;"/>
+                <ifExpr xsi:type="ocl.ecore:OperationCallExp">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+                  <source xsi:type="ocl.ecore:PropertyCallExp">
+                    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                    <source xsi:type="ocl.ecore:VariableExp" name="cl" referredVariable="/0/generateClassPersonagem/@body.10/@body.0/@body.0/@body.0/cl">
+                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+                    </source>
+                    <referredProperty xsi:type="ecore:EAttribute" href="http://www.eclipse.org/uml2/3.0.0/UML#//NamedElement/name"/>
+                  </source>
+                  <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="Colisao">
+                    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                  </argument>
+                  <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/="/>
+                </ifExpr>
+              </body>
+              <loopVariable name="cl">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+              </loopVariable>
+              <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/8/Set(Classifier)">
+                <source xsi:type="ocl.ecore:VariableExp" name="interface" referredVariable="/0/generateClassPersonagem/@body.10/@body.0/@body.0/interface">
+                  <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+                </source>
+                <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier/general"/>
+              </iterSet>
+            </body>
+            <loopVariable name="interface">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+            </loopVariable>
+            <iterSet xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+              <source xsi:type="ocl.ecore:VariableExp" name="i" referredVariable="/0/generateClassPersonagem/@body.10/@body.0/i">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+              </source>
+              <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization/contract"/>
+            </iterSet>
+          </body>
+          <loopVariable name="i">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+          </loopVariable>
+          <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/8/Set(InterfaceRealization)">
+            <source xsi:type="ocl.ecore:VariableExp" name="superC" referredVariable="/0/generateClassPersonagem/@body.10/superC">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+            </source>
+            <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//BehavioredClassifier/interfaceRealization"/>
+          </iterSet>
+        </body>
+        <loopVariable name="superC">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+        </loopVariable>
+        <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/8/Set(Class)">
+          <source xsi:type="ocl.ecore:VariableExp" name="c" referredVariable="/0/generateClassPersonagem/c">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          </source>
+          <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class/superClass"/>
+        </iterSet>
       </body>
-      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" != null) {&#xA;&#x9;&#x9;&#x9;&#x9;getPos().y = getCollidingEntities()"/>
-      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[BELOW]">
-        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;&#x9;&#x9;&#x9;speed.y -= friction;&#xA;&#x9;&#x9;&#x9;&#x9;if (speed.y &lt; 0) {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;speed.y = 0;&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;"/>
+      <body xsi:type="mtl:ForBlock">
+        <body xsi:type="mtl:ForBlock">
+          <body xsi:type="mtl:ForBlock">
+            <body xsi:type="mtl:ForBlock">
+              <body xsi:type="mtl:IfBlock">
+                <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;&#x9;&#x9;}&#xA;"/>
+                <ifExpr xsi:type="ocl.ecore:OperationCallExp">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+                  <source xsi:type="ocl.ecore:PropertyCallExp">
+                    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                    <source xsi:type="ocl.ecore:VariableExp" name="cl" referredVariable="/0/generateClassPersonagem/@body.12/@body.0/@body.0/@body.0/cl">
+                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+                    </source>
+                    <referredProperty xsi:type="ecore:EAttribute" href="http://www.eclipse.org/uml2/3.0.0/UML#//NamedElement/name"/>
+                  </source>
+                  <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="Colisao">
+                    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                  </argument>
+                  <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/="/>
+                </ifExpr>
+              </body>
+              <loopVariable name="cl">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+              </loopVariable>
+              <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/8/Set(Classifier)">
+                <source xsi:type="ocl.ecore:VariableExp" name="interface" referredVariable="/0/generateClassPersonagem/@body.12/@body.0/@body.0/interface">
+                  <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+                </source>
+                <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier/general"/>
+              </iterSet>
+            </body>
+            <loopVariable name="interface">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+            </loopVariable>
+            <iterSet xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+              <source xsi:type="ocl.ecore:VariableExp" name="i" referredVariable="/0/generateClassPersonagem/@body.12/@body.0/i">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+              </source>
+              <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization/contract"/>
+            </iterSet>
+          </body>
+          <loopVariable name="i">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+          </loopVariable>
+          <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/8/Set(InterfaceRealization)">
+            <source xsi:type="ocl.ecore:VariableExp" name="superC" referredVariable="/0/generateClassPersonagem/@body.12/superC">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+            </source>
+            <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//BehavioredClassifier/interfaceRealization"/>
+          </iterSet>
+        </body>
+        <loopVariable name="superC">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+        </loopVariable>
+        <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/8/Set(Class)">
+          <source xsi:type="ocl.ecore:VariableExp" name="c" referredVariable="/0/generateClassPersonagem/c">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          </source>
+          <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class/superClass"/>
+        </iterSet>
       </body>
-      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=".getColisao().getY()&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;- getPos().height + 0.1;&#xA;&#x9;&#x9;&#x9;&#x9;speed.y = 0;&#xA;&#x9;&#x9;&#x9;&#x9;acceleration.y = 0;&#xA;&#x9;&#x9;&#x9;} else {&#xA;&#x9;&#x9;&#x9;&#x9;speed.y -= friction;&#xA;&#x9;&#x9;&#x9;&#x9;if (speed.y &lt; 0) {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;speed.y = 0;&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;if (speed.x &lt; 0) {&#xA;&#x9;&#x9;&#x9;if (getCollidingEntities()"/>
-      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[LEFT]">
-        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;&#x9;}&#xA;&#x9;&#x9;if (speed.x &lt; 0) {&#xA;"/>
+      <body xsi:type="mtl:ForBlock">
+        <body xsi:type="mtl:ForBlock">
+          <body xsi:type="mtl:ForBlock">
+            <body xsi:type="mtl:ForBlock">
+              <body xsi:type="mtl:IfBlock">
+                <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;&#x9;&#x9;if (getCollidingEntities()"/>
+                <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[LEFT]">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                </body>
+                <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" != null) {&#xA;&#x9;&#x9;&#x9;&#x9;getPos().x = getCollidingEntities()"/>
+                <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[LEFT]">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                </body>
+                <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=".getPos().x&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;+ getCollidingEntities()"/>
+                <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[LEFT]">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                </body>
+                <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=".getPos().width - 0.1;&#xA;&#x9;&#x9;&#x9;&#x9;speed.x = 0;&#xA;&#x9;&#x9;&#x9;&#x9;acceleration.x = 0;&#xA;&#x9;&#x9;&#x9;} else {&#xA;"/>
+                <ifExpr xsi:type="ocl.ecore:OperationCallExp">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+                  <source xsi:type="ocl.ecore:PropertyCallExp">
+                    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                    <source xsi:type="ocl.ecore:VariableExp" name="cl" referredVariable="/0/generateClassPersonagem/@body.14/@body.0/@body.0/@body.0/cl">
+                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+                    </source>
+                    <referredProperty xsi:type="ecore:EAttribute" href="http://www.eclipse.org/uml2/3.0.0/UML#//NamedElement/name"/>
+                  </source>
+                  <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="Colisao">
+                    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                  </argument>
+                  <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/="/>
+                </ifExpr>
+              </body>
+              <loopVariable name="cl">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+              </loopVariable>
+              <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/8/Set(Classifier)">
+                <source xsi:type="ocl.ecore:VariableExp" name="interface" referredVariable="/0/generateClassPersonagem/@body.14/@body.0/@body.0/interface">
+                  <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+                </source>
+                <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier/general"/>
+              </iterSet>
+            </body>
+            <loopVariable name="interface">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+            </loopVariable>
+            <iterSet xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+              <source xsi:type="ocl.ecore:VariableExp" name="i" referredVariable="/0/generateClassPersonagem/@body.14/@body.0/i">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+              </source>
+              <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization/contract"/>
+            </iterSet>
+          </body>
+          <loopVariable name="i">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+          </loopVariable>
+          <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/8/Set(InterfaceRealization)">
+            <source xsi:type="ocl.ecore:VariableExp" name="superC" referredVariable="/0/generateClassPersonagem/@body.14/superC">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+            </source>
+            <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//BehavioredClassifier/interfaceRealization"/>
+          </iterSet>
+        </body>
+        <loopVariable name="superC">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+        </loopVariable>
+        <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/8/Set(Class)">
+          <source xsi:type="ocl.ecore:VariableExp" name="c" referredVariable="/0/generateClassPersonagem/c">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          </source>
+          <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class/superClass"/>
+        </iterSet>
       </body>
-      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" != null) {&#xA;&#x9;&#x9;&#x9;&#x9;getPos().x = getCollidingEntities()"/>
-      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[LEFT]">
-        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;&#x9;&#x9;&#x9;speed.x += friction;&#xA;&#x9;&#x9;&#x9;&#x9;if (speed.x > 0) {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;speed.x = 0;&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;"/>
+      <body xsi:type="mtl:ForBlock">
+        <body xsi:type="mtl:ForBlock">
+          <body xsi:type="mtl:ForBlock">
+            <body xsi:type="mtl:ForBlock">
+              <body xsi:type="mtl:IfBlock">
+                <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;&#x9;&#x9;}&#xA;"/>
+                <ifExpr xsi:type="ocl.ecore:OperationCallExp">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+                  <source xsi:type="ocl.ecore:PropertyCallExp">
+                    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                    <source xsi:type="ocl.ecore:VariableExp" name="cl" referredVariable="/0/generateClassPersonagem/@body.16/@body.0/@body.0/@body.0/cl">
+                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+                    </source>
+                    <referredProperty xsi:type="ecore:EAttribute" href="http://www.eclipse.org/uml2/3.0.0/UML#//NamedElement/name"/>
+                  </source>
+                  <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="Colisao">
+                    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                  </argument>
+                  <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/="/>
+                </ifExpr>
+              </body>
+              <loopVariable name="cl">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+              </loopVariable>
+              <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/8/Set(Classifier)">
+                <source xsi:type="ocl.ecore:VariableExp" name="interface" referredVariable="/0/generateClassPersonagem/@body.16/@body.0/@body.0/interface">
+                  <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+                </source>
+                <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier/general"/>
+              </iterSet>
+            </body>
+            <loopVariable name="interface">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+            </loopVariable>
+            <iterSet xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+              <source xsi:type="ocl.ecore:VariableExp" name="i" referredVariable="/0/generateClassPersonagem/@body.16/@body.0/i">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+              </source>
+              <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization/contract"/>
+            </iterSet>
+          </body>
+          <loopVariable name="i">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+          </loopVariable>
+          <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/8/Set(InterfaceRealization)">
+            <source xsi:type="ocl.ecore:VariableExp" name="superC" referredVariable="/0/generateClassPersonagem/@body.16/superC">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+            </source>
+            <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//BehavioredClassifier/interfaceRealization"/>
+          </iterSet>
+        </body>
+        <loopVariable name="superC">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+        </loopVariable>
+        <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/8/Set(Class)">
+          <source xsi:type="ocl.ecore:VariableExp" name="c" referredVariable="/0/generateClassPersonagem/c">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          </source>
+          <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class/superClass"/>
+        </iterSet>
       </body>
-      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=".getPos().x&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;+ getCollidingEntities()"/>
-      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[LEFT]">
-        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;&#x9;} else if (speed.x > 0) {&#xA;"/>
+      <body xsi:type="mtl:ForBlock">
+        <body xsi:type="mtl:ForBlock">
+          <body xsi:type="mtl:ForBlock">
+            <body xsi:type="mtl:ForBlock">
+              <body xsi:type="mtl:IfBlock">
+                <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;&#x9;&#x9;if (getCollidingEntities()"/>
+                <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[RIGHT]">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                </body>
+                <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" != null) {&#xA;&#x9;&#x9;&#x9;&#x9;getPos().x = getCollidingEntities()"/>
+                <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[RIGHT]">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                </body>
+                <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=".getPos().x&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;- getPos().width + 0.1;&#xA;&#x9;&#x9;&#x9;&#x9;speed.x = 0;&#xA;&#x9;&#x9;&#x9;&#x9;acceleration.x = 0;&#xA;&#x9;&#x9;&#x9;} else {&#xA;"/>
+                <ifExpr xsi:type="ocl.ecore:OperationCallExp">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+                  <source xsi:type="ocl.ecore:PropertyCallExp">
+                    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                    <source xsi:type="ocl.ecore:VariableExp" name="cl" referredVariable="/0/generateClassPersonagem/@body.18/@body.0/@body.0/@body.0/cl">
+                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+                    </source>
+                    <referredProperty xsi:type="ecore:EAttribute" href="http://www.eclipse.org/uml2/3.0.0/UML#//NamedElement/name"/>
+                  </source>
+                  <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="Colisao">
+                    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                  </argument>
+                  <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/="/>
+                </ifExpr>
+              </body>
+              <loopVariable name="cl">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+              </loopVariable>
+              <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/8/Set(Classifier)">
+                <source xsi:type="ocl.ecore:VariableExp" name="interface" referredVariable="/0/generateClassPersonagem/@body.18/@body.0/@body.0/interface">
+                  <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+                </source>
+                <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier/general"/>
+              </iterSet>
+            </body>
+            <loopVariable name="interface">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+            </loopVariable>
+            <iterSet xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+              <source xsi:type="ocl.ecore:VariableExp" name="i" referredVariable="/0/generateClassPersonagem/@body.18/@body.0/i">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+              </source>
+              <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization/contract"/>
+            </iterSet>
+          </body>
+          <loopVariable name="i">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+          </loopVariable>
+          <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/8/Set(InterfaceRealization)">
+            <source xsi:type="ocl.ecore:VariableExp" name="superC" referredVariable="/0/generateClassPersonagem/@body.18/superC">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+            </source>
+            <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//BehavioredClassifier/interfaceRealization"/>
+          </iterSet>
+        </body>
+        <loopVariable name="superC">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+        </loopVariable>
+        <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/8/Set(Class)">
+          <source xsi:type="ocl.ecore:VariableExp" name="c" referredVariable="/0/generateClassPersonagem/c">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          </source>
+          <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class/superClass"/>
+        </iterSet>
       </body>
-      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=".getPos().width - 0.1;&#xA;&#x9;&#x9;&#x9;&#x9;speed.x = 0;&#xA;&#x9;&#x9;&#x9;&#x9;acceleration.x = 0;&#xA;&#x9;&#x9;&#x9;} else {&#xA;&#x9;&#x9;&#x9;&#x9;speed.x += friction;&#xA;&#x9;&#x9;&#x9;&#x9;if (speed.x > 0) {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;speed.x = 0;&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;} else if (speed.x > 0) {&#xA;&#x9;&#x9;&#x9;if (getCollidingEntities()"/>
-      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[RIGHT]">
-        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;&#x9;&#x9;&#x9;speed.x -= friction;&#xA;&#x9;&#x9;&#x9;&#x9;if (speed.x &lt; 0) {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;speed.x = 0;&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;"/>
+      <body xsi:type="mtl:ForBlock">
+        <body xsi:type="mtl:ForBlock">
+          <body xsi:type="mtl:ForBlock">
+            <body xsi:type="mtl:ForBlock">
+              <body xsi:type="mtl:IfBlock">
+                <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;&#x9;&#x9;}&#xA;"/>
+                <ifExpr xsi:type="ocl.ecore:OperationCallExp">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+                  <source xsi:type="ocl.ecore:PropertyCallExp">
+                    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                    <source xsi:type="ocl.ecore:VariableExp" name="cl" referredVariable="/0/generateClassPersonagem/@body.20/@body.0/@body.0/@body.0/cl">
+                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+                    </source>
+                    <referredProperty xsi:type="ecore:EAttribute" href="http://www.eclipse.org/uml2/3.0.0/UML#//NamedElement/name"/>
+                  </source>
+                  <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="Colisao">
+                    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                  </argument>
+                  <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/="/>
+                </ifExpr>
+              </body>
+              <loopVariable name="cl">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+              </loopVariable>
+              <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/8/Set(Classifier)">
+                <source xsi:type="ocl.ecore:VariableExp" name="interface" referredVariable="/0/generateClassPersonagem/@body.20/@body.0/@body.0/interface">
+                  <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+                </source>
+                <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier/general"/>
+              </iterSet>
+            </body>
+            <loopVariable name="interface">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+            </loopVariable>
+            <iterSet xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+              <source xsi:type="ocl.ecore:VariableExp" name="i" referredVariable="/0/generateClassPersonagem/@body.20/@body.0/i">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+              </source>
+              <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization/contract"/>
+            </iterSet>
+          </body>
+          <loopVariable name="i">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+          </loopVariable>
+          <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/8/Set(InterfaceRealization)">
+            <source xsi:type="ocl.ecore:VariableExp" name="superC" referredVariable="/0/generateClassPersonagem/@body.20/superC">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+            </source>
+            <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//BehavioredClassifier/interfaceRealization"/>
+          </iterSet>
+        </body>
+        <loopVariable name="superC">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+        </loopVariable>
+        <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/8/Set(Class)">
+          <source xsi:type="ocl.ecore:VariableExp" name="c" referredVariable="/0/generateClassPersonagem/c">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          </source>
+          <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class/superClass"/>
+        </iterSet>
       </body>
-      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" != null) {&#xA;&#x9;&#x9;&#x9;&#x9;getPos().x = getCollidingEntities()"/>
-      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[RIGHT]">
-        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;&#x9;}&#xA;&#x9;&#x9;getPos().x += speed.x;&#xA;&#x9;&#x9;getPos().y += speed.y;&#xA;&#x9;&#x9;acceleration.x = 0;&#xA;&#x9;&#x9;acceleration.y = 0;&#xA;&#xA;&#x9;&#x9;if (speed.y != 0 || speed.x != 0) {&#xA;&#x9;&#x9;&#x9;if (speed.y &lt; 0)&#xA;&#x9;&#x9;&#x9;&#x9;direction = ABOVE;&#xA;&#x9;&#x9;&#x9;else if (speed.y > 0)&#xA;&#x9;&#x9;&#x9;&#x9;direction = BELOW;&#xA;&#x9;&#x9;&#x9;else if (speed.x &lt; 0)&#xA;&#x9;&#x9;&#x9;&#x9;direction = LEFT;&#xA;&#x9;&#x9;&#x9;else if (speed.x > 0)&#xA;&#x9;&#x9;&#x9;&#x9;direction = RIGHT;&#xA;&#x9;&#x9;&#x9;if (currentTick - lastStepTick > stepInterval) {&#xA;&#x9;&#x9;&#x9;&#x9;lastStepTick = currentTick;&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;state = (STATE_WALKING);&#xA;&#x9;&#x9;} else {&#xA;&#x9;&#x9;&#x9;state = (STATE_STANDING);&#xA;&#x9;&#x9;&#x9;animates = (2);&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;if (currentTick % 4 == 0 &amp;&amp; state == STATE_WALKING)&#xA;&#x9;&#x9;&#x9;animates++;&#xA;&#x9;}&#xA;&#xA;&#x9;@Override&#xA;&#x9;public void render(Graphics2D g) {&#xA;&#x9;&#x9;g.drawImage(&#xA;&#x9;&#x9;&#x9;&#x9;image,&#xA;&#x9;&#x9;&#x9;&#x9;(int) (getPos().x),&#xA;&#x9;&#x9;&#x9;&#x9;(int) (getPos().y),&#xA;&#x9;&#x9;&#x9;&#x9;(int) (getPos().x + getPos().width),&#xA;&#x9;&#x9;&#x9;&#x9;(int) (getPos().y + getPos().height),&#xA;&#x9;&#x9;&#x9;&#x9;(int) ((animates % numFrames) * getPos().width),&#xA;&#x9;&#x9;&#x9;&#x9;(int) (direction * getPos().height),&#xA;&#x9;&#x9;&#x9;&#x9;(int) (((animates % numFrames) * getPos().width) + getPos().width),&#xA;&#x9;&#x9;&#x9;&#x9;(int) ((direction * getPos().height) + getPos().height), null);&#xA;&#x9;}&#xA;&#xA;"/>
+      <body xsi:type="mtl:ForBlock">
+        <body xsi:type="mtl:ForBlock">
+          <body xsi:type="mtl:ForBlock">
+            <body xsi:type="mtl:ForBlock">
+              <body xsi:type="mtl:IfBlock">
+                <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#x9;@Override&#xA;&#x9;public Rectangle2D.Double getColisao() {&#xA;&#x9;&#x9;Rectangle2D.Double r = new Rectangle2D.Double();&#xA;&#x9;&#x9;r.x = getPos().x;&#xA;&#x9;&#x9;r.y = getPos().y + getPos().height / 2;&#xA;&#x9;&#x9;r.width = getPos().width;&#xA;&#x9;&#x9;r.height = getPos().height / 2;&#xA;&#x9;&#x9;return r;&#xA;&#x9;}&#xA;"/>
+                <ifExpr xsi:type="ocl.ecore:OperationCallExp">
+                  <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Boolean"/>
+                  <source xsi:type="ocl.ecore:PropertyCallExp">
+                    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                    <source xsi:type="ocl.ecore:VariableExp" name="cl" referredVariable="/0/generateClassPersonagem/@body.22/@body.0/@body.0/@body.0/cl">
+                      <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+                    </source>
+                    <referredProperty xsi:type="ecore:EAttribute" href="http://www.eclipse.org/uml2/3.0.0/UML#//NamedElement/name"/>
+                  </source>
+                  <argument xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="Colisao">
+                    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+                  </argument>
+                  <referredOperation xsi:type="ecore:EOperation" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String_Class/="/>
+                </ifExpr>
+              </body>
+              <loopVariable name="cl">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+              </loopVariable>
+              <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/8/Set(Classifier)">
+                <source xsi:type="ocl.ecore:VariableExp" name="interface" referredVariable="/0/generateClassPersonagem/@body.22/@body.0/@body.0/interface">
+                  <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+                </source>
+                <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier/general"/>
+              </iterSet>
+            </body>
+            <loopVariable name="interface">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+            </loopVariable>
+            <iterSet xsi:type="ocl.ecore:PropertyCallExp">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+              <source xsi:type="ocl.ecore:VariableExp" name="i" referredVariable="/0/generateClassPersonagem/@body.22/@body.0/i">
+                <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+              </source>
+              <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization/contract"/>
+            </iterSet>
+          </body>
+          <loopVariable name="i">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+          </loopVariable>
+          <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/8/Set(InterfaceRealization)">
+            <source xsi:type="ocl.ecore:VariableExp" name="superC" referredVariable="/0/generateClassPersonagem/@body.22/superC">
+              <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+            </source>
+            <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//BehavioredClassifier/interfaceRealization"/>
+          </iterSet>
+        </body>
+        <loopVariable name="superC">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+        </loopVariable>
+        <iterSet xsi:type="ocl.ecore:PropertyCallExp" eType="/8/Set(Class)">
+          <source xsi:type="ocl.ecore:VariableExp" name="c" referredVariable="/0/generateClassPersonagem/c">
+            <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+          </source>
+          <referredProperty xsi:type="ecore:EReference" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class/superClass"/>
+        </iterSet>
       </body>
-      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=".getPos().x&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;- getPos().width + 0.1;&#xA;&#x9;&#x9;&#x9;&#x9;speed.x = 0;&#xA;&#x9;&#x9;&#x9;&#x9;acceleration.x = 0;&#xA;&#x9;&#x9;&#x9;} else {&#xA;&#x9;&#x9;&#x9;&#x9;speed.x -= friction;&#xA;&#x9;&#x9;&#x9;&#x9;if (speed.x &lt; 0) {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;speed.x = 0;&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;getPos().x += speed.x;&#xA;&#x9;&#x9;getPos().y += speed.y;&#xA;&#x9;&#x9;acceleration.x = 0;&#xA;&#x9;&#x9;acceleration.y = 0;&#xA;&#xA;&#x9;&#x9;if (speed.y != 0 || speed.x != 0) {&#xA;&#x9;&#x9;&#x9;if (speed.y &lt; 0)&#xA;&#x9;&#x9;&#x9;&#x9;direction = ABOVE;&#xA;&#x9;&#x9;&#x9;else if (speed.y > 0)&#xA;&#x9;&#x9;&#x9;&#x9;direction = BELOW;&#xA;&#x9;&#x9;&#x9;else if (speed.x &lt; 0)&#xA;&#x9;&#x9;&#x9;&#x9;direction = LEFT;&#xA;&#x9;&#x9;&#x9;else if (speed.x > 0)&#xA;&#x9;&#x9;&#x9;&#x9;direction = RIGHT;&#xA;&#x9;&#x9;&#x9;if (currentTick - lastStepTick > stepInterval) {&#xA;&#x9;&#x9;&#x9;&#x9;lastStepTick = currentTick;&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;state = (STATE_WALKING);&#xA;&#x9;&#x9;} else {&#xA;&#x9;&#x9;&#x9;state = (STATE_STANDING);&#xA;&#x9;&#x9;&#x9;animates = (2);&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;if (currentTick % 4 == 0 &amp;&amp; state == STATE_WALKING)&#xA;&#x9;&#x9;&#x9;animates++;&#xA;&#x9;}&#xA;&#xA;&#x9;@Override&#xA;&#x9;public void render(Graphics2D g) {&#xA;&#x9;&#x9;g.drawImage(&#xA;&#x9;&#x9;&#x9;&#x9;image,&#xA;&#x9;&#x9;&#x9;&#x9;(int) (getPos().x),&#xA;&#x9;&#x9;&#x9;&#x9;(int) (getPos().y),&#xA;&#x9;&#x9;&#x9;&#x9;(int) (getPos().x + getPos().width),&#xA;&#x9;&#x9;&#x9;&#x9;(int) (getPos().y + getPos().height),&#xA;&#x9;&#x9;&#x9;&#x9;(int) ((animates % numFrames) * getPos().width),&#xA;&#x9;&#x9;&#x9;&#x9;(int) (direction * getPos().height),&#xA;&#x9;&#x9;&#x9;&#x9;(int) (((animates % numFrames) * getPos().width) + getPos().width),&#xA;&#x9;&#x9;&#x9;&#x9;(int) ((direction * getPos().height) + getPos().height), null);&#xA;&#x9;}&#xA;&#xA;&#x9;@Override&#xA;&#x9;public Rectangle2D.Double getColisao() {&#xA;&#x9;&#x9;Rectangle2D.Double r = new Rectangle2D.Double();&#xA;&#x9;&#x9;r.x = getPos().x;&#xA;&#x9;&#x9;r.y = getPos().y + getPos().height / 2;&#xA;&#x9;&#x9;r.width = getPos().width;&#xA;&#x9;&#x9;r.height = getPos().height / 2;&#xA;&#x9;&#x9;return r;&#xA;&#x9;}&#xA;&#xA;}"/>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;}"/>
       <parameter name="c">
         <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
       </parameter>
@@ -147,14 +777,14 @@
         <references href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
       </eAnnotations>
     </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="Classifier_Class">
-      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
-        <references href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
-      </eAnnotations>
-    </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Operation_Class">
       <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
         <references href="http://www.eclipse.org/uml2/3.0.0/UML#//Operation"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Classifier_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="Parameter_Class">
@@ -181,8 +811,64 @@
   <ocl.ecore:Variable name="self">
     <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
   </ocl.ecore:Variable>
+  <ecore:EPackage name="collections">
+    <eClassifiers xsi:type="ocl.ecore:SetType" name="Set(Class)" instanceClassName="java.util.Set">
+      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:SetType" name="Set(InterfaceRealization)" instanceClassName="java.util.Set">
+      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ocl.ecore:SetType" name="Set(Classifier)" instanceClassName="java.util.Set">
+      <elementType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+    </eClassifiers>
+  </ecore:EPackage>
   <ocl.ecore:Variable name="self">
     <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="self">
     <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
@@ -194,7 +880,52 @@
     <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
     <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="self">
     <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
@@ -206,10 +937,400 @@
     <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
     <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="self">
     <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Interface"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//InterfaceRealization"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="i">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
   </ocl.ecore:Variable>
   <ocl.ecore:Variable name="self">
     <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
@@ -217,7 +1338,7 @@
   <ecore:EAnnotation source="positions">
     <eAnnotations source="positions.0" references="/0/generateClassPersonagem">
       <details key="start" value="118"/>
-      <details key="end" value="5255"/>
+      <details key="end" value="7743"/>
       <details key="line" value="7"/>
     </eAnnotations>
     <eAnnotations source="positions.1" references="/0/generateClassPersonagem/@body.0">
@@ -247,110 +1368,1260 @@
     </eAnnotations>
     <eAnnotations source="positions.6" references="/0/generateClassPersonagem/@body.3">
       <details key="start" value="214"/>
-      <details key="end" value="2692"/>
+      <details key="end" value="274"/>
       <details key="line" value="11"/>
     </eAnnotations>
     <eAnnotations source="positions.7" references="/0/generateClassPersonagem/@body.4">
-      <details key="start" value="2693"/>
-      <details key="end" value="2702"/>
+      <details key="start" value="274"/>
+      <details key="end" value="556"/>
+      <details key="line" value="14"/>
+    </eAnnotations>
+    <eAnnotations source="positions.8" references="/0/generateClassPersonagem/@body.4/@body.0">
+      <details key="start" value="312"/>
+      <details key="end" value="549"/>
+      <details key="line" value="15"/>
+    </eAnnotations>
+    <eAnnotations source="positions.9" references="/0/generateClassPersonagem/@body.4/@body.0/@body.0">
+      <details key="start" value="375"/>
+      <details key="end" value="542"/>
+      <details key="line" value="16"/>
+    </eAnnotations>
+    <eAnnotations source="positions.10" references="/0/generateClassPersonagem/@body.4/@body.0/@body.0/@body.0">
+      <details key="start" value="418"/>
+      <details key="end" value="535"/>
+      <details key="line" value="17"/>
+    </eAnnotations>
+    <eAnnotations source="positions.11" references="/0/generateClassPersonagem/@body.4/@body.0/@body.0/@body.0/@body.0">
+      <details key="start" value="462"/>
+      <details key="end" value="528"/>
+      <details key="line" value="18"/>
+    </eAnnotations>
+    <eAnnotations source="positions.12" references="/0/generateClassPersonagem/@body.4/@body.0/@body.0/@body.0/@body.0/@body.0">
+      <details key="start" value="489"/>
+      <details key="end" value="523"/>
+      <details key="line" value="19"/>
+    </eAnnotations>
+    <eAnnotations source="positions.13" references="/0/generateClassPersonagem/@body.4/@body.0/@body.0/@body.0/@body.0/@ifExpr">
+      <details key="start" value="466"/>
+      <details key="end" value="487"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.8" references="/0/generateClassPersonagem/@body.5">
-      <details key="start" value="2704"/>
-      <details key="end" value="2755"/>
-      <details key="line" value="115"/>
-    </eAnnotations>
-    <eAnnotations source="positions.9" references="/0/generateClassPersonagem/@body.6">
-      <details key="start" value="2756"/>
-      <details key="end" value="2765"/>
+    <eAnnotations source="positions.14" references="/0/generateClassPersonagem/@body.4/@body.0/@body.0/@body.0/@body.0/@ifExpr/@source">
+      <details key="start" value="467"/>
+      <details key="end" value="474"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.10" references="/0/generateClassPersonagem/@body.7">
-      <details key="start" value="2767"/>
-      <details key="end" value="2818"/>
-      <details key="line" value="116"/>
-    </eAnnotations>
-    <eAnnotations source="positions.11" references="/0/generateClassPersonagem/@body.8">
-      <details key="start" value="2819"/>
-      <details key="end" value="2828"/>
+    <eAnnotations source="positions.15" references="/0/generateClassPersonagem/@body.4/@body.0/@body.0/@body.0/@body.0/@ifExpr/@source/cl">
+      <details key="start" value="467"/>
+      <details key="end" value="469"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.12" references="/0/generateClassPersonagem/@body.9">
-      <details key="start" value="2830"/>
-      <details key="end" value="3086"/>
-      <details key="line" value="117"/>
-    </eAnnotations>
-    <eAnnotations source="positions.13" references="/0/generateClassPersonagem/@body.10">
-      <details key="start" value="3087"/>
-      <details key="end" value="3096"/>
+    <eAnnotations source="positions.16" references="/0/generateClassPersonagem/@body.4/@body.0/@body.0/@body.0/@body.0/@ifExpr/@argument.0">
+      <details key="start" value="477"/>
+      <details key="end" value="486"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.14" references="/0/generateClassPersonagem/@body.11">
-      <details key="start" value="3098"/>
-      <details key="end" value="3149"/>
+    <eAnnotations source="positions.17" references="/0/generateClassPersonagem/@body.4/@body.0/@body.0/@body.0/cl">
+      <details key="start" value="424"/>
+      <details key="end" value="439"/>
+      <details key="line" value="17"/>
+    </eAnnotations>
+    <eAnnotations source="positions.18" references="/0/generateClassPersonagem/@body.4/@body.0/@body.0/@body.0/@iterSet">
+      <details key="start" value="442"/>
+      <details key="end" value="459"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.19" references="/0/generateClassPersonagem/@body.4/@body.0/@body.0/@body.0/@iterSet/interface">
+      <details key="start" value="442"/>
+      <details key="end" value="451"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.20" references="/0/generateClassPersonagem/@body.4/@body.0/@body.0/interface">
+      <details key="start" value="381"/>
+      <details key="end" value="402"/>
+      <details key="line" value="16"/>
+    </eAnnotations>
+    <eAnnotations source="positions.21" references="/0/generateClassPersonagem/@body.4/@body.0/@body.0/@iterSet">
+      <details key="start" value="405"/>
+      <details key="end" value="415"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.22" references="/0/generateClassPersonagem/@body.4/@body.0/@body.0/@iterSet/i">
+      <details key="start" value="405"/>
+      <details key="end" value="406"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.23" references="/0/generateClassPersonagem/@body.4/@body.0/i">
+      <details key="start" value="318"/>
+      <details key="end" value="342"/>
+      <details key="line" value="15"/>
+    </eAnnotations>
+    <eAnnotations source="positions.24" references="/0/generateClassPersonagem/@body.4/@body.0/@iterSet">
+      <details key="start" value="345"/>
+      <details key="end" value="372"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.25" references="/0/generateClassPersonagem/@body.4/@body.0/@iterSet/superC">
+      <details key="start" value="345"/>
+      <details key="end" value="351"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.26" references="/0/generateClassPersonagem/@body.4/superC">
+      <details key="start" value="280"/>
+      <details key="end" value="294"/>
+      <details key="line" value="14"/>
+    </eAnnotations>
+    <eAnnotations source="positions.27" references="/0/generateClassPersonagem/@body.4/@iterSet">
+      <details key="start" value="297"/>
+      <details key="end" value="309"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.28" references="/0/generateClassPersonagem/@body.4/@iterSet/c">
+      <details key="start" value="297"/>
+      <details key="end" value="298"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.29" references="/0/generateClassPersonagem/@body.5">
+      <details key="start" value="557"/>
+      <details key="end" value="2910"/>
+      <details key="line" value="25"/>
+    </eAnnotations>
+    <eAnnotations source="positions.30" references="/0/generateClassPersonagem/@body.6">
+      <details key="start" value="2910"/>
+      <details key="end" value="3447"/>
+      <details key="line" value="125"/>
+    </eAnnotations>
+    <eAnnotations source="positions.31" references="/0/generateClassPersonagem/@body.6/@body.0">
+      <details key="start" value="2948"/>
+      <details key="end" value="3440"/>
+      <details key="line" value="126"/>
+    </eAnnotations>
+    <eAnnotations source="positions.32" references="/0/generateClassPersonagem/@body.6/@body.0/@body.0">
+      <details key="start" value="3011"/>
+      <details key="end" value="3433"/>
+      <details key="line" value="127"/>
+    </eAnnotations>
+    <eAnnotations source="positions.33" references="/0/generateClassPersonagem/@body.6/@body.0/@body.0/@body.0">
+      <details key="start" value="3054"/>
+      <details key="end" value="3426"/>
       <details key="line" value="128"/>
     </eAnnotations>
-    <eAnnotations source="positions.15" references="/0/generateClassPersonagem/@body.12">
-      <details key="start" value="3150"/>
-      <details key="end" value="3159"/>
-      <details key="line" value="0"/>
-    </eAnnotations>
-    <eAnnotations source="positions.16" references="/0/generateClassPersonagem/@body.13">
-      <details key="start" value="3161"/>
-      <details key="end" value="3397"/>
+    <eAnnotations source="positions.34" references="/0/generateClassPersonagem/@body.6/@body.0/@body.0/@body.0/@body.0">
+      <details key="start" value="3098"/>
+      <details key="end" value="3419"/>
       <details key="line" value="129"/>
     </eAnnotations>
-    <eAnnotations source="positions.17" references="/0/generateClassPersonagem/@body.14">
-      <details key="start" value="3398"/>
-      <details key="end" value="3406"/>
+    <eAnnotations source="positions.35" references="/0/generateClassPersonagem/@body.6/@body.0/@body.0/@body.0/@body.0/@body.0">
+      <details key="start" value="3125"/>
+      <details key="end" value="3154"/>
+      <details key="line" value="130"/>
+    </eAnnotations>
+    <eAnnotations source="positions.36" references="/0/generateClassPersonagem/@body.6/@body.0/@body.0/@body.0/@body.0/@body.1">
+      <details key="start" value="3155"/>
+      <details key="end" value="3164"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.18" references="/0/generateClassPersonagem/@body.15">
-      <details key="start" value="3408"/>
-      <details key="end" value="3459"/>
-      <details key="line" value="141"/>
+    <eAnnotations source="positions.37" references="/0/generateClassPersonagem/@body.6/@body.0/@body.0/@body.0/@body.0/@body.2">
+      <details key="start" value="3166"/>
+      <details key="end" value="3217"/>
+      <details key="line" value="130"/>
     </eAnnotations>
-    <eAnnotations source="positions.19" references="/0/generateClassPersonagem/@body.16">
-      <details key="start" value="3460"/>
-      <details key="end" value="3468"/>
+    <eAnnotations source="positions.38" references="/0/generateClassPersonagem/@body.6/@body.0/@body.0/@body.0/@body.0/@body.3">
+      <details key="start" value="3218"/>
+      <details key="end" value="3227"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.20" references="/0/generateClassPersonagem/@body.17">
-      <details key="start" value="3470"/>
-      <details key="end" value="3512"/>
+    <eAnnotations source="positions.39" references="/0/generateClassPersonagem/@body.6/@body.0/@body.0/@body.0/@body.0/@body.4">
+      <details key="start" value="3229"/>
+      <details key="end" value="3280"/>
+      <details key="line" value="131"/>
+    </eAnnotations>
+    <eAnnotations source="positions.40" references="/0/generateClassPersonagem/@body.6/@body.0/@body.0/@body.0/@body.0/@body.5">
+      <details key="start" value="3281"/>
+      <details key="end" value="3290"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.41" references="/0/generateClassPersonagem/@body.6/@body.0/@body.0/@body.0/@body.0/@body.6">
+      <details key="start" value="3292"/>
+      <details key="end" value="3414"/>
+      <details key="line" value="132"/>
+    </eAnnotations>
+    <eAnnotations source="positions.42" references="/0/generateClassPersonagem/@body.6/@body.0/@body.0/@body.0/@body.0/@ifExpr">
+      <details key="start" value="3102"/>
+      <details key="end" value="3123"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.43" references="/0/generateClassPersonagem/@body.6/@body.0/@body.0/@body.0/@body.0/@ifExpr/@source">
+      <details key="start" value="3103"/>
+      <details key="end" value="3110"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.44" references="/0/generateClassPersonagem/@body.6/@body.0/@body.0/@body.0/@body.0/@ifExpr/@source/cl">
+      <details key="start" value="3103"/>
+      <details key="end" value="3105"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.45" references="/0/generateClassPersonagem/@body.6/@body.0/@body.0/@body.0/@body.0/@ifExpr/@argument.0">
+      <details key="start" value="3113"/>
+      <details key="end" value="3122"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.46" references="/0/generateClassPersonagem/@body.6/@body.0/@body.0/@body.0/cl">
+      <details key="start" value="3060"/>
+      <details key="end" value="3075"/>
+      <details key="line" value="128"/>
+    </eAnnotations>
+    <eAnnotations source="positions.47" references="/0/generateClassPersonagem/@body.6/@body.0/@body.0/@body.0/@iterSet">
+      <details key="start" value="3078"/>
+      <details key="end" value="3095"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.48" references="/0/generateClassPersonagem/@body.6/@body.0/@body.0/@body.0/@iterSet/interface">
+      <details key="start" value="3078"/>
+      <details key="end" value="3087"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.49" references="/0/generateClassPersonagem/@body.6/@body.0/@body.0/interface">
+      <details key="start" value="3017"/>
+      <details key="end" value="3038"/>
+      <details key="line" value="127"/>
+    </eAnnotations>
+    <eAnnotations source="positions.50" references="/0/generateClassPersonagem/@body.6/@body.0/@body.0/@iterSet">
+      <details key="start" value="3041"/>
+      <details key="end" value="3051"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.51" references="/0/generateClassPersonagem/@body.6/@body.0/@body.0/@iterSet/i">
+      <details key="start" value="3041"/>
+      <details key="end" value="3042"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.52" references="/0/generateClassPersonagem/@body.6/@body.0/i">
+      <details key="start" value="2954"/>
+      <details key="end" value="2978"/>
+      <details key="line" value="126"/>
+    </eAnnotations>
+    <eAnnotations source="positions.53" references="/0/generateClassPersonagem/@body.6/@body.0/@iterSet">
+      <details key="start" value="2981"/>
+      <details key="end" value="3008"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.54" references="/0/generateClassPersonagem/@body.6/@body.0/@iterSet/superC">
+      <details key="start" value="2981"/>
+      <details key="end" value="2987"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.55" references="/0/generateClassPersonagem/@body.6/superC">
+      <details key="start" value="2916"/>
+      <details key="end" value="2930"/>
+      <details key="line" value="125"/>
+    </eAnnotations>
+    <eAnnotations source="positions.56" references="/0/generateClassPersonagem/@body.6/@iterSet">
+      <details key="start" value="2933"/>
+      <details key="end" value="2945"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.57" references="/0/generateClassPersonagem/@body.6/@iterSet/c">
+      <details key="start" value="2933"/>
+      <details key="end" value="2934"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.58" references="/0/generateClassPersonagem/@body.7">
+      <details key="start" value="3448"/>
+      <details key="end" value="3520"/>
       <details key="line" value="142"/>
     </eAnnotations>
-    <eAnnotations source="positions.21" references="/0/generateClassPersonagem/@body.18">
-      <details key="start" value="3513"/>
-      <details key="end" value="3521"/>
-      <details key="line" value="0"/>
+    <eAnnotations source="positions.59" references="/0/generateClassPersonagem/@body.8">
+      <details key="start" value="3520"/>
+      <details key="end" value="3773"/>
+      <details key="line" value="146"/>
     </eAnnotations>
-    <eAnnotations source="positions.22" references="/0/generateClassPersonagem/@body.19">
-      <details key="start" value="3523"/>
+    <eAnnotations source="positions.60" references="/0/generateClassPersonagem/@body.8/@body.0">
+      <details key="start" value="3558"/>
+      <details key="end" value="3766"/>
+      <details key="line" value="147"/>
+    </eAnnotations>
+    <eAnnotations source="positions.61" references="/0/generateClassPersonagem/@body.8/@body.0/@body.0">
+      <details key="start" value="3621"/>
+      <details key="end" value="3759"/>
+      <details key="line" value="148"/>
+    </eAnnotations>
+    <eAnnotations source="positions.62" references="/0/generateClassPersonagem/@body.8/@body.0/@body.0/@body.0">
+      <details key="start" value="3664"/>
+      <details key="end" value="3752"/>
+      <details key="line" value="149"/>
+    </eAnnotations>
+    <eAnnotations source="positions.63" references="/0/generateClassPersonagem/@body.8/@body.0/@body.0/@body.0/@body.0">
+      <details key="start" value="3708"/>
+      <details key="end" value="3745"/>
+      <details key="line" value="150"/>
+    </eAnnotations>
+    <eAnnotations source="positions.64" references="/0/generateClassPersonagem/@body.8/@body.0/@body.0/@body.0/@body.0/@body.0">
+      <details key="start" value="3735"/>
+      <details key="end" value="3740"/>
+      <details key="line" value="151"/>
+    </eAnnotations>
+    <eAnnotations source="positions.65" references="/0/generateClassPersonagem/@body.8/@body.0/@body.0/@body.0/@body.0/@ifExpr">
+      <details key="start" value="3712"/>
       <details key="end" value="3733"/>
-      <details key="line" value="143"/>
-    </eAnnotations>
-    <eAnnotations source="positions.23" references="/0/generateClassPersonagem/@body.20">
-      <details key="start" value="3734"/>
-      <details key="end" value="3743"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.24" references="/0/generateClassPersonagem/@body.21">
-      <details key="start" value="3745"/>
-      <details key="end" value="3796"/>
-      <details key="line" value="153"/>
-    </eAnnotations>
-    <eAnnotations source="positions.25" references="/0/generateClassPersonagem/@body.22">
-      <details key="start" value="3797"/>
-      <details key="end" value="3806"/>
+    <eAnnotations source="positions.66" references="/0/generateClassPersonagem/@body.8/@body.0/@body.0/@body.0/@body.0/@ifExpr/@source">
+      <details key="start" value="3713"/>
+      <details key="end" value="3720"/>
       <details key="line" value="0"/>
     </eAnnotations>
-    <eAnnotations source="positions.26" references="/0/generateClassPersonagem/@body.23">
+    <eAnnotations source="positions.67" references="/0/generateClassPersonagem/@body.8/@body.0/@body.0/@body.0/@body.0/@ifExpr/@source/cl">
+      <details key="start" value="3713"/>
+      <details key="end" value="3715"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.68" references="/0/generateClassPersonagem/@body.8/@body.0/@body.0/@body.0/@body.0/@ifExpr/@argument.0">
+      <details key="start" value="3723"/>
+      <details key="end" value="3732"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.69" references="/0/generateClassPersonagem/@body.8/@body.0/@body.0/@body.0/cl">
+      <details key="start" value="3670"/>
+      <details key="end" value="3685"/>
+      <details key="line" value="149"/>
+    </eAnnotations>
+    <eAnnotations source="positions.70" references="/0/generateClassPersonagem/@body.8/@body.0/@body.0/@body.0/@iterSet">
+      <details key="start" value="3688"/>
+      <details key="end" value="3705"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.71" references="/0/generateClassPersonagem/@body.8/@body.0/@body.0/@body.0/@iterSet/interface">
+      <details key="start" value="3688"/>
+      <details key="end" value="3697"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.72" references="/0/generateClassPersonagem/@body.8/@body.0/@body.0/interface">
+      <details key="start" value="3627"/>
+      <details key="end" value="3648"/>
+      <details key="line" value="148"/>
+    </eAnnotations>
+    <eAnnotations source="positions.73" references="/0/generateClassPersonagem/@body.8/@body.0/@body.0/@iterSet">
+      <details key="start" value="3651"/>
+      <details key="end" value="3661"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.74" references="/0/generateClassPersonagem/@body.8/@body.0/@body.0/@iterSet/i">
+      <details key="start" value="3651"/>
+      <details key="end" value="3652"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.75" references="/0/generateClassPersonagem/@body.8/@body.0/i">
+      <details key="start" value="3564"/>
+      <details key="end" value="3588"/>
+      <details key="line" value="147"/>
+    </eAnnotations>
+    <eAnnotations source="positions.76" references="/0/generateClassPersonagem/@body.8/@body.0/@iterSet">
+      <details key="start" value="3591"/>
+      <details key="end" value="3618"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.77" references="/0/generateClassPersonagem/@body.8/@body.0/@iterSet/superC">
+      <details key="start" value="3591"/>
+      <details key="end" value="3597"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.78" references="/0/generateClassPersonagem/@body.8/superC">
+      <details key="start" value="3526"/>
+      <details key="end" value="3540"/>
+      <details key="line" value="146"/>
+    </eAnnotations>
+    <eAnnotations source="positions.79" references="/0/generateClassPersonagem/@body.8/@iterSet">
+      <details key="start" value="3543"/>
+      <details key="end" value="3555"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.80" references="/0/generateClassPersonagem/@body.8/@iterSet/c">
+      <details key="start" value="3543"/>
+      <details key="end" value="3544"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.81" references="/0/generateClassPersonagem/@body.9">
+      <details key="start" value="3774"/>
+      <details key="end" value="3802"/>
+      <details key="line" value="157"/>
+    </eAnnotations>
+    <eAnnotations source="positions.82" references="/0/generateClassPersonagem/@body.10">
+      <details key="start" value="3802"/>
+      <details key="end" value="4259"/>
+      <details key="line" value="158"/>
+    </eAnnotations>
+    <eAnnotations source="positions.83" references="/0/generateClassPersonagem/@body.10/@body.0">
+      <details key="start" value="3840"/>
+      <details key="end" value="4252"/>
+      <details key="line" value="159"/>
+    </eAnnotations>
+    <eAnnotations source="positions.84" references="/0/generateClassPersonagem/@body.10/@body.0/@body.0">
+      <details key="start" value="3903"/>
+      <details key="end" value="4245"/>
+      <details key="line" value="160"/>
+    </eAnnotations>
+    <eAnnotations source="positions.85" references="/0/generateClassPersonagem/@body.10/@body.0/@body.0/@body.0">
+      <details key="start" value="3946"/>
+      <details key="end" value="4238"/>
+      <details key="line" value="161"/>
+    </eAnnotations>
+    <eAnnotations source="positions.86" references="/0/generateClassPersonagem/@body.10/@body.0/@body.0/@body.0/@body.0">
+      <details key="start" value="3990"/>
+      <details key="end" value="4231"/>
+      <details key="line" value="162"/>
+    </eAnnotations>
+    <eAnnotations source="positions.87" references="/0/generateClassPersonagem/@body.10/@body.0/@body.0/@body.0/@body.0/@body.0">
+      <details key="start" value="4017"/>
+      <details key="end" value="4046"/>
+      <details key="line" value="163"/>
+    </eAnnotations>
+    <eAnnotations source="positions.88" references="/0/generateClassPersonagem/@body.10/@body.0/@body.0/@body.0/@body.0/@body.1">
+      <details key="start" value="4047"/>
+      <details key="end" value="4056"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.89" references="/0/generateClassPersonagem/@body.10/@body.0/@body.0/@body.0/@body.0/@body.2">
+      <details key="start" value="4058"/>
+      <details key="end" value="4109"/>
+      <details key="line" value="163"/>
+    </eAnnotations>
+    <eAnnotations source="positions.90" references="/0/generateClassPersonagem/@body.10/@body.0/@body.0/@body.0/@body.0/@body.3">
+      <details key="start" value="4110"/>
+      <details key="end" value="4119"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.91" references="/0/generateClassPersonagem/@body.10/@body.0/@body.0/@body.0/@body.0/@body.4">
+      <details key="start" value="4121"/>
+      <details key="end" value="4226"/>
+      <details key="line" value="164"/>
+    </eAnnotations>
+    <eAnnotations source="positions.92" references="/0/generateClassPersonagem/@body.10/@body.0/@body.0/@body.0/@body.0/@ifExpr">
+      <details key="start" value="3994"/>
+      <details key="end" value="4015"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.93" references="/0/generateClassPersonagem/@body.10/@body.0/@body.0/@body.0/@body.0/@ifExpr/@source">
+      <details key="start" value="3995"/>
+      <details key="end" value="4002"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.94" references="/0/generateClassPersonagem/@body.10/@body.0/@body.0/@body.0/@body.0/@ifExpr/@source/cl">
+      <details key="start" value="3995"/>
+      <details key="end" value="3997"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.95" references="/0/generateClassPersonagem/@body.10/@body.0/@body.0/@body.0/@body.0/@ifExpr/@argument.0">
+      <details key="start" value="4005"/>
+      <details key="end" value="4014"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.96" references="/0/generateClassPersonagem/@body.10/@body.0/@body.0/@body.0/cl">
+      <details key="start" value="3952"/>
+      <details key="end" value="3967"/>
+      <details key="line" value="161"/>
+    </eAnnotations>
+    <eAnnotations source="positions.97" references="/0/generateClassPersonagem/@body.10/@body.0/@body.0/@body.0/@iterSet">
+      <details key="start" value="3970"/>
+      <details key="end" value="3987"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.98" references="/0/generateClassPersonagem/@body.10/@body.0/@body.0/@body.0/@iterSet/interface">
+      <details key="start" value="3970"/>
+      <details key="end" value="3979"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.99" references="/0/generateClassPersonagem/@body.10/@body.0/@body.0/interface">
+      <details key="start" value="3909"/>
+      <details key="end" value="3930"/>
+      <details key="line" value="160"/>
+    </eAnnotations>
+    <eAnnotations source="positions.100" references="/0/generateClassPersonagem/@body.10/@body.0/@body.0/@iterSet">
+      <details key="start" value="3933"/>
+      <details key="end" value="3943"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.101" references="/0/generateClassPersonagem/@body.10/@body.0/@body.0/@iterSet/i">
+      <details key="start" value="3933"/>
+      <details key="end" value="3934"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.102" references="/0/generateClassPersonagem/@body.10/@body.0/i">
+      <details key="start" value="3846"/>
+      <details key="end" value="3870"/>
+      <details key="line" value="159"/>
+    </eAnnotations>
+    <eAnnotations source="positions.103" references="/0/generateClassPersonagem/@body.10/@body.0/@iterSet">
+      <details key="start" value="3873"/>
+      <details key="end" value="3900"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.104" references="/0/generateClassPersonagem/@body.10/@body.0/@iterSet/superC">
+      <details key="start" value="3873"/>
+      <details key="end" value="3879"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.105" references="/0/generateClassPersonagem/@body.10/superC">
       <details key="start" value="3808"/>
-      <details key="end" value="5243"/>
-      <details key="line" value="154"/>
+      <details key="end" value="3822"/>
+      <details key="line" value="158"/>
     </eAnnotations>
-    <eAnnotations source="positions.27" references="/0/generateClassPersonagem/c">
+    <eAnnotations source="positions.106" references="/0/generateClassPersonagem/@body.10/@iterSet">
+      <details key="start" value="3825"/>
+      <details key="end" value="3837"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.107" references="/0/generateClassPersonagem/@body.10/@iterSet/c">
+      <details key="start" value="3825"/>
+      <details key="end" value="3826"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.108" references="/0/generateClassPersonagem/@body.11">
+      <details key="start" value="4260"/>
+      <details key="end" value="4332"/>
+      <details key="line" value="174"/>
+    </eAnnotations>
+    <eAnnotations source="positions.109" references="/0/generateClassPersonagem/@body.12">
+      <details key="start" value="4332"/>
+      <details key="end" value="4585"/>
+      <details key="line" value="178"/>
+    </eAnnotations>
+    <eAnnotations source="positions.110" references="/0/generateClassPersonagem/@body.12/@body.0">
+      <details key="start" value="4370"/>
+      <details key="end" value="4578"/>
+      <details key="line" value="179"/>
+    </eAnnotations>
+    <eAnnotations source="positions.111" references="/0/generateClassPersonagem/@body.12/@body.0/@body.0">
+      <details key="start" value="4433"/>
+      <details key="end" value="4571"/>
+      <details key="line" value="180"/>
+    </eAnnotations>
+    <eAnnotations source="positions.112" references="/0/generateClassPersonagem/@body.12/@body.0/@body.0/@body.0">
+      <details key="start" value="4476"/>
+      <details key="end" value="4564"/>
+      <details key="line" value="181"/>
+    </eAnnotations>
+    <eAnnotations source="positions.113" references="/0/generateClassPersonagem/@body.12/@body.0/@body.0/@body.0/@body.0">
+      <details key="start" value="4520"/>
+      <details key="end" value="4557"/>
+      <details key="line" value="182"/>
+    </eAnnotations>
+    <eAnnotations source="positions.114" references="/0/generateClassPersonagem/@body.12/@body.0/@body.0/@body.0/@body.0/@body.0">
+      <details key="start" value="4547"/>
+      <details key="end" value="4552"/>
+      <details key="line" value="183"/>
+    </eAnnotations>
+    <eAnnotations source="positions.115" references="/0/generateClassPersonagem/@body.12/@body.0/@body.0/@body.0/@body.0/@ifExpr">
+      <details key="start" value="4524"/>
+      <details key="end" value="4545"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.116" references="/0/generateClassPersonagem/@body.12/@body.0/@body.0/@body.0/@body.0/@ifExpr/@source">
+      <details key="start" value="4525"/>
+      <details key="end" value="4532"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.117" references="/0/generateClassPersonagem/@body.12/@body.0/@body.0/@body.0/@body.0/@ifExpr/@source/cl">
+      <details key="start" value="4525"/>
+      <details key="end" value="4527"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.118" references="/0/generateClassPersonagem/@body.12/@body.0/@body.0/@body.0/@body.0/@ifExpr/@argument.0">
+      <details key="start" value="4535"/>
+      <details key="end" value="4544"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.119" references="/0/generateClassPersonagem/@body.12/@body.0/@body.0/@body.0/cl">
+      <details key="start" value="4482"/>
+      <details key="end" value="4497"/>
+      <details key="line" value="181"/>
+    </eAnnotations>
+    <eAnnotations source="positions.120" references="/0/generateClassPersonagem/@body.12/@body.0/@body.0/@body.0/@iterSet">
+      <details key="start" value="4500"/>
+      <details key="end" value="4517"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.121" references="/0/generateClassPersonagem/@body.12/@body.0/@body.0/@body.0/@iterSet/interface">
+      <details key="start" value="4500"/>
+      <details key="end" value="4509"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.122" references="/0/generateClassPersonagem/@body.12/@body.0/@body.0/interface">
+      <details key="start" value="4439"/>
+      <details key="end" value="4460"/>
+      <details key="line" value="180"/>
+    </eAnnotations>
+    <eAnnotations source="positions.123" references="/0/generateClassPersonagem/@body.12/@body.0/@body.0/@iterSet">
+      <details key="start" value="4463"/>
+      <details key="end" value="4473"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.124" references="/0/generateClassPersonagem/@body.12/@body.0/@body.0/@iterSet/i">
+      <details key="start" value="4463"/>
+      <details key="end" value="4464"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.125" references="/0/generateClassPersonagem/@body.12/@body.0/i">
+      <details key="start" value="4376"/>
+      <details key="end" value="4400"/>
+      <details key="line" value="179"/>
+    </eAnnotations>
+    <eAnnotations source="positions.126" references="/0/generateClassPersonagem/@body.12/@body.0/@iterSet">
+      <details key="start" value="4403"/>
+      <details key="end" value="4430"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.127" references="/0/generateClassPersonagem/@body.12/@body.0/@iterSet/superC">
+      <details key="start" value="4403"/>
+      <details key="end" value="4409"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.128" references="/0/generateClassPersonagem/@body.12/superC">
+      <details key="start" value="4338"/>
+      <details key="end" value="4352"/>
+      <details key="line" value="178"/>
+    </eAnnotations>
+    <eAnnotations source="positions.129" references="/0/generateClassPersonagem/@body.12/@iterSet">
+      <details key="start" value="4355"/>
+      <details key="end" value="4367"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.130" references="/0/generateClassPersonagem/@body.12/@iterSet/c">
+      <details key="start" value="4355"/>
+      <details key="end" value="4356"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.131" references="/0/generateClassPersonagem/@body.13">
+      <details key="start" value="4586"/>
+      <details key="end" value="4611"/>
+      <details key="line" value="189"/>
+    </eAnnotations>
+    <eAnnotations source="positions.132" references="/0/generateClassPersonagem/@body.14">
+      <details key="start" value="4611"/>
+      <details key="end" value="5090"/>
+      <details key="line" value="191"/>
+    </eAnnotations>
+    <eAnnotations source="positions.133" references="/0/generateClassPersonagem/@body.14/@body.0">
+      <details key="start" value="4649"/>
+      <details key="end" value="5083"/>
+      <details key="line" value="192"/>
+    </eAnnotations>
+    <eAnnotations source="positions.134" references="/0/generateClassPersonagem/@body.14/@body.0/@body.0">
+      <details key="start" value="4712"/>
+      <details key="end" value="5076"/>
+      <details key="line" value="193"/>
+    </eAnnotations>
+    <eAnnotations source="positions.135" references="/0/generateClassPersonagem/@body.14/@body.0/@body.0/@body.0">
+      <details key="start" value="4755"/>
+      <details key="end" value="5069"/>
+      <details key="line" value="194"/>
+    </eAnnotations>
+    <eAnnotations source="positions.136" references="/0/generateClassPersonagem/@body.14/@body.0/@body.0/@body.0/@body.0">
+      <details key="start" value="4799"/>
+      <details key="end" value="5062"/>
+      <details key="line" value="195"/>
+    </eAnnotations>
+    <eAnnotations source="positions.137" references="/0/generateClassPersonagem/@body.14/@body.0/@body.0/@body.0/@body.0/@body.0">
+      <details key="start" value="4826"/>
+      <details key="end" value="4855"/>
+      <details key="line" value="196"/>
+    </eAnnotations>
+    <eAnnotations source="positions.138" references="/0/generateClassPersonagem/@body.14/@body.0/@body.0/@body.0/@body.0/@body.1">
+      <details key="start" value="4856"/>
+      <details key="end" value="4864"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.139" references="/0/generateClassPersonagem/@body.14/@body.0/@body.0/@body.0/@body.0/@body.2">
+      <details key="start" value="4866"/>
+      <details key="end" value="4917"/>
+      <details key="line" value="196"/>
+    </eAnnotations>
+    <eAnnotations source="positions.140" references="/0/generateClassPersonagem/@body.14/@body.0/@body.0/@body.0/@body.0/@body.3">
+      <details key="start" value="4918"/>
+      <details key="end" value="4926"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.141" references="/0/generateClassPersonagem/@body.14/@body.0/@body.0/@body.0/@body.0/@body.4">
+      <details key="start" value="4928"/>
+      <details key="end" value="4970"/>
+      <details key="line" value="197"/>
+    </eAnnotations>
+    <eAnnotations source="positions.142" references="/0/generateClassPersonagem/@body.14/@body.0/@body.0/@body.0/@body.0/@body.5">
+      <details key="start" value="4971"/>
+      <details key="end" value="4979"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.143" references="/0/generateClassPersonagem/@body.14/@body.0/@body.0/@body.0/@body.0/@body.6">
+      <details key="start" value="4981"/>
+      <details key="end" value="5057"/>
+      <details key="line" value="198"/>
+    </eAnnotations>
+    <eAnnotations source="positions.144" references="/0/generateClassPersonagem/@body.14/@body.0/@body.0/@body.0/@body.0/@ifExpr">
+      <details key="start" value="4803"/>
+      <details key="end" value="4824"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.145" references="/0/generateClassPersonagem/@body.14/@body.0/@body.0/@body.0/@body.0/@ifExpr/@source">
+      <details key="start" value="4804"/>
+      <details key="end" value="4811"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.146" references="/0/generateClassPersonagem/@body.14/@body.0/@body.0/@body.0/@body.0/@ifExpr/@source/cl">
+      <details key="start" value="4804"/>
+      <details key="end" value="4806"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.147" references="/0/generateClassPersonagem/@body.14/@body.0/@body.0/@body.0/@body.0/@ifExpr/@argument.0">
+      <details key="start" value="4814"/>
+      <details key="end" value="4823"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.148" references="/0/generateClassPersonagem/@body.14/@body.0/@body.0/@body.0/cl">
+      <details key="start" value="4761"/>
+      <details key="end" value="4776"/>
+      <details key="line" value="194"/>
+    </eAnnotations>
+    <eAnnotations source="positions.149" references="/0/generateClassPersonagem/@body.14/@body.0/@body.0/@body.0/@iterSet">
+      <details key="start" value="4779"/>
+      <details key="end" value="4796"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.150" references="/0/generateClassPersonagem/@body.14/@body.0/@body.0/@body.0/@iterSet/interface">
+      <details key="start" value="4779"/>
+      <details key="end" value="4788"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.151" references="/0/generateClassPersonagem/@body.14/@body.0/@body.0/interface">
+      <details key="start" value="4718"/>
+      <details key="end" value="4739"/>
+      <details key="line" value="193"/>
+    </eAnnotations>
+    <eAnnotations source="positions.152" references="/0/generateClassPersonagem/@body.14/@body.0/@body.0/@iterSet">
+      <details key="start" value="4742"/>
+      <details key="end" value="4752"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.153" references="/0/generateClassPersonagem/@body.14/@body.0/@body.0/@iterSet/i">
+      <details key="start" value="4742"/>
+      <details key="end" value="4743"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.154" references="/0/generateClassPersonagem/@body.14/@body.0/i">
+      <details key="start" value="4655"/>
+      <details key="end" value="4679"/>
+      <details key="line" value="192"/>
+    </eAnnotations>
+    <eAnnotations source="positions.155" references="/0/generateClassPersonagem/@body.14/@body.0/@iterSet">
+      <details key="start" value="4682"/>
+      <details key="end" value="4709"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.156" references="/0/generateClassPersonagem/@body.14/@body.0/@iterSet/superC">
+      <details key="start" value="4682"/>
+      <details key="end" value="4688"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.157" references="/0/generateClassPersonagem/@body.14/superC">
+      <details key="start" value="4617"/>
+      <details key="end" value="4631"/>
+      <details key="line" value="191"/>
+    </eAnnotations>
+    <eAnnotations source="positions.158" references="/0/generateClassPersonagem/@body.14/@iterSet">
+      <details key="start" value="4634"/>
+      <details key="end" value="4646"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.159" references="/0/generateClassPersonagem/@body.14/@iterSet/c">
+      <details key="start" value="4634"/>
+      <details key="end" value="4635"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.160" references="/0/generateClassPersonagem/@body.15">
+      <details key="start" value="5091"/>
+      <details key="end" value="5163"/>
+      <details key="line" value="207"/>
+    </eAnnotations>
+    <eAnnotations source="positions.161" references="/0/generateClassPersonagem/@body.16">
+      <details key="start" value="5163"/>
+      <details key="end" value="5416"/>
+      <details key="line" value="211"/>
+    </eAnnotations>
+    <eAnnotations source="positions.162" references="/0/generateClassPersonagem/@body.16/@body.0">
+      <details key="start" value="5201"/>
+      <details key="end" value="5409"/>
+      <details key="line" value="212"/>
+    </eAnnotations>
+    <eAnnotations source="positions.163" references="/0/generateClassPersonagem/@body.16/@body.0/@body.0">
+      <details key="start" value="5264"/>
+      <details key="end" value="5402"/>
+      <details key="line" value="213"/>
+    </eAnnotations>
+    <eAnnotations source="positions.164" references="/0/generateClassPersonagem/@body.16/@body.0/@body.0/@body.0">
+      <details key="start" value="5307"/>
+      <details key="end" value="5395"/>
+      <details key="line" value="214"/>
+    </eAnnotations>
+    <eAnnotations source="positions.165" references="/0/generateClassPersonagem/@body.16/@body.0/@body.0/@body.0/@body.0">
+      <details key="start" value="5351"/>
+      <details key="end" value="5388"/>
+      <details key="line" value="215"/>
+    </eAnnotations>
+    <eAnnotations source="positions.166" references="/0/generateClassPersonagem/@body.16/@body.0/@body.0/@body.0/@body.0/@body.0">
+      <details key="start" value="5378"/>
+      <details key="end" value="5383"/>
+      <details key="line" value="216"/>
+    </eAnnotations>
+    <eAnnotations source="positions.167" references="/0/generateClassPersonagem/@body.16/@body.0/@body.0/@body.0/@body.0/@ifExpr">
+      <details key="start" value="5355"/>
+      <details key="end" value="5376"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.168" references="/0/generateClassPersonagem/@body.16/@body.0/@body.0/@body.0/@body.0/@ifExpr/@source">
+      <details key="start" value="5356"/>
+      <details key="end" value="5363"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.169" references="/0/generateClassPersonagem/@body.16/@body.0/@body.0/@body.0/@body.0/@ifExpr/@source/cl">
+      <details key="start" value="5356"/>
+      <details key="end" value="5358"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.170" references="/0/generateClassPersonagem/@body.16/@body.0/@body.0/@body.0/@body.0/@ifExpr/@argument.0">
+      <details key="start" value="5366"/>
+      <details key="end" value="5375"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.171" references="/0/generateClassPersonagem/@body.16/@body.0/@body.0/@body.0/cl">
+      <details key="start" value="5313"/>
+      <details key="end" value="5328"/>
+      <details key="line" value="214"/>
+    </eAnnotations>
+    <eAnnotations source="positions.172" references="/0/generateClassPersonagem/@body.16/@body.0/@body.0/@body.0/@iterSet">
+      <details key="start" value="5331"/>
+      <details key="end" value="5348"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.173" references="/0/generateClassPersonagem/@body.16/@body.0/@body.0/@body.0/@iterSet/interface">
+      <details key="start" value="5331"/>
+      <details key="end" value="5340"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.174" references="/0/generateClassPersonagem/@body.16/@body.0/@body.0/interface">
+      <details key="start" value="5270"/>
+      <details key="end" value="5291"/>
+      <details key="line" value="213"/>
+    </eAnnotations>
+    <eAnnotations source="positions.175" references="/0/generateClassPersonagem/@body.16/@body.0/@body.0/@iterSet">
+      <details key="start" value="5294"/>
+      <details key="end" value="5304"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.176" references="/0/generateClassPersonagem/@body.16/@body.0/@body.0/@iterSet/i">
+      <details key="start" value="5294"/>
+      <details key="end" value="5295"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.177" references="/0/generateClassPersonagem/@body.16/@body.0/i">
+      <details key="start" value="5207"/>
+      <details key="end" value="5231"/>
+      <details key="line" value="212"/>
+    </eAnnotations>
+    <eAnnotations source="positions.178" references="/0/generateClassPersonagem/@body.16/@body.0/@iterSet">
+      <details key="start" value="5234"/>
+      <details key="end" value="5261"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.179" references="/0/generateClassPersonagem/@body.16/@body.0/@iterSet/superC">
+      <details key="start" value="5234"/>
+      <details key="end" value="5240"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.180" references="/0/generateClassPersonagem/@body.16/superC">
+      <details key="start" value="5169"/>
+      <details key="end" value="5183"/>
+      <details key="line" value="211"/>
+    </eAnnotations>
+    <eAnnotations source="positions.181" references="/0/generateClassPersonagem/@body.16/@iterSet">
+      <details key="start" value="5186"/>
+      <details key="end" value="5198"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.182" references="/0/generateClassPersonagem/@body.16/@iterSet/c">
+      <details key="start" value="5186"/>
+      <details key="end" value="5187"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.183" references="/0/generateClassPersonagem/@body.17">
+      <details key="start" value="5417"/>
+      <details key="end" value="5445"/>
+      <details key="line" value="222"/>
+    </eAnnotations>
+    <eAnnotations source="positions.184" references="/0/generateClassPersonagem/@body.18">
+      <details key="start" value="5445"/>
+      <details key="end" value="5892"/>
+      <details key="line" value="223"/>
+    </eAnnotations>
+    <eAnnotations source="positions.185" references="/0/generateClassPersonagem/@body.18/@body.0">
+      <details key="start" value="5483"/>
+      <details key="end" value="5885"/>
+      <details key="line" value="224"/>
+    </eAnnotations>
+    <eAnnotations source="positions.186" references="/0/generateClassPersonagem/@body.18/@body.0/@body.0">
+      <details key="start" value="5546"/>
+      <details key="end" value="5878"/>
+      <details key="line" value="225"/>
+    </eAnnotations>
+    <eAnnotations source="positions.187" references="/0/generateClassPersonagem/@body.18/@body.0/@body.0/@body.0">
+      <details key="start" value="5589"/>
+      <details key="end" value="5871"/>
+      <details key="line" value="226"/>
+    </eAnnotations>
+    <eAnnotations source="positions.188" references="/0/generateClassPersonagem/@body.18/@body.0/@body.0/@body.0/@body.0">
+      <details key="start" value="5633"/>
+      <details key="end" value="5864"/>
+      <details key="line" value="227"/>
+    </eAnnotations>
+    <eAnnotations source="positions.189" references="/0/generateClassPersonagem/@body.18/@body.0/@body.0/@body.0/@body.0/@body.0">
+      <details key="start" value="5660"/>
+      <details key="end" value="5689"/>
+      <details key="line" value="228"/>
+    </eAnnotations>
+    <eAnnotations source="positions.190" references="/0/generateClassPersonagem/@body.18/@body.0/@body.0/@body.0/@body.0/@body.1">
+      <details key="start" value="5690"/>
+      <details key="end" value="5699"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.191" references="/0/generateClassPersonagem/@body.18/@body.0/@body.0/@body.0/@body.0/@body.2">
+      <details key="start" value="5701"/>
+      <details key="end" value="5752"/>
+      <details key="line" value="228"/>
+    </eAnnotations>
+    <eAnnotations source="positions.192" references="/0/generateClassPersonagem/@body.18/@body.0/@body.0/@body.0/@body.0/@body.3">
+      <details key="start" value="5753"/>
+      <details key="end" value="5762"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.193" references="/0/generateClassPersonagem/@body.18/@body.0/@body.0/@body.0/@body.0/@body.4">
+      <details key="start" value="5764"/>
+      <details key="end" value="5859"/>
+      <details key="line" value="229"/>
+    </eAnnotations>
+    <eAnnotations source="positions.194" references="/0/generateClassPersonagem/@body.18/@body.0/@body.0/@body.0/@body.0/@ifExpr">
+      <details key="start" value="5637"/>
+      <details key="end" value="5658"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.195" references="/0/generateClassPersonagem/@body.18/@body.0/@body.0/@body.0/@body.0/@ifExpr/@source">
+      <details key="start" value="5638"/>
+      <details key="end" value="5645"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.196" references="/0/generateClassPersonagem/@body.18/@body.0/@body.0/@body.0/@body.0/@ifExpr/@source/cl">
+      <details key="start" value="5638"/>
+      <details key="end" value="5640"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.197" references="/0/generateClassPersonagem/@body.18/@body.0/@body.0/@body.0/@body.0/@ifExpr/@argument.0">
+      <details key="start" value="5648"/>
+      <details key="end" value="5657"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.198" references="/0/generateClassPersonagem/@body.18/@body.0/@body.0/@body.0/cl">
+      <details key="start" value="5595"/>
+      <details key="end" value="5610"/>
+      <details key="line" value="226"/>
+    </eAnnotations>
+    <eAnnotations source="positions.199" references="/0/generateClassPersonagem/@body.18/@body.0/@body.0/@body.0/@iterSet">
+      <details key="start" value="5613"/>
+      <details key="end" value="5630"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.200" references="/0/generateClassPersonagem/@body.18/@body.0/@body.0/@body.0/@iterSet/interface">
+      <details key="start" value="5613"/>
+      <details key="end" value="5622"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.201" references="/0/generateClassPersonagem/@body.18/@body.0/@body.0/interface">
+      <details key="start" value="5552"/>
+      <details key="end" value="5573"/>
+      <details key="line" value="225"/>
+    </eAnnotations>
+    <eAnnotations source="positions.202" references="/0/generateClassPersonagem/@body.18/@body.0/@body.0/@iterSet">
+      <details key="start" value="5576"/>
+      <details key="end" value="5586"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.203" references="/0/generateClassPersonagem/@body.18/@body.0/@body.0/@iterSet/i">
+      <details key="start" value="5576"/>
+      <details key="end" value="5577"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.204" references="/0/generateClassPersonagem/@body.18/@body.0/i">
+      <details key="start" value="5489"/>
+      <details key="end" value="5513"/>
+      <details key="line" value="224"/>
+    </eAnnotations>
+    <eAnnotations source="positions.205" references="/0/generateClassPersonagem/@body.18/@body.0/@iterSet">
+      <details key="start" value="5516"/>
+      <details key="end" value="5543"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.206" references="/0/generateClassPersonagem/@body.18/@body.0/@iterSet/superC">
+      <details key="start" value="5516"/>
+      <details key="end" value="5522"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.207" references="/0/generateClassPersonagem/@body.18/superC">
+      <details key="start" value="5451"/>
+      <details key="end" value="5465"/>
+      <details key="line" value="223"/>
+    </eAnnotations>
+    <eAnnotations source="positions.208" references="/0/generateClassPersonagem/@body.18/@iterSet">
+      <details key="start" value="5468"/>
+      <details key="end" value="5480"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.209" references="/0/generateClassPersonagem/@body.18/@iterSet/c">
+      <details key="start" value="5468"/>
+      <details key="end" value="5469"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.210" references="/0/generateClassPersonagem/@body.19">
+      <details key="start" value="5893"/>
+      <details key="end" value="5965"/>
+      <details key="line" value="239"/>
+    </eAnnotations>
+    <eAnnotations source="positions.211" references="/0/generateClassPersonagem/@body.20">
+      <details key="start" value="5965"/>
+      <details key="end" value="6218"/>
+      <details key="line" value="243"/>
+    </eAnnotations>
+    <eAnnotations source="positions.212" references="/0/generateClassPersonagem/@body.20/@body.0">
+      <details key="start" value="6003"/>
+      <details key="end" value="6211"/>
+      <details key="line" value="244"/>
+    </eAnnotations>
+    <eAnnotations source="positions.213" references="/0/generateClassPersonagem/@body.20/@body.0/@body.0">
+      <details key="start" value="6066"/>
+      <details key="end" value="6204"/>
+      <details key="line" value="245"/>
+    </eAnnotations>
+    <eAnnotations source="positions.214" references="/0/generateClassPersonagem/@body.20/@body.0/@body.0/@body.0">
+      <details key="start" value="6109"/>
+      <details key="end" value="6197"/>
+      <details key="line" value="246"/>
+    </eAnnotations>
+    <eAnnotations source="positions.215" references="/0/generateClassPersonagem/@body.20/@body.0/@body.0/@body.0/@body.0">
+      <details key="start" value="6153"/>
+      <details key="end" value="6190"/>
+      <details key="line" value="247"/>
+    </eAnnotations>
+    <eAnnotations source="positions.216" references="/0/generateClassPersonagem/@body.20/@body.0/@body.0/@body.0/@body.0/@body.0">
+      <details key="start" value="6180"/>
+      <details key="end" value="6185"/>
+      <details key="line" value="248"/>
+    </eAnnotations>
+    <eAnnotations source="positions.217" references="/0/generateClassPersonagem/@body.20/@body.0/@body.0/@body.0/@body.0/@ifExpr">
+      <details key="start" value="6157"/>
+      <details key="end" value="6178"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.218" references="/0/generateClassPersonagem/@body.20/@body.0/@body.0/@body.0/@body.0/@ifExpr/@source">
+      <details key="start" value="6158"/>
+      <details key="end" value="6165"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.219" references="/0/generateClassPersonagem/@body.20/@body.0/@body.0/@body.0/@body.0/@ifExpr/@source/cl">
+      <details key="start" value="6158"/>
+      <details key="end" value="6160"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.220" references="/0/generateClassPersonagem/@body.20/@body.0/@body.0/@body.0/@body.0/@ifExpr/@argument.0">
+      <details key="start" value="6168"/>
+      <details key="end" value="6177"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.221" references="/0/generateClassPersonagem/@body.20/@body.0/@body.0/@body.0/cl">
+      <details key="start" value="6115"/>
+      <details key="end" value="6130"/>
+      <details key="line" value="246"/>
+    </eAnnotations>
+    <eAnnotations source="positions.222" references="/0/generateClassPersonagem/@body.20/@body.0/@body.0/@body.0/@iterSet">
+      <details key="start" value="6133"/>
+      <details key="end" value="6150"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.223" references="/0/generateClassPersonagem/@body.20/@body.0/@body.0/@body.0/@iterSet/interface">
+      <details key="start" value="6133"/>
+      <details key="end" value="6142"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.224" references="/0/generateClassPersonagem/@body.20/@body.0/@body.0/interface">
+      <details key="start" value="6072"/>
+      <details key="end" value="6093"/>
+      <details key="line" value="245"/>
+    </eAnnotations>
+    <eAnnotations source="positions.225" references="/0/generateClassPersonagem/@body.20/@body.0/@body.0/@iterSet">
+      <details key="start" value="6096"/>
+      <details key="end" value="6106"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.226" references="/0/generateClassPersonagem/@body.20/@body.0/@body.0/@iterSet/i">
+      <details key="start" value="6096"/>
+      <details key="end" value="6097"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.227" references="/0/generateClassPersonagem/@body.20/@body.0/i">
+      <details key="start" value="6009"/>
+      <details key="end" value="6033"/>
+      <details key="line" value="244"/>
+    </eAnnotations>
+    <eAnnotations source="positions.228" references="/0/generateClassPersonagem/@body.20/@body.0/@iterSet">
+      <details key="start" value="6036"/>
+      <details key="end" value="6063"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.229" references="/0/generateClassPersonagem/@body.20/@body.0/@iterSet/superC">
+      <details key="start" value="6036"/>
+      <details key="end" value="6042"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.230" references="/0/generateClassPersonagem/@body.20/superC">
+      <details key="start" value="5971"/>
+      <details key="end" value="5985"/>
+      <details key="line" value="243"/>
+    </eAnnotations>
+    <eAnnotations source="positions.231" references="/0/generateClassPersonagem/@body.20/@iterSet">
+      <details key="start" value="5988"/>
+      <details key="end" value="6000"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.232" references="/0/generateClassPersonagem/@body.20/@iterSet/c">
+      <details key="start" value="5988"/>
+      <details key="end" value="5989"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.233" references="/0/generateClassPersonagem/@body.21">
+      <details key="start" value="6219"/>
+      <details key="end" value="7237"/>
+      <details key="line" value="254"/>
+    </eAnnotations>
+    <eAnnotations source="positions.234" references="/0/generateClassPersonagem/@body.22">
+      <details key="start" value="7237"/>
+      <details key="end" value="7728"/>
+      <details key="line" value="295"/>
+    </eAnnotations>
+    <eAnnotations source="positions.235" references="/0/generateClassPersonagem/@body.22/@body.0">
+      <details key="start" value="7275"/>
+      <details key="end" value="7721"/>
+      <details key="line" value="296"/>
+    </eAnnotations>
+    <eAnnotations source="positions.236" references="/0/generateClassPersonagem/@body.22/@body.0/@body.0">
+      <details key="start" value="7338"/>
+      <details key="end" value="7714"/>
+      <details key="line" value="297"/>
+    </eAnnotations>
+    <eAnnotations source="positions.237" references="/0/generateClassPersonagem/@body.22/@body.0/@body.0/@body.0">
+      <details key="start" value="7381"/>
+      <details key="end" value="7707"/>
+      <details key="line" value="298"/>
+    </eAnnotations>
+    <eAnnotations source="positions.238" references="/0/generateClassPersonagem/@body.22/@body.0/@body.0/@body.0/@body.0">
+      <details key="start" value="7425"/>
+      <details key="end" value="7700"/>
+      <details key="line" value="299"/>
+    </eAnnotations>
+    <eAnnotations source="positions.239" references="/0/generateClassPersonagem/@body.22/@body.0/@body.0/@body.0/@body.0/@body.0">
+      <details key="start" value="7452"/>
+      <details key="end" value="7695"/>
+      <details key="line" value="300"/>
+    </eAnnotations>
+    <eAnnotations source="positions.240" references="/0/generateClassPersonagem/@body.22/@body.0/@body.0/@body.0/@body.0/@ifExpr">
+      <details key="start" value="7429"/>
+      <details key="end" value="7450"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.241" references="/0/generateClassPersonagem/@body.22/@body.0/@body.0/@body.0/@body.0/@ifExpr/@source">
+      <details key="start" value="7430"/>
+      <details key="end" value="7437"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.242" references="/0/generateClassPersonagem/@body.22/@body.0/@body.0/@body.0/@body.0/@ifExpr/@source/cl">
+      <details key="start" value="7430"/>
+      <details key="end" value="7432"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.243" references="/0/generateClassPersonagem/@body.22/@body.0/@body.0/@body.0/@body.0/@ifExpr/@argument.0">
+      <details key="start" value="7440"/>
+      <details key="end" value="7449"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.244" references="/0/generateClassPersonagem/@body.22/@body.0/@body.0/@body.0/cl">
+      <details key="start" value="7387"/>
+      <details key="end" value="7402"/>
+      <details key="line" value="298"/>
+    </eAnnotations>
+    <eAnnotations source="positions.245" references="/0/generateClassPersonagem/@body.22/@body.0/@body.0/@body.0/@iterSet">
+      <details key="start" value="7405"/>
+      <details key="end" value="7422"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.246" references="/0/generateClassPersonagem/@body.22/@body.0/@body.0/@body.0/@iterSet/interface">
+      <details key="start" value="7405"/>
+      <details key="end" value="7414"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.247" references="/0/generateClassPersonagem/@body.22/@body.0/@body.0/interface">
+      <details key="start" value="7344"/>
+      <details key="end" value="7365"/>
+      <details key="line" value="297"/>
+    </eAnnotations>
+    <eAnnotations source="positions.248" references="/0/generateClassPersonagem/@body.22/@body.0/@body.0/@iterSet">
+      <details key="start" value="7368"/>
+      <details key="end" value="7378"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.249" references="/0/generateClassPersonagem/@body.22/@body.0/@body.0/@iterSet/i">
+      <details key="start" value="7368"/>
+      <details key="end" value="7369"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.250" references="/0/generateClassPersonagem/@body.22/@body.0/i">
+      <details key="start" value="7281"/>
+      <details key="end" value="7305"/>
+      <details key="line" value="296"/>
+    </eAnnotations>
+    <eAnnotations source="positions.251" references="/0/generateClassPersonagem/@body.22/@body.0/@iterSet">
+      <details key="start" value="7308"/>
+      <details key="end" value="7335"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.252" references="/0/generateClassPersonagem/@body.22/@body.0/@iterSet/superC">
+      <details key="start" value="7308"/>
+      <details key="end" value="7314"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.253" references="/0/generateClassPersonagem/@body.22/superC">
+      <details key="start" value="7243"/>
+      <details key="end" value="7257"/>
+      <details key="line" value="295"/>
+    </eAnnotations>
+    <eAnnotations source="positions.254" references="/0/generateClassPersonagem/@body.22/@iterSet">
+      <details key="start" value="7260"/>
+      <details key="end" value="7272"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.255" references="/0/generateClassPersonagem/@body.22/@iterSet/c">
+      <details key="start" value="7260"/>
+      <details key="end" value="7261"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.256" references="/0/generateClassPersonagem/@body.23">
+      <details key="start" value="7729"/>
+      <details key="end" value="7731"/>
+      <details key="line" value="314"/>
+    </eAnnotations>
+    <eAnnotations source="positions.257" references="/0/generateClassPersonagem/c">
       <details key="start" value="159"/>
       <details key="end" value="168"/>
       <details key="line" value="7"/>

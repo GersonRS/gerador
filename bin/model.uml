@@ -9,11 +9,12 @@
     <packagedElement name="KeyListener" xmi:id="KeyListener" xmi:type="uml:Interface"/>
     <packagedElement name="MouseInputListener" xmi:id="MouseInputListener" xmi:type="uml:Interface"/>
     <packagedElement name="Interacao" xmi:id="_QWLVEIlgEeW8q8DTHKD6Ow" xmi:type="uml:Interface">
-      <generalization general="KeyListener" xmi:id="_x7urMIlnEeW895OJNim2Fg"/>
-      <generalization general="MouseInputListener" xmi:id="_yZMqUIlnEeW895OJNim2Fg"/>
+      
+      
     </packagedElement>
-    <packagedElement clientDependency="_ISgYkIlrEeW895OJNim2Fg" isAbstract="true" name="GameBase" xmi:id="_qBZ48IlnEeW895OJNim2Fg" xmi:type="uml:Class">
+    <packagedElement clientDependency="_ISgYkIlrEeW895OJNim2Fg _BboJkIraEeWsdOYnHSCEsQ" isAbstract="true" name="GameBase" xmi:id="_qBZ48IlnEeW895OJNim2Fg" xmi:type="uml:Class">
       <interfaceRealization client="_qBZ48IlnEeW895OJNim2Fg" contract="_QWLVEIlgEeW8q8DTHKD6Ow" name="InterfaceRealization1" supplier="_QWLVEIlgEeW8q8DTHKD6Ow" xmi:id="_ISgYkIlrEeW895OJNim2Fg"/>
+      <interfaceRealization client="_qBZ48IlnEeW895OJNim2Fg" contract="_4xDL8IlhEeW8q8DTHKD6Ow" name="InterfaceRealization2" supplier="_4xDL8IlhEeW8q8DTHKD6Ow" xmi:id="_BboJkIraEeWsdOYnHSCEsQ"/>
     </packagedElement>
     <packagedElement name="Cenario" xmi:id="_xeanoIloEeW895OJNim2Fg" xmi:type="uml:Class"/>
     <packagedElement name="" xmi:id="_XeXysIlTEeWD0pc--njHrg" xmi:type="uml:PrimitiveType"/>
@@ -35,8 +36,8 @@
       </ownedOperation>
     </packagedElement>
     <packagedElement name="Acoes" xmi:id="_4xDL8IlhEeW8q8DTHKD6Ow" xmi:type="uml:Interface">
-      <generalization general="Movimento" xmi:id="_wXq3cIlnEeW895OJNim2Fg"/>
-      <generalization general="Colisao" xmi:id="_xD0y0IlnEeW895OJNim2Fg"/>
+      
+      
     </packagedElement>
     <packagedElement clientDependency="_L91a0IlrEeW895OJNim2Fg" isAbstract="true" name="Elemento" xmi:id="Elemento" xmi:type="uml:Class">
       <interfaceRealization client="Elemento" contract="_4xDL8IlhEeW8q8DTHKD6Ow" name="InterfaceRealization1" supplier="_4xDL8IlhEeW8q8DTHKD6Ow" xmi:id="_L91a0IlrEeW895OJNim2Fg"/>
@@ -65,6 +66,6 @@
   <packagedElement name="game" xmi:id="_uxClsIoIEeWhMZXom0l9CQ" xmi:type="uml:Package">
     <packagedElement name="Jogo" xmi:id="_huaOIIoOEeWhMZXom0l9CQ" xmi:type="uml:Class">
       <generalization general="_qBZ48IlnEeW895OJNim2Fg" xmi:id="_jj8MYIoOEeWhMZXom0l9CQ"/>
-    <ownedOperation name="loadCenario" xmi:id="Kyj01E2Zac3nj7tEm0256_8"><ownedParameter name="c" xmi:id="vyvEF9K717mN079a14966U5"/></ownedOperation><ownedOperation name="addTeleport" xmi:id="Yk41qgU-g9jL1j7i20XxIIU"><ownedParameter name="c" xmi:id="Y930wZBeX0LjRa2tb5R5uqU"/><ownedParameter name="c" xmi:id="Wz5qGEyyps125YRR43243uw"/><ownedParameter direction="return" name="2" xmi:id="E6kC0YU46P50QN7t1418aU3"/></ownedOperation><ownedOperation name="configLayerInferior" xmi:id="7o2w90HQ61ksGPFaoxrM0ec"><ownedParameter name="c" xmi:id="D8K9ie1xzg91qHWZ07y1I2B"/><ownedParameter name="a" xmi:id="YPL838JqRi7R1A64Lie3p33"/></ownedOperation></packagedElement>
-  <packagedElement name="Principal" xmi:id="Principal" xmi:type="uml:Class"><generalization general="Personagem" xmi:id="7oc283_hI0eZ2Ie2M789vGH"/><ownedAttribute name="nome" type="String"><defaultValue value="&quot;a&quot;" xmi:type="uml:LiteralString"/></ownedAttribute></packagedElement><packagedElement name="Boneco" xmi:id="Boneco" xmi:type="uml:Class"><generalization general="Personagem" xmi:id="12hJFecgH3-Dv2D5r5EEpVz"/></packagedElement><packagedElement name="NPC" xmi:id="NPC" xmi:type="uml:Class"><generalization general="Personagem" xmi:id="9k8-rq4S976370A7z3hvxKu"/></packagedElement></packagedElement>
+    </packagedElement>
+  <packagedElement name="Principal" xmi:id="Principal" xmi:type="uml:Class"><generalization general="Personagem" xmi:id="5rW1mT7v8fP60rLd9277ZQt"/><ownedComment xmi:id="82DA9iq03yN878Kqft26B0u"><body>core.Personagem</body></ownedComment><ownedComment xmi:id="cqT3VVWZu1EzUL7RV8KG2IB"><body>java.awt.Graphics2D</body></ownedComment></packagedElement><packagedElement name="Asda" xmi:id="Asda" xmi:type="uml:Class"><generalization general="Personagem" xmi:id="S0CGxC75SG80wK4SmD5dg92"/><ownedComment xmi:id="999xQS2jy376-7ZjtYoWfh3"><body>core.Personagem</body></ownedComment><ownedComment xmi:id="X8iA6ZTf229pu8V_7mFi9zs"><body>java.awt.Graphics2D</body></ownedComment></packagedElement><packagedElement name="Asdasd" xmi:id="Asdasd" xmi:type="uml:Class"><generalization general="Elemento" xmi:id="1Vsi18DT44Cc0c4X0CF4Qx4"/><ownedComment xmi:id="zbH2M70_92pmt92G85B7rt2"><body>core.Elemento</body></ownedComment><ownedComment xmi:id="iHyL130aGVhF49XTNCdhqzT"><body>java.awt.Graphics2D</body></ownedComment></packagedElement></packagedElement>
 </uml:Model>

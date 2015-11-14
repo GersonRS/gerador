@@ -12,7 +12,6 @@
 import java.awt.AlphaComposite;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
-import java.awt.Point;
 [for (i : InterfaceRealization | c.interfaceRealization)]
 [for (interface : Interface | i.contract)]
 [for (cl : Classifier | interface.general)]
@@ -20,13 +19,16 @@ import java.awt.Point;
 import java.awt.event.KeyEvent;
 [/if]
 [if (cl.name = 'MouseInputListener')]
+import java.awt.Point;
 import java.awt.event.MouseEvent;
-import java.awt.geom.Point2D;
+[/if]
+[if (cl.name = 'Colisao')]
+import java.awt.geom.Rectangle2D;
 [/if]
 [/for]
 [/for]
 [/for]
-import java.awt.geom.Rectangle2D;
+import java.awt.geom.Point2D;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -74,6 +76,12 @@ public abstract class GameBase implements Runnable, Interacao {
 	private volatile boolean mouseButton2;
 	private volatile Point mousePos;
 [/if]
+[if (cl.name = 'Colisao')]
+	private final int ABOVE = 0;
+	private final int RIGHT = 1;
+	private final int BELOW = 2;
+	private final int LEFT = 3;
+[/if]
 [/for]
 [/for]
 [/for]
@@ -82,12 +90,6 @@ public abstract class GameBase implements Runnable, Interacao {
 	private String nextCenerio;
 	private Point2D.Double nextPos;
 	private boolean transition = false;
-
-	// --------atributos---------//
-	private final int ABOVE = 0;
-	private final int RIGHT = 1;
-	private final int BELOW = 2;
-	private final int LEFT = 3;
 
 	protected JFrame mainWindow;
 	private BufferStrategy bufferStrategy;
@@ -157,11 +159,13 @@ public abstract class GameBase implements Runnable, Interacao {
 [if (cl.name = 'KeyListener')]
 				updateKeys();
 [/if]
+[if (cl.name = 'Colisao')]
+				testaColisao();
+[/if]
 [/for]
 [/for]
 [/for]
 				logica(totalTicks);
-				testaColisao();
 				skippedFrames++;
 
 			} else {
@@ -277,6 +281,10 @@ public abstract class GameBase implements Runnable, Interacao {
 		bufferStrategy.show();
 	}
 
+[for (i : InterfaceRealization | c.interfaceRealization)]
+[for (interface : Interface | i.contract)]
+[for (cl : Classifier | interface.general)]
+[if (cl.name = 'Colisao')]
 	private void testaColisao() {
 		ArrayList<Elemento> element = this.elementos.get(currentCenario);
 		ArrayList<Elemento> obstaculo = this.elementos.get("obstaculos");
@@ -397,6 +405,10 @@ public abstract class GameBase implements Runnable, Interacao {
 			}
 		}
 	}
+[/if]
+[/for]
+[/for]
+[/for]
 
 [for (i : InterfaceRealization | c.interfaceRealization)]
 [for (interface : Interface | i.contract)]
@@ -577,11 +589,11 @@ public abstract class GameBase implements Runnable, Interacao {
 		cenarios.get(currentCenario).render(g);
 	}
 
-	protected void renderCenarioBase(Graphics2D g) {
+	protected void renderCenarioInferior(Graphics2D g) {
 		cenarios.get(currentCenario).renderInferior(g);
 	}
 
-	protected void renderCenarioSuperficie(Graphics2D g) {
+	protected void renderCenarioSuperior(Graphics2D g) {
 		cenarios.get(currentCenario).renderSuperior(g);
 	}
 
@@ -606,7 +618,15 @@ public abstract class GameBase implements Runnable, Interacao {
 		for (int i = 0; i < elementos.get(currentCenario).size(); i++) {
 			Elemento e = elementos.get(currentCenario).get(i);
 			if (e.isAtivo()) {
+[for (i : InterfaceRealization | c.interfaceRealization)]
+[for (interface : Interface | i.contract)]
+[for (cl : Classifier | interface.general)]
+[if (cl.name = 'Movimento')]
 				e.mover(this);
+[/if]
+[/for]
+[/for]
+[/for]
 				e.update(tick);
 			} else {
 				elementos.get(currentCenario).remove(e);

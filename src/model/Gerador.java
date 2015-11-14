@@ -2,6 +2,8 @@ package model;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,6 +26,7 @@ import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
@@ -64,6 +67,44 @@ public class Gerador {
 				generalization.setAttribute("general", elemento.getExtend());
 				generalization.setAttribute("xmi:id", gerarId());
 				packagedElement.appendChild(generalization);
+
+				if (elemento.getExtend().equalsIgnoreCase("Personagem")
+						|| elemento.getExtend().equalsIgnoreCase("Elemento")
+						|| elemento.getExtend().equalsIgnoreCase("Obstaculo")) {
+					Element ownedComment = doc.createElement("ownedComment");
+					ownedComment.setAttribute("xmi:id", gerarId());
+					Node node = doc.createElement("body");
+					node.setTextContent("core." + elemento.getExtend());
+					ownedComment.appendChild(node);
+					packagedElement.appendChild(ownedComment);
+					if (elemento.getExtend().equalsIgnoreCase("Personagem")
+							|| elemento.getExtend()
+									.equalsIgnoreCase("Elemento")) {
+						Element ownedComment_1 = doc
+								.createElement("ownedComment");
+						ownedComment_1.setAttribute("xmi:id", gerarId());
+						Node node_1 = doc.createElement("body");
+						node_1.setTextContent("core.Interacao");
+						ownedComment_1.appendChild(node_1);
+						Element ownedComment_2 = doc
+								.createElement("ownedComment");
+						ownedComment_2.setAttribute("xmi:id", gerarId());
+						Node node_2 = doc.createElement("body");
+						node_2.setTextContent("java.awt.geom.Rectangle2D");
+						ownedComment_2.appendChild(node_2);
+						Element ownedComment_3 = doc
+								.createElement("ownedComment");
+						ownedComment_3.setAttribute("xmi:id", gerarId());
+						Node node_3 = doc.createElement("body");
+						node_3.setTextContent("java.awt.Graphics2D");
+						ownedComment_3.appendChild(node_3);
+						if (game.isAcoes_colisao())
+							packagedElement.appendChild(ownedComment_2);
+						if (game.isAcoes_movimento())
+							packagedElement.appendChild(ownedComment_1);
+						packagedElement.appendChild(ownedComment_3);
+					}
+				}
 			}
 
 			for (Atributo atributo : elemento.getAtributos()) {
@@ -113,8 +154,13 @@ public class Gerador {
 	}
 
 	public void generateXMLFile() {
-		InputStream is = getClass().getClassLoader().getResourceAsStream(
-				"core.uml");
+		InputStream is = null;
+		try {
+			is = new FileInputStream(new File("resource/core.uml"));
+		} catch (FileNotFoundException e1) {
+			e1.printStackTrace();
+		}
+
 		try {
 			DocumentBuilderFactory factory = DocumentBuilderFactory
 					.newInstance();
@@ -128,94 +174,69 @@ public class Gerador {
 				}
 			});
 
-			Document doc = builder.parse(is);
-			Element docElement = doc.getDocumentElement();
+			if (is != null) {
 
-			Element packagedCore = null;
-			Element packagedGame = null;
-			Element interacao = null;
-			Element acoes = null;
-			Element jogo = null;
+				Document doc = builder.parse(is);
+				Element docElement = doc.getDocumentElement();
 
-			NodeList pacotes = docElement
-					.getElementsByTagName("packagedElement");
-			for (int i = 0; i < pacotes.getLength(); i++) {
-				Element current = (Element) pacotes.item(i);
-				if (current.getAttribute("name").equalsIgnoreCase("core")) {
-					packagedCore = current;
+				Element packagedCore = null;
+				Element packagedGame = null;
+				Element interacao = null;
+				Element acoes = null;
+				Element jogo = null;
+
+				NodeList pacotes = docElement
+						.getElementsByTagName("packagedElement");
+				for (int i = 0; i < pacotes.getLength(); i++) {
+					Element current = (Element) pacotes.item(i);
+					if (current.getAttribute("name").equalsIgnoreCase("core")) {
+						packagedCore = current;
+					}
+					if (current.getAttribute("name").equalsIgnoreCase("game")) {
+						packagedGame = current;
+					}
 				}
-				if (current.getAttribute("name").equalsIgnoreCase("game")) {
-					packagedGame = current;
+
+				NodeList classesCore = packagedCore
+						.getElementsByTagName("packagedElement");
+
+				for (int i = 0; i < classesCore.getLength(); i++) {
+					Element current = (Element) classesCore.item(i);
+					if (current.getAttribute("name").equalsIgnoreCase(
+							"Interacao")) {
+						interacao = current;
+					}
+					if (current.getAttribute("name").equalsIgnoreCase("Acoes")) {
+						acoes = current;
+					}
 				}
-			}
 
-			NodeList classesCore = packagedCore
-					.getElementsByTagName("packagedElement");
+				jogo = (Element) packagedGame.getElementsByTagName(
+						"packagedElement").item(0);
 
-			for (int i = 0; i < classesCore.getLength(); i++) {
-				Element current = (Element) classesCore.item(i);
-				if (current.getAttribute("name").equalsIgnoreCase("Interacao")) {
-					interacao = current;
-				}
-				if (current.getAttribute("name").equalsIgnoreCase("Acoes")) {
-					acoes = current;
-				}
-			}
-
-			jogo = (Element) packagedGame.getElementsByTagName(
-					"packagedElement").item(0);
-
-			ArrayList<Cenario> cenarios = game.getListaCenarios();
-			for (Cenario cenario : cenarios) {
-				Element ownedOperation = doc.createElement("ownedOperation");
-				ownedOperation.setAttribute("xmi:id", gerarId());
-				ownedOperation.setAttribute("name", "loadCenario");
-
-				Element ownedParameter = doc.createElement("ownedParameter");
-				ownedParameter.setAttribute("xmi:id", gerarId());
-				ownedParameter.setAttribute("name", cenario.getNome());
-				ownedOperation.appendChild(ownedParameter);
-
-				jogo.appendChild(ownedOperation);
-
-				for (Entry<String, String> teleport : cenario.getTeleporte()
-						.entrySet()) {
-					Element ownedOperation_teleport = doc
+				ArrayList<Cenario> cenarios = game.getListaCenarios();
+				for (Cenario cenario : cenarios) {
+					Element ownedOperation = doc
 							.createElement("ownedOperation");
-					ownedOperation_teleport.setAttribute("xmi:id", gerarId());
-					ownedOperation_teleport.setAttribute("name", "addTeleport");
+					ownedOperation.setAttribute("xmi:id", gerarId());
+					ownedOperation.setAttribute("name", "loadCenario");
 
-					Element ownedParameter_1 = doc
+					Element ownedParameter = doc
 							.createElement("ownedParameter");
-					ownedParameter_1.setAttribute("xmi:id", gerarId());
-					ownedParameter_1.setAttribute("name", cenario.getNome());
+					ownedParameter.setAttribute("xmi:id", gerarId());
+					ownedParameter.setAttribute("name", cenario.getNome());
+					ownedOperation.appendChild(ownedParameter);
 
-					Element ownedParameter_2 = doc
-							.createElement("ownedParameter");
-					ownedParameter_2.setAttribute("xmi:id", gerarId());
-					ownedParameter_2.setAttribute("name", teleport.getValue());
+					jogo.appendChild(ownedOperation);
 
-					Element ownedParameter_3 = doc
-							.createElement("ownedParameter");
-					ownedParameter_3.setAttribute("xmi:id", gerarId());
-					ownedParameter_3.setAttribute("name", teleport.getKey());
-					ownedParameter_3.setAttribute("direction", "return");
-
-					ownedOperation_teleport.appendChild(ownedParameter_1);
-					ownedOperation_teleport.appendChild(ownedParameter_2);
-					ownedOperation_teleport.appendChild(ownedParameter_3);
-
-					jogo.appendChild(ownedOperation_teleport);
-				}
-
-				for (Entry<String, String> layers : cenario.getLayers()
-						.entrySet()) {
-					if (layers.getValue().equalsIgnoreCase("superior")) {
-						Element ownedOperation_layer = doc
+					for (Entry<String, String> teleport : cenario
+							.getTeleporte().entrySet()) {
+						Element ownedOperation_teleport = doc
 								.createElement("ownedOperation");
-						ownedOperation_layer.setAttribute("xmi:id", gerarId());
-						ownedOperation_layer.setAttribute("name",
-								"configLayerSuperior");
+						ownedOperation_teleport.setAttribute("xmi:id",
+								gerarId());
+						ownedOperation_teleport.setAttribute("name",
+								"addTeleport");
 
 						Element ownedParameter_1 = doc
 								.createElement("ownedParameter");
@@ -226,167 +247,211 @@ public class Gerador {
 						Element ownedParameter_2 = doc
 								.createElement("ownedParameter");
 						ownedParameter_2.setAttribute("xmi:id", gerarId());
-						ownedParameter_2.setAttribute("name", layers.getKey());
+						ownedParameter_2.setAttribute("name",
+								teleport.getValue());
 
-						ownedOperation_layer.appendChild(ownedParameter_1);
-						ownedOperation_layer.appendChild(ownedParameter_2);
-
-						jogo.appendChild(ownedOperation_layer);
-					} else if (layers.getValue().equalsIgnoreCase("inferior")) {
-						Element ownedOperation_layer = doc
-								.createElement("ownedOperation");
-						ownedOperation_layer.setAttribute("xmi:id", gerarId());
-						ownedOperation_layer.setAttribute("name",
-								"configLayerInferior");
-
-						Element ownedParameter_1 = doc
+						Element ownedParameter_3 = doc
 								.createElement("ownedParameter");
-						ownedParameter_1.setAttribute("xmi:id", gerarId());
-						ownedParameter_1
-								.setAttribute("name", cenario.getNome());
+						ownedParameter_3.setAttribute("xmi:id", gerarId());
+						ownedParameter_3
+								.setAttribute("name", teleport.getKey());
+						ownedParameter_3.setAttribute("direction", "return");
 
-						Element ownedParameter_2 = doc
-								.createElement("ownedParameter");
-						ownedParameter_2.setAttribute("xmi:id", gerarId());
-						ownedParameter_2.setAttribute("name", layers.getKey());
+						ownedOperation_teleport.appendChild(ownedParameter_1);
+						ownedOperation_teleport.appendChild(ownedParameter_2);
+						ownedOperation_teleport.appendChild(ownedParameter_3);
 
-						ownedOperation_layer.appendChild(ownedParameter_1);
-						ownedOperation_layer.appendChild(ownedParameter_2);
+						jogo.appendChild(ownedOperation_teleport);
+					}
 
-						jogo.appendChild(ownedOperation_layer);
+					for (Entry<String, String> layers : cenario.getLayers()
+							.entrySet()) {
+						if (layers.getValue().equalsIgnoreCase("superior")) {
+							Element ownedOperation_layer = doc
+									.createElement("ownedOperation");
+							ownedOperation_layer.setAttribute("xmi:id",
+									gerarId());
+							ownedOperation_layer.setAttribute("name",
+									"configLayerSuperior");
+
+							Element ownedParameter_1 = doc
+									.createElement("ownedParameter");
+							ownedParameter_1.setAttribute("xmi:id", gerarId());
+							ownedParameter_1.setAttribute("name",
+									cenario.getNome());
+
+							Element ownedParameter_2 = doc
+									.createElement("ownedParameter");
+							ownedParameter_2.setAttribute("xmi:id", gerarId());
+							ownedParameter_2.setAttribute("name",
+									layers.getKey());
+
+							ownedOperation_layer.appendChild(ownedParameter_1);
+							ownedOperation_layer.appendChild(ownedParameter_2);
+
+							jogo.appendChild(ownedOperation_layer);
+						} else if (layers.getValue().equalsIgnoreCase(
+								"inferior")) {
+							Element ownedOperation_layer = doc
+									.createElement("ownedOperation");
+							ownedOperation_layer.setAttribute("xmi:id",
+									gerarId());
+							ownedOperation_layer.setAttribute("name",
+									"configLayerInferior");
+
+							Element ownedParameter_1 = doc
+									.createElement("ownedParameter");
+							ownedParameter_1.setAttribute("xmi:id", gerarId());
+							ownedParameter_1.setAttribute("name",
+									cenario.getNome());
+
+							Element ownedParameter_2 = doc
+									.createElement("ownedParameter");
+							ownedParameter_2.setAttribute("xmi:id", gerarId());
+							ownedParameter_2.setAttribute("name",
+									layers.getKey());
+
+							ownedOperation_layer.appendChild(ownedParameter_1);
+							ownedOperation_layer.appendChild(ownedParameter_2);
+
+							jogo.appendChild(ownedOperation_layer);
+						}
 					}
 				}
+
+				if (game.isInteracoes_mouse()) {
+					boolean tem = false;
+					NodeList generalization = interacao
+							.getElementsByTagName("generalization");
+					for (int i = 0; i < generalization.getLength(); i++) {
+						Element general = (Element) generalization.item(i);
+						if (general.getAttribute("general").equalsIgnoreCase(
+								"MouseInputListener")) {
+							tem = true;
+						}
+					}
+					if (!tem) {
+						Element general = doc.createElement("generalization");
+						general.setAttribute("xmi:id", gerarId());
+						general.setAttribute("general", "MouseInputListener");
+						interacao.appendChild(general);
+					}
+				} else {
+					NodeList generalization = interacao
+							.getElementsByTagName("generalization");
+					for (int i = 0; i < generalization.getLength(); i++) {
+						Element general = (Element) generalization.item(i);
+						if (general.getAttribute("general").equalsIgnoreCase(
+								"MouseInputListener")) {
+							interacao.removeChild(general);
+						}
+					}
+				}
+
+				if (game.isInteracoes_teclado()) {
+					boolean tem = false;
+					NodeList generalization = interacao
+							.getElementsByTagName("generalization");
+					for (int i = 0; i < generalization.getLength(); i++) {
+						Element general = (Element) generalization.item(i);
+						if (general.getAttribute("general").equalsIgnoreCase(
+								"KeyListener")) {
+							tem = true;
+						}
+					}
+					if (!tem) {
+						Element general = doc.createElement("generalization");
+						general.setAttribute("xmi:id", gerarId());
+						general.setAttribute("general", "KeyListener");
+						interacao.appendChild(general);
+					}
+				} else {
+					NodeList generalization = interacao
+							.getElementsByTagName("generalization");
+					for (int i = 0; i < generalization.getLength(); i++) {
+						Element general = (Element) generalization.item(i);
+						if (general.getAttribute("general").equalsIgnoreCase(
+								"KeyListener")) {
+							interacao.removeChild(general);
+						}
+					}
+				}
+
+				if (game.isAcoes_colisao()) {
+					boolean tem = false;
+					NodeList generalization = acoes
+							.getElementsByTagName("generalization");
+					for (int i = 0; i < generalization.getLength(); i++) {
+						Element general = (Element) generalization.item(i);
+						if (general.getAttribute("general").equalsIgnoreCase(
+								"Colisao")) {
+							tem = true;
+						}
+					}
+					if (!tem) {
+						Element general = doc.createElement("generalization");
+						general.setAttribute("xmi:id", gerarId());
+						general.setAttribute("general", "Colisao");
+						acoes.appendChild(general);
+					}
+				} else {
+					NodeList generalization = acoes
+							.getElementsByTagName("generalization");
+					for (int i = 0; i < generalization.getLength(); i++) {
+						Element general = (Element) generalization.item(i);
+						if (general.getAttribute("general").equalsIgnoreCase(
+								"Colisao")) {
+							acoes.removeChild(general);
+						}
+					}
+				}
+
+				if (game.isAcoes_movimento()) {
+					boolean tem = false;
+					NodeList generalization = acoes
+							.getElementsByTagName("generalization");
+					for (int i = 0; i < generalization.getLength(); i++) {
+						Element general = (Element) generalization.item(i);
+						if (general.getAttribute("general").equalsIgnoreCase(
+								"Movimento")) {
+							tem = true;
+						}
+					}
+					if (!tem) {
+						Element general = doc.createElement("generalization");
+						general.setAttribute("xmi:id", gerarId());
+						general.setAttribute("general", "Movimento");
+						acoes.appendChild(general);
+					}
+				} else {
+					NodeList generalization = acoes
+							.getElementsByTagName("generalization");
+					for (int i = 0; i < generalization.getLength(); i++) {
+						Element general = (Element) generalization.item(i);
+						if (general.getAttribute("general").equalsIgnoreCase(
+								"Movimento")) {
+							acoes.removeChild(general);
+						}
+					}
+				}
+
+				generateHeaderNodes(doc, packagedGame);
+
+				// Salva o documento XML no diretório passado como parâmetro.
+				DOMSource source = new DOMSource(doc);
+				StreamResult result = new StreamResult(new FileOutputStream(
+						new File("resource/model.uml").getAbsolutePath()));
+
+				TransformerFactory transFactory = TransformerFactory
+						.newInstance();
+				Transformer transformer = transFactory.newTransformer();
+				transformer.transform(source, result);
+
+				gerarClasses();
+				JOptionPane.showMessageDialog(null, "Você gerou com sucesso.");
+			}else{
+				JOptionPane.showMessageDialog(null, "o Arquivo não foi encontrado. Tente novamente");
 			}
-
-			if (game.isInteracoes_mouse()) {
-				boolean tem = false;
-				NodeList generalization = interacao
-						.getElementsByTagName("generalization");
-				for (int i = 0; i < generalization.getLength(); i++) {
-					Element general = (Element) generalization.item(i);
-					if (general.getAttribute("general").equalsIgnoreCase(
-							"MouseInputListener")) {
-						tem = true;
-					}
-				}
-				if (!tem) {
-					Element general = doc.createElement("generalization");
-					general.setAttribute("xmi:id", gerarId());
-					general.setAttribute("general", "MouseInputListener");
-					interacao.appendChild(general);
-				}
-			} else {
-				NodeList generalization = interacao
-						.getElementsByTagName("generalization");
-				for (int i = 0; i < generalization.getLength(); i++) {
-					Element general = (Element) generalization.item(i);
-					if (general.getAttribute("general").equalsIgnoreCase(
-							"MouseInputListener")) {
-						interacao.removeChild(general);
-					}
-				}
-			}
-
-			if (game.isInteracoes_teclado()) {
-				boolean tem = false;
-				NodeList generalization = interacao
-						.getElementsByTagName("generalization");
-				for (int i = 0; i < generalization.getLength(); i++) {
-					Element general = (Element) generalization.item(i);
-					if (general.getAttribute("general").equalsIgnoreCase(
-							"KeyListener")) {
-						tem = true;
-					}
-				}
-				if (!tem) {
-					Element general = doc.createElement("generalization");
-					general.setAttribute("xmi:id", gerarId());
-					general.setAttribute("general", "KeyListener");
-					interacao.appendChild(general);
-				}
-			} else {
-				NodeList generalization = interacao
-						.getElementsByTagName("generalization");
-				for (int i = 0; i < generalization.getLength(); i++) {
-					Element general = (Element) generalization.item(i);
-					if (general.getAttribute("general").equalsIgnoreCase(
-							"KeyListener")) {
-						interacao.removeChild(general);
-					}
-				}
-			}
-
-			if (game.isAcoes_colisao()) {
-				boolean tem = false;
-				NodeList generalization = acoes
-						.getElementsByTagName("generalization");
-				for (int i = 0; i < generalization.getLength(); i++) {
-					Element general = (Element) generalization.item(i);
-					if (general.getAttribute("general").equalsIgnoreCase(
-							"Colisao")) {
-						tem = true;
-					}
-				}
-				if (!tem) {
-					Element general = doc.createElement("generalization");
-					general.setAttribute("xmi:id", gerarId());
-					general.setAttribute("general", "Colisao");
-					acoes.appendChild(general);
-				}
-			} else {
-				NodeList generalization = acoes
-						.getElementsByTagName("generalization");
-				for (int i = 0; i < generalization.getLength(); i++) {
-					Element general = (Element) generalization.item(i);
-					if (general.getAttribute("general").equalsIgnoreCase(
-							"Colisao")) {
-						acoes.removeChild(general);
-					}
-				}
-			}
-
-			if (game.isAcoes_movimento()) {
-				boolean tem = false;
-				NodeList generalization = acoes
-						.getElementsByTagName("generalization");
-				for (int i = 0; i < generalization.getLength(); i++) {
-					Element general = (Element) generalization.item(i);
-					if (general.getAttribute("general").equalsIgnoreCase(
-							"Movimento")) {
-						tem = true;
-					}
-				}
-				if (!tem) {
-					Element general = doc.createElement("generalization");
-					general.setAttribute("xmi:id", gerarId());
-					general.setAttribute("general", "Movimento");
-					acoes.appendChild(general);
-				}
-			} else {
-				NodeList generalization = acoes
-						.getElementsByTagName("generalization");
-				for (int i = 0; i < generalization.getLength(); i++) {
-					Element general = (Element) generalization.item(i);
-					if (general.getAttribute("general").equalsIgnoreCase(
-							"Movimento")) {
-						acoes.removeChild(general);
-					}
-				}
-			}
-
-			generateHeaderNodes(doc, packagedGame);
-
-			// Salva o documento XML no diretório passado como parâmetro.
-			DOMSource source = new DOMSource(doc);
-			StreamResult result = new StreamResult(new FileOutputStream(
-					new File("resource/model.uml").getAbsolutePath()));
-
-			TransformerFactory transFactory = TransformerFactory.newInstance();
-			Transformer transformer = transFactory.newTransformer();
-			transformer.transform(source, result);
-			
-			gerarClasses();
-			JOptionPane.showMessageDialog(null, "Você gerou com sucesso.");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -407,9 +472,10 @@ public class Gerador {
 
 		return retorno;
 	}
-	
+
 	public void gerarClasses() {
-		URI modelURI = URI.createFileURI(new File("resource/model.uml").getAbsolutePath());
+		URI modelURI = URI.createFileURI(new File("resource/model.uml")
+				.getAbsolutePath());
 		File folder = new File("C:/Users/Gerson/workspaceMM/Generation/src");
 		List<String> arguments = new ArrayList<String>();
 		try {
@@ -419,7 +485,10 @@ public class Gerador {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (AcceleoRuntimeException e) {
-			JOptionPane.showMessageDialog(null, "a geração dos Arquivos anteriores ainda esta sendo feita espera um pouco");
+			JOptionPane
+					.showMessageDialog(
+							null,
+							"a geração dos Arquivos anteriores ainda esta sendo processada. Espera um pouco");
 		}
 	}
 }
