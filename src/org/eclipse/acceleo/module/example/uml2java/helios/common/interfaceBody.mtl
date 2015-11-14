@@ -5,7 +5,7 @@
 [import common/]
 
 [template public generateInterfaceBody(i : Interface)]
-public interface [i.name.toUpperFirst()/] {
+public interface [i.name.toUpperFirst()/] [for (superC : Classifier | i.getGenerals()) before(' extends ') separator(',')] [superC.name/][/for]{
 
 [for (o : Operation | i.ownedOperation)]
     /**

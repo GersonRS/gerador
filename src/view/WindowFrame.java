@@ -3,9 +3,11 @@ package view;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
+import javax.swing.ImageIcon;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -28,109 +30,177 @@ public class WindowFrame extends JFrame {
 	 */
 	public WindowFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setSize(500,350);
+		setLocationRelativeTo(null);
+		setResizable(false);
 
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new CardLayout(0, 0));
 
-		JPanel panel = new JPanel();
-		contentPane.add(panel, "branco");
+		final JPanel panel = new JPanel();
+		contentPane.add(panel, "inicio");
+		
+		final PainelElementos panel_1 = new PainelElementos();
+		contentPane.add(panel_1, "elementos");
 
-		final PainelElementosAdd panel_1 = new PainelElementosAdd();
-		contentPane.add(panel_1, "addElementos");
-
-		final PainelElementosDel panel_2 = new PainelElementosDel();
-		contentPane.add(panel_2, "delElementos");
-
-		final PainelAtributosAdd panel_3 = new PainelAtributosAdd();
-		contentPane.add(panel_3, "addAtributos");
-
-		final PainelAtributosDel panel_4 = new PainelAtributosDel();
-		contentPane.add(panel_4, "delAtributos");
+		final PainelAtributos panel_2 = new PainelAtributos();
+		contentPane.add(panel_2, "atributos");
+		
+		final PainelCenarios panel_3 = new PainelCenarios();
+		contentPane.add(panel_3, "cenarios");
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
+		
+		JMenu mnArquivo = new JMenu("Arquivo");
+		menuBar.add(mnArquivo);
+		
+		JMenuItem mntmInicio = new JMenuItem("Inicio");
+		mntmInicio.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/Home.png")));
+		mnArquivo.add(mntmInicio);
+		mntmInicio.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				CardLayout layout = (CardLayout) contentPane.getLayout();
+				layout.show(contentPane, "inicio");
+			}
+		});
+		
+		JMenuItem mntmCarregarBase = new JMenuItem("Carregar Base");
+		mntmCarregarBase.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/open.png")));
+		mnArquivo.add(mntmCarregarBase);
+		
+		JMenuItem mntmSalvarBase = new JMenuItem("Salvar Base");
+		mntmSalvarBase.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/salvar.png")));
+		mnArquivo.add(mntmSalvarBase);
+		
+		JMenuItem mntmSair = new JMenuItem("Sair");
+		mntmSair.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/Exit.png")));
+		mnArquivo.add(mntmSair);
 
-		JMenu mnElementos = new JMenu("Elementos");
-		menuBar.add(mnElementos);
+		JMenu mnGame = new JMenu("Game");
+		menuBar.add(mnGame);
 
-		JMenuItem mntmAdicionar = new JMenuItem("Adicionar");
-		mnElementos.add(mntmAdicionar);
-		mntmAdicionar.addActionListener(new ActionListener() {
+		JMenu mnElementos_1 = new JMenu("Elementos");
+		mnElementos_1.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/user_blue.png")));
+		mnGame.add(mnElementos_1);
+
+		JMenuItem mntmGerenciar = new JMenuItem("Gerenciar");
+		mntmGerenciar.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/user_blue_config.png")));
+		mnElementos_1.add(mntmGerenciar);
+		mntmGerenciar.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 				CardLayout layout = (CardLayout) contentPane.getLayout();
-				layout.show(contentPane, "addElementos");
+				layout.show(contentPane, "elementos");
 				panel_1.updateList();
 			}
 		});
 
-		JMenuItem mntmRemover = new JMenuItem("Remover");
-		mnElementos.add(mntmRemover);
-		mntmRemover.addActionListener(new ActionListener() {
+		JMenu mnAtributos_1 = new JMenu("Atributos");
+		mnAtributos_1.setIcon(new ImageIcon(getClass().getClassLoader()
+				.getResource("images/attribute.png")));
+		mnGame.add(mnAtributos_1);
+
+		JMenuItem mntmGerenciar_1 = new JMenuItem("Gerenciar");
+		mntmGerenciar_1.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/settings_file.png")));
+		mnAtributos_1.add(mntmGerenciar_1);
+		mntmGerenciar_1.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 				CardLayout layout = (CardLayout) contentPane.getLayout();
-				layout.show(contentPane, "delElementos");
+				layout.show(contentPane, "atributos");
 				panel_2.updateList();
 			}
 		});
-
-		JMenu mnAtributos = new JMenu("Atributos");
-		menuBar.add(mnAtributos);
-
-		JMenuItem mntmAdicionar_1 = new JMenuItem("Adicionar");
-		mnAtributos.add(mntmAdicionar_1);
-		mntmAdicionar_1.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {
+		
+		JMenu mnCenrios = new JMenu("Cen\u00E1rios");
+		mnCenrios.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/cenario.png")));
+		mnGame.add(mnCenrios);
+		
+		JMenuItem mntmGerenciar_2 = new JMenuItem("Gerenciar");
+		mntmGerenciar_2.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/settings.png")));
+		mnCenrios.add(mntmGerenciar_2);
+		mntmGerenciar_2.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
 				CardLayout layout = (CardLayout) contentPane.getLayout();
-				layout.show(contentPane, "addAtributos");
+				layout.show(contentPane, "cenarios");
 				panel_3.updateList();
 			}
 		});
-
-		JMenuItem mntmRemover_1 = new JMenuItem("Remover");
-		mnAtributos.add(mntmRemover_1);
-		mntmRemover_1.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {
-				CardLayout layout = (CardLayout) contentPane.getLayout();
-				layout.show(contentPane, "delAtributos");
-				panel_4.updateList();
+		
+		JMenu mnInterao = new JMenu("Intera\u00E7\u00E3o");
+		mnInterao.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/interactive.png")));
+		mnGame.add(mnInterao);
+		
+		final JCheckBoxMenuItem chckbxmntmMouse = new JCheckBoxMenuItem("Mouse");
+		mnInterao.add(chckbxmntmMouse);
+		chckbxmntmMouse.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if(chckbxmntmMouse.isSelected()){
+					Gerador.getInstance().getGame().setInteracoes_mouse(true);
+				}else{
+					Gerador.getInstance().getGame().setInteracoes_mouse(false);
+				}
+			}
+		});
+		
+		final JCheckBoxMenuItem chckbxmntmTeclado = new JCheckBoxMenuItem("Teclado");
+		mnInterao.add(chckbxmntmTeclado);
+		chckbxmntmTeclado.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if(chckbxmntmTeclado.isSelected()){
+					Gerador.getInstance().getGame().setInteracoes_teclado(true);
+				}else{
+					Gerador.getInstance().getGame().setInteracoes_teclado(false);
+				}
+			}
+		});
+		
+		JMenu mnAes = new JMenu("A\u00E7\u00F5es");
+		mnAes.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/action.png")));
+		mnGame.add(mnAes);
+		
+		final JCheckBoxMenuItem chckbxmntmMovimento = new JCheckBoxMenuItem("Movimento");
+		mnAes.add(chckbxmntmMovimento);
+		chckbxmntmMovimento.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if(chckbxmntmMovimento.isSelected()){
+					Gerador.getInstance().getGame().setAcoes_movimento(true);
+				}else{
+					Gerador.getInstance().getGame().setAcoes_movimento(false);
+				}
+			}
+		});
+		
+		final JCheckBoxMenuItem chckbxmntmColiso = new JCheckBoxMenuItem("Colis\u00E3o");
+		mnAes.add(chckbxmntmColiso);
+		chckbxmntmColiso.addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				if(chckbxmntmColiso.isSelected()){
+					Gerador.getInstance().getGame().setAcoes_colisao(true);
+				}else{
+					Gerador.getInstance().getGame().setAcoes_colisao(false);
+				}
 			}
 		});
 
-		JMenu mnAes = new JMenu("A\u00E7\u00F5es");
-		menuBar.add(mnAes);
-
-		JMenuItem mntmAdicionar_2 = new JMenuItem("Adicionar");
-		mnAes.add(mntmAdicionar_2);
-
-		JMenuItem mntmRemover_2 = new JMenuItem("Remover");
-		mnAes.add(mntmRemover_2);
-
-		JMenu mnGerar = new JMenu("Gerar");
-		menuBar.add(mnGerar);
-
 		JMenuItem mntmGerarCodigo = new JMenuItem("Gerar Codigo");
-		mnGerar.add(mntmGerarCodigo);
-		
-		System.out.println(new File("resource").getAbsolutePath()+ File.separator +"model1.uml");
-		
+		mnGame.add(mntmGerarCodigo);
+		mntmGerarCodigo.setIcon(new ImageIcon(getClass().getClassLoader()
+				.getResource("images/gerador.png")));
+
 		mntmGerarCodigo.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				try {
-					Gerador.getInstance().generateXMLFile(new File("resource").getAbsolutePath());
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
-
+				Gerador.getInstance().generateXMLFile();
 			}
 		});
 	}

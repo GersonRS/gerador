@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:mtl="http://www.eclipse.org/acceleo/mtl/3.0" xmlns:ocl.ecore="http://www.eclipse.org/ocl/1.1.0/Ecore">
+  <mtl:Module name="elemento" nsURI="org::eclipse::acceleo::module::example::uml2java::helios::common::elemento" startHeaderPosition="38" endHeaderPosition="95">
+    <input>
+      <takesTypesFrom href="http://www.eclipse.org/uml2/3.0.0/UML#/"/>
+    </input>
+    <imports href="common.emtl#/0"/>
+    <ownedModuleElement xsi:type="mtl:Template" name="generateClassElemento" visibility="Public">
+      <body xsi:type="mtl:TemplateInvocation">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <definition href="common.emtl#/0/packageBlock"/>
+        <argument xsi:type="ocl.ecore:VariableExp" name="c" referredVariable="/0/generateClassElemento/c">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+        </argument>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;&#xA;"/>
+      <body xsi:type="mtl:TemplateInvocation">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <definition href="common.emtl#/0/_commentBodyBlock"/>
+        <argument xsi:type="ocl.ecore:VariableExp" name="self" referredVariable="/7">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+        </argument>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;&#xA;import java.awt.Graphics2D;&#xA;import java.awt.geom.Rectangle2D;&#xA;&#xA;/**&#xA; * &#xA; * Elemento base do jogo. Esta classe prove os principais atributos &#xA; * para os demais elementos especializados deste elemento.&#xA; * &#xA; */&#xA;public abstract class Elemento implements Acoes {&#xA;&#xA;&#x9;private Rectangle2D.Double pos;&#xA;&#x9;private Elemento"/>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[]">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" collidingEntities;&#xA;&#x9;private boolean ativo;&#xA;&#x9;protected boolean visivel;&#xA;&#x9;protected int id;&#xA;&#x9;&#xA;&#x9;/**&#xA;&#x9; * &#xA;&#x9; * Crie um novo Elemento.&#xA;&#x9; * &#xA;&#x9; */&#xA;&#x9;public Elemento(){&#xA;&#x9;&#x9;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * &#xA;&#x9; * Crie um novo Elemento.&#xA;&#x9; * &#xA;&#x9; * @param x&#xA;&#x9; *            posição x do elemento&#xA;&#x9; * @param y&#xA;&#x9; *            posição y do elemento&#xA;&#x9; * @param width&#xA;&#x9; *            largura do elemento&#xA;&#x9; * @param height&#xA;&#x9; *            altura do elemento&#xA;&#x9; *            &#xA;&#x9; */&#xA;&#x9;public Elemento(int x, int y, int width, int height) {&#xA;&#x9;&#x9;this.pos = new Rectangle2D.Double(x, y, width, height);&#xA;&#x9;&#x9;this.collidingEntities = new Elemento"/>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[4]">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=";&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * &#xA;&#x9; * metodo de atualização do elemento.&#xA;&#x9; * &#xA;&#x9; * @param currentTick&#xA;&#x9; *            numero de vezes que o jogo fez iterações.&#xA;&#x9; * &#xA;&#x9; */&#xA;&#x9;public abstract void update(int currentTick);&#xA;&#xA;&#x9;/**&#xA;&#x9; * &#xA;&#x9; * metodo que desenha o elemento na tela.&#xA;&#x9; * &#xA;&#x9; * @param g&#xA;&#x9; *            Graphics2D no qual o elemento ira ser desenhado.&#xA;&#x9; * &#xA;&#x9; */&#xA;&#x9;public abstract void render(Graphics2D g);&#xA;&#xA;&#x9;/**&#xA;&#x9; * &#xA;&#x9; * retorna a posição atual do elemento.&#xA;&#x9; * &#xA;&#x9; * @return Rectangle2D.Double&#xA;&#x9; */&#xA;&#x9;public Rectangle2D.Double getPos() {&#xA;&#x9;&#x9;return pos;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * &#xA;&#x9; * retorna outros elementos com os quais este elemento esta colidindo.&#xA;&#x9; * &#xA;&#x9; * @return Elemento"/>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[]">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;&#x9; */&#xA;&#x9;public Elemento"/>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[]">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" getCollidingEntities() {&#xA;&#x9;&#x9;return collidingEntities;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * &#xA;&#x9; * retorna o estado ativo do elemento.&#xA;&#x9; * &#xA;&#x9; * @return boolean&#xA;&#x9; */&#xA;&#x9;public boolean isAtivo() {&#xA;&#x9;&#x9;return ativo;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * &#xA;&#x9; * altera o estado ativo do elemento.&#xA;&#x9; * &#xA;&#x9; * @param ativo&#xA;&#x9; *            valor do novo estado ativo do elemento.&#xA;&#x9; * &#xA;&#x9; */&#xA;&#x9;public void setAtivo(boolean ativo) {&#xA;&#x9;&#x9;this.ativo = ativo;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * &#xA;&#x9; * retorna o estado visivel do elemento.&#xA;&#x9; * &#xA;&#x9; * @return boolean&#xA;&#x9; */&#xA;&#x9;public boolean isVisivel() {&#xA;&#x9;&#x9;return visivel;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * &#xA;&#x9; * altera o estado visivel do elemento.&#xA;&#x9; * &#xA;&#x9; * @param ativo&#xA;&#x9; *            valor do novo estado visivel do elemento.&#xA;&#x9; * &#xA;&#x9; */&#xA;&#x9;public void setVisivel(boolean visivel) {&#xA;&#x9;&#x9;this.visivel = visivel;&#xA;&#x9;}&#xA;&#xA;}"/>
+      <parameter name="c">
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+      </parameter>
+    </ownedModuleElement>
+  </mtl:Module>
+  <ecore:EPackage name="additions">
+    <eClassifiers xsi:type="ecore:EClass" name="String_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Integer_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Real_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Real"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EObject_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      </eAnnotations>
+      <eOperations name="generateClassElemento">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL" references="/0/generateClassElemento"/>
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <eParameters name="c">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+        </eParameters>
+      </eOperations>
+      <eOperations name="packageBlock">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL">
+          <references href="common.emtl#/0/packageBlock"/>
+        </eAnnotations>
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <eParameters name="cl">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+        </eParameters>
+      </eOperations>
+      <eOperations name="_commentBodyBlock">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL">
+          <references href="common.emtl#/0/_commentBodyBlock"/>
+        </eAnnotations>
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <eParameters name="traceabilityContext">
+          <eType xsi:type="ocl.ecore:AnyType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="OclAny_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Collection(T)_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Collection(T)"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Sequence(T)_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Sequence(T)"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="OrderedSet(T)_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OrderedSet(T)"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Class_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Classifier_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Operation_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/3.0.0/UML#//Operation"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Parameter_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/3.0.0/UML#//Parameter"/>
+      </eAnnotations>
+    </eClassifiers>
+  </ecore:EPackage>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </ocl.ecore:Variable>
+  <ecore:EAnnotation source="positions">
+    <eAnnotations source="positions.0" references="/0/generateClassElemento">
+      <details key="start" value="116"/>
+      <details key="end" value="2548"/>
+      <details key="line" value="7"/>
+    </eAnnotations>
+    <eAnnotations source="positions.1" references="/0/generateClassElemento/@body.0">
+      <details key="start" value="168"/>
+      <details key="end" value="184"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.2" references="/0/generateClassElemento/@body.0/c">
+      <details key="start" value="168"/>
+      <details key="end" value="169"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.3" references="/0/generateClassElemento/@body.1">
+      <details key="start" value="186"/>
+      <details key="end" value="188"/>
+      <details key="line" value="9"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4" references="/0/generateClassElemento/@body.2">
+      <details key="start" value="189"/>
+      <details key="end" value="208"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5" references="/0/generateClassElemento/@body.2/self">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.6" references="/0/generateClassElemento/@body.3">
+      <details key="start" value="210"/>
+      <details key="end" value="520"/>
+      <details key="line" value="11"/>
+    </eAnnotations>
+    <eAnnotations source="positions.7" references="/0/generateClassElemento/@body.4">
+      <details key="start" value="521"/>
+      <details key="end" value="525"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.8" references="/0/generateClassElemento/@body.5">
+      <details key="start" value="527"/>
+      <details key="end" value="1114"/>
+      <details key="line" value="24"/>
+    </eAnnotations>
+    <eAnnotations source="positions.9" references="/0/generateClassElemento/@body.6">
+      <details key="start" value="1115"/>
+      <details key="end" value="1120"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.10" references="/0/generateClassElemento/@body.7">
+      <details key="start" value="1122"/>
+      <details key="end" value="1765"/>
+      <details key="line" value="54"/>
+    </eAnnotations>
+    <eAnnotations source="positions.11" references="/0/generateClassElemento/@body.8">
+      <details key="start" value="1766"/>
+      <details key="end" value="1770"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.12" references="/0/generateClassElemento/@body.9">
+      <details key="start" value="1772"/>
+      <details key="end" value="1794"/>
+      <details key="line" value="92"/>
+    </eAnnotations>
+    <eAnnotations source="positions.13" references="/0/generateClassElemento/@body.10">
+      <details key="start" value="1795"/>
+      <details key="end" value="1799"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.14" references="/0/generateClassElemento/@body.11">
+      <details key="start" value="1801"/>
+      <details key="end" value="2536"/>
+      <details key="line" value="93"/>
+    </eAnnotations>
+    <eAnnotations source="positions.15" references="/0/generateClassElemento/c">
+      <details key="start" value="155"/>
+      <details key="end" value="164"/>
+      <details key="line" value="7"/>
+    </eAnnotations>
+  </ecore:EAnnotation>
+</xmi:XMI>

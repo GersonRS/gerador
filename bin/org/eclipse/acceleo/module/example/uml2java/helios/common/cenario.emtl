@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:mtl="http://www.eclipse.org/acceleo/mtl/3.0" xmlns:ocl.ecore="http://www.eclipse.org/ocl/1.1.0/Ecore">
+  <mtl:Module name="cenario" nsURI="org::eclipse::acceleo::module::example::uml2java::helios::common::cenario" startHeaderPosition="38" endHeaderPosition="94">
+    <input>
+      <takesTypesFrom href="http://www.eclipse.org/uml2/3.0.0/UML#/"/>
+    </input>
+    <imports href="common.emtl#/0"/>
+    <ownedModuleElement xsi:type="mtl:Template" name="generateClassCenario" visibility="Public">
+      <body xsi:type="mtl:TemplateInvocation">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <definition href="common.emtl#/0/packageBlock"/>
+        <argument xsi:type="ocl.ecore:VariableExp" name="c" referredVariable="/0/generateClassCenario/c">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+        </argument>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;&#xA;"/>
+      <body xsi:type="mtl:TemplateInvocation">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <definition href="common.emtl#/0/_commentBodyBlock"/>
+        <argument xsi:type="ocl.ecore:VariableExp" name="self" referredVariable="/7">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+        </argument>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="&#xA;&#xA;import java.awt.Graphics2D;&#xA;import java.awt.geom.Rectangle2D;&#xA;import java.awt.image.BufferedImage;&#xA;import java.io.ByteArrayInputStream;&#xA;import java.io.IOException;&#xA;import java.io.InputStream;&#xA;import java.util.ArrayList;&#xA;import java.util.HashMap;&#xA;import java.util.Map;&#xA;import java.util.StringTokenizer;&#xA;&#xA;import javax.imageio.ImageIO;&#xA;import javax.xml.parsers.DocumentBuilder;&#xA;import javax.xml.parsers.DocumentBuilderFactory;&#xA;&#xA;import org.w3c.dom.Document;&#xA;import org.w3c.dom.Element;&#xA;import org.w3c.dom.Node;&#xA;import org.w3c.dom.NodeList;&#xA;import org.xml.sax.EntityResolver;&#xA;import org.xml.sax.InputSource;&#xA;import org.xml.sax.SAXException;&#xA;&#xA;/**&#xA; * informações da classe Scenery&#xA; * &#xA; * @author Gerson&#xA; */&#xA;public class Cenario {&#xA;&#xA;&#x9;private Rectangle2D.Double pos;&#xA;&#x9;private HashMap&lt;Integer, String> destino;&#xA;&#x9;private int width, height;&#xA;&#x9;private int tileWidth;&#xA;&#x9;private int tileHeight;&#xA;&#x9;private String source;&#xA;&#x9;private HashMap&lt;String, ArrayList&lt;Elemento>> obstaculos;&#xA;&#x9;private HashMap&lt;String, int"/>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[][]">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="> camadas;&#xA;&#x9;private HashMap&lt;String, String> datas;&#xA;&#x9;private HashMap&lt;String, BufferedImage> layers;&#xA;&#x9;private BufferedImage image;&#xA;&#x9;private ArrayList&lt;String> layersInferiores;&#xA;&#x9;private ArrayList&lt;String> layersSuperiores;&#xA;&#xA;&#x9;/**&#xA;&#x9; * &#xA;&#x9; * Metodo Construtor da classe Scenery&#xA;&#x9; * &#xA;&#x9; * @param diretorio&#xA;&#x9; *            Diretorio de onde esta o cenario a ser carregado&#xA;&#x9; *            &#xA;&#x9; */&#xA;&#xA;&#x9;public Cenario(String diretorio) {&#xA;&#x9;&#x9;this.datas = new HashMap&lt;String, String>();&#xA;&#x9;&#x9;this.camadas = new HashMap&lt;String, int"/>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[][]">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=">();&#xA;&#x9;&#x9;this.obstaculos = new HashMap&lt;String, ArrayList&lt;Elemento>>();&#xA;&#x9;&#x9;this.layersInferiores = new ArrayList&lt;String>();&#xA;&#x9;&#x9;this.layersSuperiores = new ArrayList&lt;String>();&#xA;&#x9;&#x9;this.destino = new HashMap&lt;Integer, String>();&#xA;&#x9;&#x9;pos = new Rectangle2D.Double();&#xA;&#x9;&#x9;carregaCenario(diretorio);&#xA;&#x9;&#x9;try {&#xA;&#x9;&#x9;&#x9;this.image = ImageIO.read(getClass().getClassLoader().getResource(&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&quot;images/&quot; + source));&#xA;&#x9;&#x9;} catch (IOException e) {&#xA;&#x9;&#x9;&#x9;e.printStackTrace();&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;montarMatriz();&#xA;&#x9;&#x9;desenhaCamadas();&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * Metodo que constroi toda a matriz carregada apartir do arquivo do&#xA;&#x9; * diretorio informado&#xA;&#x9; * &#xA;&#x9; * @return void&#xA;&#x9; */&#xA;&#xA;&#x9;private void montarMatriz() {&#xA;&#x9;&#x9;try {&#xA;&#x9;&#x9;&#x9;for (Map.Entry&lt;String, String> entry : datas.entrySet()) {&#xA;&#x9;&#x9;&#x9;&#x9;if (entry.getValue() != null &amp;&amp; entry.getValue().length() > 0) {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;int camada"/>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[][]">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" = new int"/>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[height][width]">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=";&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;StringTokenizer linhas = new StringTokenizer(&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;entry.getValue(), &quot;\n&quot;);&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;int i = 0;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;while (linhas.hasMoreTokens()) {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;StringTokenizer colunas = new StringTokenizer(&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;linhas.nextToken(), &quot;,&quot;);&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;int j = 0;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;while (colunas.hasMoreTokens()) {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;camada"/>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[i][j]">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" = Integer&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;.parseInt(colunas.nextToken());&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;j++;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;i++;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;camadas.put(entry.getKey(), camada);&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;} catch (NumberFormatException e) {&#xA;&#x9;&#x9;&#x9;e.printStackTrace();&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * Desenha as camadas que compõe o cenário&#xA;&#x9; * &#xA;&#x9; * @return void&#xA;&#x9; */&#xA;&#xA;&#x9;private void desenhaCamadas() {&#xA;&#x9;&#x9;layers = new HashMap&lt;String, BufferedImage>();&#xA;&#x9;&#x9;for (Map.Entry&lt;String, int"/>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[][]">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="> entry : camadas.entrySet()) {&#xA;&#x9;&#x9;&#x9;BufferedImage layer = new BufferedImage((int) pos.width,&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;(int) pos.height, BufferedImage.TYPE_4BYTE_ABGR);&#xA;&#x9;&#x9;&#x9;ArrayList&lt;Elemento> obs = new ArrayList&lt;Elemento>();&#xA;&#x9;&#x9;&#x9;for (int i = 0; i &lt; height; i++) {&#xA;&#x9;&#x9;&#x9;&#x9;for (int j = 0; j &lt; width; j++) {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;int tile = (entry.getValue()"/>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[i][j]">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" != 0) ? (entry&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;.getValue()"/>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[i][j]">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol=" - 1) : 0;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;int tileRow = (tile / 8) | 0;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;int tileCol = (tile % 8) | 0;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;layer.getGraphics().drawImage(image, (j * tileWidth),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;(i * tileHeight), (j * tileWidth) + tileWidth,&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;(i * tileHeight) + tileHeight,&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;(tileCol * tileWidth), (tileRow * tileHeight),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;(tileCol * tileWidth) + tileWidth,&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;(tileRow * tileHeight) + tileHeight, null);&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if (entry.getKey().equalsIgnoreCase(&quot;obstaculos&quot;)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&amp;&amp; tile != 0) {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Obstaculo o = new Obstaculo((j * tileWidth),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;(i * tileHeight), tileWidth, tileHeight, tile);&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;obs.add(o);&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;} else if (entry.getKey().equalsIgnoreCase(&quot;in&quot;)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&amp;&amp; tile != 0) {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Obstaculo o = new Obstaculo((j * tileWidth),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;(i * tileHeight), tileWidth, tileHeight, tile);&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;obs.add(o);&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;} else if (entry.getKey().equalsIgnoreCase(&quot;out&quot;)&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&amp;&amp; tile != 0) {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Obstaculo o = new Obstaculo((j * tileWidth),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;(i * tileHeight), tileWidth, tileHeight, tile);&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;obs.add(o);&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;layers.put(entry.getKey(), layer);&#xA;&#x9;&#x9;&#x9;if (entry.getKey().equalsIgnoreCase(&quot;obstaculos&quot;))&#xA;&#x9;&#x9;&#x9;&#x9;obstaculos.put(entry.getKey(), obs);&#xA;&#x9;&#x9;&#x9;else if (entry.getKey().equalsIgnoreCase(&quot;in&quot;))&#xA;&#x9;&#x9;&#x9;&#x9;obstaculos.put(entry.getKey(), obs);&#xA;&#x9;&#x9;&#x9;else if (entry.getKey().equalsIgnoreCase(&quot;out&quot;))&#xA;&#x9;&#x9;&#x9;&#x9;obstaculos.put(entry.getKey(), obs);&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;image = null;&#xA;&#x9;&#x9;System.gc();&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * Carrega o cenário a partir de um diretorio e inicializa todos os atributos do cenário.&#xA;&#x9; * &#xA;&#x9; * @param diretorio&#xA;&#x9; *            Diretorio de onde esta o cenario&#xA;&#x9; * &#xA;&#x9; * @return void&#xA;&#x9; */&#xA;&#xA;&#x9;private void carregaCenario(String diretorio) {&#xA;&#x9;&#x9;InputStream is = getClass().getClassLoader().getResourceAsStream(&#xA;&#x9;&#x9;&#x9;&#x9;&quot;scenerys/&quot; + diretorio + &quot;.tmx&quot;);&#xA;&#x9;&#x9;try {&#xA;&#x9;&#x9;&#x9;DocumentBuilderFactory factory = DocumentBuilderFactory&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;.newInstance();&#xA;&#x9;&#x9;&#x9;factory.setValidating(false);&#xA;&#x9;&#x9;&#x9;DocumentBuilder builder = factory.newDocumentBuilder();&#xA;&#x9;&#x9;&#x9;builder.setEntityResolver(new EntityResolver() {&#xA;&#x9;&#x9;&#x9;&#x9;public InputSource resolveEntity(String publicId,&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;String systemId) throws SAXException, IOException {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;return new InputSource(&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;new ByteArrayInputStream(new byte"/>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="[0]">
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      </body>
+      <body xsi:type="ocl.ecore:StringLiteralExp" stringSymbol="));&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;});&#xA;&#xA;&#x9;&#x9;&#x9;Document doc = builder.parse(is);&#xA;&#x9;&#x9;&#x9;Element docElement = doc.getDocumentElement();&#xA;&#xA;&#x9;&#x9;&#x9;this.width = Integer.parseInt(docElement.getAttribute(&quot;width&quot;));&#xA;&#x9;&#x9;&#x9;this.height = Integer.parseInt(docElement.getAttribute(&quot;height&quot;));&#xA;&#x9;&#x9;&#x9;this.tileWidth = Integer.parseInt(docElement&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;.getAttribute(&quot;tilewidth&quot;));&#xA;&#x9;&#x9;&#x9;this.tileHeight = Integer.parseInt(docElement&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;.getAttribute(&quot;tileheight&quot;));&#xA;&#xA;&#x9;&#x9;&#x9;NodeList tileNodes = docElement.getElementsByTagName(&quot;tileset&quot;);&#xA;&#x9;&#x9;&#x9;Element currente = (Element) tileNodes.item(0);&#xA;&#x9;&#x9;&#x9;Element imageNode = (Element) currente&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;.getElementsByTagName(&quot;image&quot;).item(0);&#xA;&#x9;&#x9;&#x9;this.source = imageNode.getAttribute(&quot;source&quot;);&#xA;&#xA;&#x9;&#x9;&#x9;NodeList layerNodes = docElement.getElementsByTagName(&quot;layer&quot;);&#xA;&#x9;&#x9;&#x9;for (int i = 0; i &lt; layerNodes.getLength(); i++) {&#xA;&#x9;&#x9;&#x9;&#x9;Element current = (Element) layerNodes.item(i);&#xA;&#x9;&#x9;&#x9;&#x9;String name = current.getAttribute(&quot;name&quot;);&#xA;&#x9;&#x9;&#x9;&#x9;Element dataNode = (Element) current.getElementsByTagName(&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&quot;data&quot;).item(0);&#xA;&#x9;&#x9;&#x9;&#x9;Node cdata = dataNode.getFirstChild();&#xA;&#x9;&#x9;&#x9;&#x9;String data = cdata.getNodeValue().trim();&#xA;&#x9;&#x9;&#x9;&#x9;this.datas.put(name, data);&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;} catch (Exception e) {&#xA;&#x9;&#x9;&#x9;e.printStackTrace();&#xA;&#x9;&#x9;} finally {&#xA;&#x9;&#x9;&#x9;if (width * tileWidth &lt; 800 &amp;&amp; height * tileHeight &lt; 576) {&#xA;&#x9;&#x9;&#x9;&#x9;System.out.println(&quot;erro&quot;);&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;pos.width = width * tileWidth;&#xA;&#x9;&#x9;&#x9;pos.height = height * tileHeight;&#xA;&#x9;&#x9;}&#xA;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * Metodo que desenha o uma camada especificada por parametro&#xA;&#x9; * &#xA;&#x9; * @param g&#xA;&#x9; *            Graphics onde a camada será desenhado&#xA;&#x9; * @param name&#xA;&#x9; *            Nome da camada a ser desenhada&#xA;&#x9; * &#xA;&#x9; * @return void&#xA;&#x9; */&#xA;&#x9;public void render(Graphics2D g, String name) {&#xA;&#x9;&#x9;g.drawImage(layers.get(name), 0, 0, null);&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * Metodo que desenha todas as camadas de uma vez&#xA;&#x9; * &#xA;&#x9; * @param g&#xA;&#x9; *            Graphics onde todas as camadas seram desenhadas&#xA;&#x9; * &#xA;&#x9; * @return void&#xA;&#x9; */&#xA;&#x9;public void render(Graphics2D g) {&#xA;&#x9;&#x9;for (BufferedImage img : layers.values()) {&#xA;&#x9;&#x9;&#x9;g.drawImage(img, 0, 0, null);&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * Metodo que desenha as camadas inferiores&#xA;&#x9; * &#xA;&#x9; * @param g&#xA;&#x9; *            Graphics onde as camadas bases seram desenhadas&#xA;&#x9; * &#xA;&#x9; * @return void&#xA;&#x9; */&#xA;&#x9;public void renderInferior(Graphics2D g) {&#xA;&#x9;&#x9;for (String string : layersInferiores) {&#xA;&#x9;&#x9;&#x9;render(g, string);&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * Metodo que desenha as camadas superiores&#xA;&#x9; * &#xA;&#x9; * @param g&#xA;&#x9; *            Graphics onde as camadas da superficie seram desenhadas&#xA;&#x9; * &#xA;&#x9; * @return void&#xA;&#x9; */&#xA;&#x9;public void renderSuperior(Graphics2D g) {&#xA;&#x9;&#x9;for (String string : layersSuperiores) {&#xA;&#x9;&#x9;&#x9;render(g, string);&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * Metodo para a a definição das camadas bases&#xA;&#x9; * &#xA;&#x9; * @param s&#xA;&#x9; *            Nome da camada a ser definida como camada inferior&#xA;&#x9; * &#xA;&#x9; * @return void&#xA;&#x9; */&#xA;&#x9;public void configLayerInferior(String s) {&#xA;&#x9;&#x9;layersInferiores.add(s);&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * Metodo para a definição das camadas superiores&#xA;&#x9; * &#xA;&#x9; * @param s&#xA;&#x9; *            Nome da camada a ser definida como camada superior&#xA;&#x9; * &#xA;&#x9; * @return void&#xA;&#x9; */&#xA;&#x9;public void configLayerSuperior(String s) {&#xA;&#x9;&#x9;layersSuperiores.add(s);&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * get do posicionamento do cenário&#xA;&#x9; * &#xA;&#x9; * @return Rectangle2D.Double&#xA;&#x9; */&#xA;&#x9;public Rectangle2D.Double getPos() {&#xA;&#x9;&#x9;return pos;&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * get dos obstaculos que tem no cenrário&#xA;&#x9; * &#xA;&#x9; * @return ArrayList&lt;Obstaculo>&#xA;&#x9; */&#xA;&#x9;public ArrayList&lt;Elemento> getObstaculos() {&#xA;&#x9;&#x9;return obstaculos.get(&quot;obstaculos&quot;);&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * get dos lugares onde o personagem se teleporta&#xA;&#x9; * &#xA;&#x9; * @return ArrayList&lt;Obstaculo>&#xA;&#x9; */&#xA;&#x9;public ArrayList&lt;Elemento> getIn() {&#xA;&#x9;&#x9;return obstaculos.get(&quot;in&quot;);&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * get dos lugares onde o personagem se teleporta para outros cenarios&#xA;&#x9; * &#xA;&#x9; * @return ArrayList&lt;Obstaculo>&#xA;&#x9; */&#xA;&#x9;public ArrayList&lt;Elemento> getOut() {&#xA;&#x9;&#x9;return obstaculos.get(&quot;out&quot;);&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * Metodo que adiciona um cenario destino&#xA;&#x9; * &#xA;&#x9; * @param cenario&#xA;&#x9; *            Nome do cenario destino&#xA;&#x9; * @param local&#xA;&#x9; *            numero do local para o qual o personagem ira se teleportar&#xA;&#x9; * &#xA;&#x9; * @return void&#xA;&#x9; */&#xA;&#x9;public void addTeleport(String cenario, int local) {&#xA;&#x9;&#x9;destino.put(local, cenario);&#xA;&#x9;}&#xA;&#xA;&#x9;/**&#xA;&#x9; * Metodo que retorna o local de destino para o qual o personagem se teleporta.&#xA;&#x9; * &#xA;&#x9; * @param local&#xA;&#x9; *            numero do local para o qual o personagem ira se teleportar&#xA;&#x9; * &#xA;&#x9; * @return String&#xA;&#x9; */&#xA;&#x9;public String getDestino(int local) {&#xA;&#x9;&#x9;if (destino.containsKey(local)) {&#xA;&#x9;&#x9;&#x9;return destino.get(local);&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;return &quot;&quot;;&#xA;&#x9;}&#xA;&#xA;}"/>
+      <parameter name="c">
+        <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+      </parameter>
+    </ownedModuleElement>
+  </mtl:Module>
+  <ecore:EPackage name="additions">
+    <eClassifiers xsi:type="ecore:EClass" name="String_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Integer_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Integer"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Real_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Real"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="EObject_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+      </eAnnotations>
+      <eOperations name="generateClassCenario">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL" references="/0/generateClassCenario"/>
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <eParameters name="c">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+        </eParameters>
+      </eOperations>
+      <eOperations name="packageBlock">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL">
+          <references href="common.emtl#/0/packageBlock"/>
+        </eAnnotations>
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <eParameters name="cl">
+          <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+        </eParameters>
+      </eOperations>
+      <eOperations name="_commentBodyBlock">
+        <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+          <contents xsi:type="ocl.ecore:Constraint"/>
+        </eAnnotations>
+        <eAnnotations source="MTL">
+          <references href="common.emtl#/0/_commentBodyBlock"/>
+        </eAnnotations>
+        <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+        <eParameters name="traceabilityContext">
+          <eType xsi:type="ocl.ecore:AnyType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny"/>
+        </eParameters>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="OclAny_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OclAny"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Collection(T)_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Collection(T)"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Sequence(T)_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/Sequence(T)"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="OrderedSet(T)_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/OrderedSet(T)"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Class_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Classifier_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/3.0.0/UML#//Classifier"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Operation_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/3.0.0/UML#//Operation"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Parameter_Class">
+      <eAnnotations source="http://www.eclipse.org/ocl/1.1.0/OCL">
+        <references href="http://www.eclipse.org/uml2/3.0.0/UML#//Parameter"/>
+      </eAnnotations>
+    </eClassifiers>
+  </ecore:EPackage>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ocl.ecore:PrimitiveType" href="http://www.eclipse.org/ocl/1.1.0/oclstdlib.ecore#/0/String"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/uml2/3.0.0/UML#//Class"/>
+  </ocl.ecore:Variable>
+  <ocl.ecore:Variable name="self">
+    <eType xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </ocl.ecore:Variable>
+  <ecore:EAnnotation source="positions">
+    <eAnnotations source="positions.0" references="/0/generateClassCenario">
+      <details key="start" value="115"/>
+      <details key="end" value="10133"/>
+      <details key="line" value="7"/>
+    </eAnnotations>
+    <eAnnotations source="positions.1" references="/0/generateClassCenario/@body.0">
+      <details key="start" value="166"/>
+      <details key="end" value="182"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.2" references="/0/generateClassCenario/@body.0/c">
+      <details key="start" value="166"/>
+      <details key="end" value="167"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.3" references="/0/generateClassCenario/@body.1">
+      <details key="start" value="184"/>
+      <details key="end" value="186"/>
+      <details key="line" value="9"/>
+    </eAnnotations>
+    <eAnnotations source="positions.4" references="/0/generateClassCenario/@body.2">
+      <details key="start" value="187"/>
+      <details key="end" value="206"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.5" references="/0/generateClassCenario/@body.2/self">
+      <details key="start" value="-1"/>
+      <details key="end" value="-1"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.6" references="/0/generateClassCenario/@body.3">
+      <details key="start" value="208"/>
+      <details key="end" value="1197"/>
+      <details key="line" value="11"/>
+    </eAnnotations>
+    <eAnnotations source="positions.7" references="/0/generateClassCenario/@body.4">
+      <details key="start" value="1198"/>
+      <details key="end" value="1204"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.8" references="/0/generateClassCenario/@body.5">
+      <details key="start" value="1206"/>
+      <details key="end" value="1710"/>
+      <details key="line" value="49"/>
+    </eAnnotations>
+    <eAnnotations source="positions.9" references="/0/generateClassCenario/@body.6">
+      <details key="start" value="1711"/>
+      <details key="end" value="1717"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.10" references="/0/generateClassCenario/@body.7">
+      <details key="start" value="1719"/>
+      <details key="end" value="2517"/>
+      <details key="line" value="67"/>
+    </eAnnotations>
+    <eAnnotations source="positions.11" references="/0/generateClassCenario/@body.8">
+      <details key="start" value="2518"/>
+      <details key="end" value="2524"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.12" references="/0/generateClassCenario/@body.9">
+      <details key="start" value="2526"/>
+      <details key="end" value="2536"/>
+      <details key="line" value="95"/>
+    </eAnnotations>
+    <eAnnotations source="positions.13" references="/0/generateClassCenario/@body.10">
+      <details key="start" value="2537"/>
+      <details key="end" value="2554"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.14" references="/0/generateClassCenario/@body.11">
+      <details key="start" value="2556"/>
+      <details key="end" value="2852"/>
+      <details key="line" value="95"/>
+    </eAnnotations>
+    <eAnnotations source="positions.15" references="/0/generateClassCenario/@body.12">
+      <details key="start" value="2853"/>
+      <details key="end" value="2861"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.16" references="/0/generateClassCenario/@body.13">
+      <details key="start" value="2863"/>
+      <details key="end" value="3263"/>
+      <details key="line" value="104"/>
+    </eAnnotations>
+    <eAnnotations source="positions.17" references="/0/generateClassCenario/@body.14">
+      <details key="start" value="3264"/>
+      <details key="end" value="3270"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.18" references="/0/generateClassCenario/@body.15">
+      <details key="start" value="3272"/>
+      <details key="end" value="3584"/>
+      <details key="line" value="126"/>
+    </eAnnotations>
+    <eAnnotations source="positions.19" references="/0/generateClassCenario/@body.16">
+      <details key="start" value="3585"/>
+      <details key="end" value="3593"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.20" references="/0/generateClassCenario/@body.17">
+      <details key="start" value="3595"/>
+      <details key="end" value="3629"/>
+      <details key="line" value="132"/>
+    </eAnnotations>
+    <eAnnotations source="positions.21" references="/0/generateClassCenario/@body.18">
+      <details key="start" value="3630"/>
+      <details key="end" value="3638"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.22" references="/0/generateClassCenario/@body.19">
+      <details key="start" value="3640"/>
+      <details key="end" value="5770"/>
+      <details key="line" value="133"/>
+    </eAnnotations>
+    <eAnnotations source="positions.23" references="/0/generateClassCenario/@body.20">
+      <details key="start" value="5771"/>
+      <details key="end" value="5776"/>
+      <details key="line" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="positions.24" references="/0/generateClassCenario/@body.21">
+      <details key="start" value="5778"/>
+      <details key="end" value="10121"/>
+      <details key="line" value="194"/>
+    </eAnnotations>
+    <eAnnotations source="positions.25" references="/0/generateClassCenario/c">
+      <details key="start" value="153"/>
+      <details key="end" value="162"/>
+      <details key="line" value="7"/>
+    </eAnnotations>
+  </ecore:EAnnotation>
+</xmi:XMI>

@@ -23,11 +23,11 @@
 [if (o.type.oclIsUndefined())]void [o.name/][else][o.type.name/] [o.name/][/if]
 [/template]
 
-[template public importBlock(traceabilityContext : OclAny)]
+[template public importBlock(cl : Classifier)]
 // [protected ('for imports')]
-import java.util.*;
-import rpg.*;
-import java.awt.Graphics2D;
+[for (cmt : Comment | cl.ownedComment)]
+import  [cmt._body/];
+[/for]
 // [/protected]
 [/template]
 
@@ -47,7 +47,7 @@ import java.awt.Graphics2D;
 
 [template public _commentBodyBlock(traceabilityContext : OclAny)]
 /**
- * @author MTL
+ * @author Gerson R. Santos
  */
 [/template]
 

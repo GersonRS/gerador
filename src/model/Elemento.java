@@ -13,6 +13,16 @@ public class Elemento {
 		this.extend = extend;
 		this.atributos = new ArrayList<Atributo>();
 	}
+	
+	
+	public Atributo getAtributoPorNome(String nome) {
+		for (Atributo atributo : atributos) {
+			if(atributo.getNome().equalsIgnoreCase(nome))
+				return atributo;
+		}
+		return null;
+	}
+
 
 	public String getNome() {
 		return nome;

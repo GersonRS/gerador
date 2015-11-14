@@ -50,27 +50,42 @@ public[if (c.isAbstract)] abstract[/if] class [c.name.toUpperFirst()/][for (supe
 [/if]
 [/for]
 [for (o : Operation | c.getOperations())]
+[o.setIsUnique(false)/]
 [o.operationBody()/]
 [/for]
 
+[if (not c.isAbstract)]
 [for (superC : Class | c.superClass)]
-[for (o : Operation | superC.ownedOperation)]
-[if (o.isAbstract)]
-[o.visibility/] [o.returnTypeOperation()/]([o.getInParameter()/]) {
-        // [protected ('for operation '.concat(o.name))]
-[if (not o.type.oclIsUndefined())]
-        // TODO should be implemented
-        return null;
-[else]
-        // TODO should be implemented
-[/if]
-        // [/protected]
-    }
-[/if]
+	[for (s : Class | superC.superClass)]
+		[for (o : Operation | s.ownedOperation)]
+			[if (o.isAbstract)]
+				[o.setIsUnique(true)/]
+[o.operationBody()/]
+			[/if]
+		[/for]
+		[for (i : Interface | s.getImplementedInterfaces())]
+			[for (sI: Interface | i.general)]
+				[for (o : Operation | sI.ownedOperation)]
+[o.operationBody()/]
+				[/for]
+			[/for]
+		[/for]
+	[/for]
+	[for (o : Operation | superC.ownedOperation)]
+		[if (o.isAbstract)]
+			[o.setIsUnique(true)/]
+[o.operationBody()/]
+		[/if]
+	[/for]
+	[for (i : Interface | superC.getImplementedInterfaces())]
+		[for (superI: Interface | i.general)]
+			[for (o : Operation | superI.ownedOperation)]
+[o.operationBody()/]
+			[/for]
+		[/for]
+	[/for]
 [/for]
-[/for]
-
-
+[/if]
 [for (interf : Interface | c.getImplementedInterfaces())]
 [for (o : Operation | interf.ownedOperation)]
 [o.operationBody()/]
@@ -90,16 +105,27 @@ public[if (c.isAbstract)] abstract[/if] class [c.name.toUpperFirst()/][for (supe
 [/if]
      */
 [if (o.isAbstract)]
-[o.visibility/] abstract [o.returnTypeOperation()/]([o.getInParameter()/]);
+	[if (o.isUnique)]
+	[o.visibility/] [o.returnTypeOperation()/]([o.getInParameter()/]) {
+		[if (not o.type.oclIsUndefined())]
+        // TODO should be implemented
+        return null;
+		[else]
+        // TODO should be implemented
+		[/if]
+    }
+	[else]
+    	[o.visibility/] abstract [o.returnTypeOperation()/]([o.getInParameter()/]);
+	[/if]
 [else]
     [o.visibility/] [o.returnTypeOperation()/]([o.getInParameter()/]) {
         // [protected ('for operation '.concat(o.name))]
-[if (not o.type.oclIsUndefined())]
+		[if (not o.type.oclIsUndefined())]
         // TODO should be implemented
         return null;
-[else]
+		[else]
         // TODO should be implemented
-[/if]
+		[/if]
         // [/protected]
     }
 [/if]
