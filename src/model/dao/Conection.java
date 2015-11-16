@@ -20,6 +20,8 @@ import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import exceptions.ExceptionArquivoNull;
+
 public class Conection {
 
 	private static Conection conection;
@@ -64,6 +66,7 @@ public class Conection {
 			is = new FileInputStream(f);
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
+			new ExceptionArquivoNull();
 		}
 		doc=carregaDoc(is);
 		
@@ -77,6 +80,7 @@ public class Conection {
 			is = new FileInputStream(f);
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
+			new ExceptionArquivoNull();
 		}
 
 		doc = carregaDoc(is);

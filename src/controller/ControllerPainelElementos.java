@@ -8,20 +8,22 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 import model.Elemento;
-import model.Gerador;
+import model.Facada;
 import view.PainelElementos;
 
-public class ControllerPainelElementos extends KeyAdapter implements ActionListener{
-	
+public class ControllerPainelElementos extends KeyAdapter implements
+		ActionListener {
+
 	private static ControllerPainelElementos instance = null;
 	private PainelElementos painel;
 
-	public static synchronized ControllerPainelElementos getInstance(PainelElementos painel) {
+	public static synchronized ControllerPainelElementos getInstance(
+			PainelElementos painel) {
 		if (instance == null)
 			instance = new ControllerPainelElementos(painel);
 		return instance;
 	}
-	
+
 	public ControllerPainelElementos(PainelElementos painel) {
 		this.painel = painel;
 	}
@@ -36,7 +38,7 @@ public class ControllerPainelElementos extends KeyAdapter implements ActionListe
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource()==painel.getBtnAdicionar()){
+		if (e.getSource() == painel.getBtnAdicionar()) {
 			String name = painel.getTextField().getText();
 
 			if (name.equals("") || alreadyInList(name)) {
@@ -46,35 +48,34 @@ public class ControllerPainelElementos extends KeyAdapter implements ActionListe
 				return;
 			}
 
-			String nome = painel.getTextField().getText().substring(0,1).toUpperCase().concat(painel.getTextField().getText().substring(1));
-			String extend = painel.getComboBox().getItemAt(painel.getComboBox().getSelectedIndex());
+			String nome = painel.getTextField().getText().substring(0, 1)
+					.toUpperCase()
+					.concat(painel.getTextField().getText().substring(1));
+			String extend = painel.getComboBox().getItemAt(
+					painel.getComboBox().getSelectedIndex());
 
 			painel.getListModel().addElement(nome);
-			
-			Gerador.getInstance()
-					.getGame()
-					.getListaElementos()
-					.add(new Elemento(nome, extend));
+
+			Facada.getInstance().addElemento(new Elemento(nome, extend));
 
 			painel.getTextField().requestFocusInWindow();
 			painel.getTextField().setText("");
 			painel.getBtnRemover().setEnabled(true);
 			updateComboBox();
 		}
-		if(e.getSource()==painel.getBtnRemover()){
+		if (e.getSource() == painel.getBtnRemover()) {
 			int index = painel.getList().getSelectedIndex();
 			if (index < 0) {
 				Toolkit.getDefaultToolkit().beep();
 				return;
 			}
 
-			ArrayList<Elemento> elementos = Gerador.getInstance().getGame()
+			ArrayList<Elemento> elementos = Facada.getInstance()
 					.getListaElementos();
 			for (int i = 0; i < elementos.size(); i++) {
 				if (elementos.get(i).getNome()
 						.equalsIgnoreCase(painel.getListModel().get(index))) {
-					Gerador.getInstance().getGame().getListaElementos()
-							.remove(i);
+					Facada.getInstance().getListaElementos().remove(i);
 				}
 			}
 			painel.getListModel().remove(index);
@@ -107,13 +108,12 @@ public class ControllerPainelElementos extends KeyAdapter implements ActionListe
 	}
 
 	public void updateList() {
-		ArrayList<Elemento> e = Gerador.getInstance().getGame()
-				.getListaElementos();
+		ArrayList<Elemento> e = Facada.getInstance().getListaElementos();
 		painel.getListModel().removeAllElements();
 		for (Elemento elemento : e) {
 			painel.getListModel().addElement(elemento.getNome());
 		}
-		if(e.size()>0)
+		if (e.size() > 0)
 			painel.getBtnRemover().setEnabled(true);
 		else
 			painel.getBtnRemover().setEnabled(false);
@@ -121,9 +121,8 @@ public class ControllerPainelElementos extends KeyAdapter implements ActionListe
 	}
 
 	private void updateComboBox() {
-		ArrayList<Elemento> e = Gerador.getInstance().getGame()
-				.getListaElementos();
-		String[] elementos = { "","Elemento", "Personagem", "Obstaculo" };
+		ArrayList<Elemento> e = Facada.getInstance().getListaElementos();
+		String[] elementos = { "", "Elemento", "Personagem", "Obstaculo" };
 		painel.getComboBoxModel().removeAllElements();
 		for (int i = 0; i < elementos.length; i++) {
 			painel.getComboBoxModel().addElement(elementos[i]);

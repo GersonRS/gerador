@@ -9,8 +9,8 @@
     <packagedElement name="KeyListener" xmi:id="KeyListener" xmi:type="uml:Interface"/>
     <packagedElement name="MouseInputListener" xmi:id="MouseInputListener" xmi:type="uml:Interface"/>
     <packagedElement name="Interacao" xmi:id="_QWLVEIlgEeW8q8DTHKD6Ow" xmi:type="uml:Interface">
-      <generalization general="KeyListener" xmi:id="_x7urMIlnEeW895OJNim2Fg"/>
-      <generalization general="MouseInputListener" xmi:id="_yZMqUIlnEeW895OJNim2Fg"/>
+      
+      
     </packagedElement>
     <packagedElement clientDependency="_ISgYkIlrEeW895OJNim2Fg _BboJkIraEeWsdOYnHSCEsQ" isAbstract="true" name="GameBase" xmi:id="_qBZ48IlnEeW895OJNim2Fg" xmi:type="uml:Class">
       <interfaceRealization client="_qBZ48IlnEeW895OJNim2Fg" contract="_QWLVEIlgEeW8q8DTHKD6Ow" name="InterfaceRealization1" supplier="_QWLVEIlgEeW8q8DTHKD6Ow" xmi:id="_ISgYkIlrEeW895OJNim2Fg"/>
@@ -36,8 +36,8 @@
       </ownedOperation>
     </packagedElement>
     <packagedElement name="Acoes" xmi:id="_4xDL8IlhEeW8q8DTHKD6Ow" xmi:type="uml:Interface">
-      <generalization general="Movimento" xmi:id="_wXq3cIlnEeW895OJNim2Fg"/>
-      <generalization general="Colisao" xmi:id="_xD0y0IlnEeW895OJNim2Fg"/>
+      
+      
     </packagedElement>
     <packagedElement clientDependency="_L91a0IlrEeW895OJNim2Fg" isAbstract="true" name="Elemento" xmi:id="Elemento" xmi:type="uml:Class">
       <interfaceRealization client="Elemento" contract="_4xDL8IlhEeW8q8DTHKD6Ow" name="InterfaceRealization1" supplier="_4xDL8IlhEeW8q8DTHKD6Ow" xmi:id="_L91a0IlrEeW895OJNim2Fg"/>
@@ -66,6 +66,6 @@
   <packagedElement name="game" xmi:id="_uxClsIoIEeWhMZXom0l9CQ" xmi:type="uml:Package">
     <packagedElement name="Jogo" xmi:id="_huaOIIoOEeWhMZXom0l9CQ" xmi:type="uml:Class">
       <generalization general="_qBZ48IlnEeW895OJNim2Fg" xmi:id="_jj8MYIoOEeWhMZXom0l9CQ"/>
-    <ownedOperation name="loadCenario" xmi:id="mUGN516M_ysM81xqoX2h49i"><ownedParameter name="numsei" xmi:id="Lo1FgN4pYN4p0aYWEVohXcZ"/></ownedOperation><ownedOperation name="addTeleport" xmi:id="pG1wcwdJjwyPE324qG0p5s0"><ownedParameter name="numsei" xmi:id="ct9635i67F4r-Je72r8Z64f"/><ownedParameter name="numsei" xmi:id="81hhuIUg81f80F-NoAV90x4"/><ownedParameter direction="return" name="2" xmi:id="66dWdkbgScw53QErW7J792j"/></ownedOperation><ownedOperation name="configLayerInferior" xmi:id="2wutYzob40k6RyZp_95of0T"><ownedParameter name="numsei" xmi:id="11nq90foyjt0tY882mjP3vv"/><ownedParameter name="areia" xmi:id="xJvZz5a0WT1_wM8xVHt8Y75"/></ownedOperation><ownedOperation name="configLayerSuperior" xmi:id="6113Tvmx0zTU-izftK2JW07"><ownedParameter name="numsei" xmi:id="S03rYd1goGAjH4L7XnP5JvE"/><ownedParameter name="folhsa" xmi:id="6VF3L3Tu04P9jucw450SIFy"/></ownedOperation><ownedOperation name="configLayerInferior" xmi:id="1wpoQoK829d07aFTy1yoQ88"><ownedParameter name="numsei" xmi:id="9W-Z3h66I730V2Z6v23EI1B"/><ownedParameter name="grama" xmi:id="ZeT19Kfc05j6ZcbtoA38HN5"/></ownedOperation></packagedElement>
-  <packagedElement name="Hahahahahaaaa" xmi:id="Hahahahahaaaa" xmi:type="uml:Class"><generalization general="Personagem" xmi:id="ndiLCCBoz5D6qH3p56m7Q0P"/><ownedComment xmi:id="jedT54Gk24ar04z359FL59u"><body>core.Personagem</body></ownedComment><ownedComment xmi:id="T15G4ubx3T5uLH3Rmp6v58o"><body>java.awt.geom.Rectangle2D</body></ownedComment><ownedComment xmi:id="cwK1Dn9FMwrQ439qk58FVY4"><body>core.Interacao</body></ownedComment><ownedComment xmi:id="I868007f84Ha-JroQ81U69X"><body>java.awt.Graphics2D</body></ownedComment><ownedAttribute name="seila" type="String"><defaultValue value="&quot;a&quot;" xmi:type="uml:LiteralString"/></ownedAttribute></packagedElement></packagedElement>
+    </packagedElement>
+  </packagedElement>
 </uml:Model>

@@ -40,41 +40,41 @@ public class Obstaculo extends Elemento {
 	}
 
 [if (not c.isAbstract)]
-[for (superC : Class | c.superClass)]
-	[for (s : Class | superC.superClass)]
-		[for (o : Operation | s.ownedOperation)]
+	[for (superC : Class | c.superClass)]
+		[for (o : Operation | superC.ownedOperation)]
 			[if (o.isAbstract)]
 				[o.setIsUnique(true)/]
 [o.operationBody()/]
 			[/if]
 		[/for]
-		[for (i : Interface | s.getImplementedInterfaces())]
+		[for (i : Interface | superC.getImplementedInterfaces())]
 			[for (sI: Interface | i.general)]
 				[for (o : Operation | sI.ownedOperation)]
+					[if (sI.name = 'Movimento')]
 [o.operationBody()/]
+					[/if]
+					[if (sI.name = 'Colisao')]
+	/**
+     * retorna a area de colisão do elemento.
+     * @return
+     */
+	@Override
+    public Rectangle2D.Double getColisao() {
+        // Start of user code for operation getColisao
+        // TODO should be implemented
+		return getPos();
+        // End of user code
+    }	
+					[/if]
 				[/for]
 			[/for]
 		[/for]
 	[/for]
-	[for (o : Operation | superC.ownedOperation)]
-		[if (o.isAbstract)]
-			[o.setIsUnique(true)/]
-[o.operationBody()/]
-		[/if]
-	[/for]
-	[for (i : Interface | superC.getImplementedInterfaces())]
-		[for (superI: Interface | i.general)]
-			[for (o : Operation | superI.ownedOperation)]
-[o.operationBody()/]
-			[/for]
-		[/for]
-	[/for]
-[/for]
 [/if]
 [for (interf : Interface | c.getImplementedInterfaces())]
-[for (o : Operation | interf.ownedOperation)]
+	[for (o : Operation | interf.ownedOperation)]
 [o.operationBody()/]
-[/for]
+	[/for]
 [/for]
 
 }

@@ -28,6 +28,7 @@ public class WindowFrame extends JFrame {
 	private JCheckBoxMenuItem chckbxmntmTeclado;
 	private JCheckBoxMenuItem chckbxmntmMouse;
 	private JFileChooser fc;
+	private JFileChooser generation;
 	private JMenuItem mntmInicio;
 	private JMenuItem mntmCarregarBase;
 	private JMenuItem mntmSalvarBase;
@@ -40,6 +41,7 @@ public class WindowFrame extends JFrame {
 	private PainelAtributos panel_2;
 	private PainelCenarios panel_3;
 	private PainelVisaoGeral panel;
+	private JMenuBar menu;
 
 	/**
 	 * Create the frame.
@@ -67,11 +69,11 @@ public class WindowFrame extends JFrame {
 		panel_3 = new PainelCenarios();
 		contentPane.add(panel_3, "cenarios");
 
-		JMenuBar menuBar = new JMenuBar();
-		setJMenuBar(menuBar);
+		menu = new JMenuBar();
+		setJMenuBar(menu);
 
 		JMenu mnArquivo = new JMenu("Arquivo");
-		menuBar.add(mnArquivo);
+		menu.add(mnArquivo);
 
 		mntmInicio = new JMenuItem("Inicio");
 		mntmInicio.setIcon(new ImageIcon(getClass().getClassLoader()
@@ -100,7 +102,7 @@ public class WindowFrame extends JFrame {
 		mnArquivo.add(mntmSair);
 
 		JMenu mnGame = new JMenu("Game");
-		menuBar.add(mnGame);
+		menu.add(mnGame);
 
 		JMenu mnElementos_1 = new JMenu("Elementos");
 		mnElementos_1.setIcon(new ImageIcon(getClass().getClassLoader()
@@ -214,6 +216,15 @@ public class WindowFrame extends JFrame {
 		};
 
 		fc.setFileFilter(filter);
+
+		generation = new JFileChooser();
+		generation.setComponentPopupMenu(new JPopupMenu("nada"));
+		generation.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		generation.setAcceptAllFileFilterUsed(false);
+	}
+
+	public JFileChooser getGeneration() {
+		return generation;
 	}
 
 	public JCheckBoxMenuItem getChckbxmntmColiso() {
@@ -286,6 +297,10 @@ public class WindowFrame extends JFrame {
 
 	public PainelVisaoGeral getPanel() {
 		return panel;
+	}
+
+	public JMenuBar getMenu() {
+		return menu;
 	}
 
 }

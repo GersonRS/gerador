@@ -3,6 +3,7 @@ package model.dao;
 import java.util.ArrayList;
 
 import model.Elemento;
+import model.Facada;
 import model.Gerador;
 
 import org.w3c.dom.Document;
@@ -38,9 +39,9 @@ public class ElementoDAO {
 		return elementos;
 	}
 
-	public static void inserirElementos(Document doc, Element packagedGame) {
+	public static void setElementos(Document doc, Element packagedGame) {
 		
-		ArrayList<Elemento> elementos = Gerador.getInstance().getGame().getListaElementos();
+		ArrayList<Elemento> elementos = Facada.getInstance().getListaElementos();
 
 		for (Elemento elemento : elementos) {
 
@@ -85,9 +86,9 @@ public class ElementoDAO {
 						Node node_3 = doc.createElement("body");
 						node_3.setTextContent("java.awt.Graphics2D");
 						ownedComment_3.appendChild(node_3);
-						if (Gerador.getInstance().getGame().isAcoes_colisao())
+						if (Facada.getInstance().isAcoes_colisao())
 							packagedElement.appendChild(ownedComment_2);
-						if (Gerador.getInstance().getGame().isAcoes_movimento())
+						if (Facada.getInstance().isAcoes_movimento())
 							packagedElement.appendChild(ownedComment_1);
 						packagedElement.appendChild(ownedComment_3);
 					}

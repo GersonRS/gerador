@@ -15,7 +15,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import model.Cenario;
-import model.Gerador;
+import model.Facada;
 import view.PainelCenarios;
 
 public class ControllerPainelCenario extends KeyAdapter implements
@@ -65,9 +65,8 @@ public class ControllerPainelCenario extends KeyAdapter implements
 				Toolkit.getDefaultToolkit().beep();
 				return;
 			}
-			painel.setCenario(Gerador
+			painel.setCenario(Facada
 					.getInstance()
-					.getGame()
 					.getCenarioPorNome(
 							painel.getListModel_2().getElementAt(index)));
 			painel.getPanel_6().setBorder(
@@ -111,7 +110,7 @@ public class ControllerPainelCenario extends KeyAdapter implements
 
 			painel.getListModel_2().addElement(name);
 
-			Gerador.getInstance().getGame().getListaCenarios()
+			Facada.getInstance().getListaCenarios()
 					.add(new Cenario(name));
 
 			painel.getList_2().setSelectedIndex(
@@ -195,12 +194,12 @@ public class ControllerPainelCenario extends KeyAdapter implements
 				return;
 			}
 
-			ArrayList<Cenario> cenarios = Gerador.getInstance().getGame()
+			ArrayList<Cenario> cenarios = Facada.getInstance()
 					.getListaCenarios();
 			for (int i = 0; i < cenarios.size(); i++) {
 				if (cenarios.get(i).getNome()
 						.equalsIgnoreCase(painel.getListModel_2().get(index))) {
-					Gerador.getInstance().getGame().getListaCenarios()
+					Facada.getInstance().getListaCenarios()
 							.remove(i);
 				}
 			}
@@ -294,7 +293,7 @@ public class ControllerPainelCenario extends KeyAdapter implements
 	}
 
 	public void updateList() {
-		ArrayList<Cenario> c = Gerador.getInstance().getGame()
+		ArrayList<Cenario> c = Facada.getInstance()
 				.getListaCenarios();
 		painel.getListModel_2().removeAllElements();
 		for (Cenario cenario : c) {
@@ -351,7 +350,7 @@ public class ControllerPainelCenario extends KeyAdapter implements
 	}
 
 	private void updateComboBox() {
-		ArrayList<Cenario> e = Gerador.getInstance().getGame()
+		ArrayList<Cenario> e = Facada.getInstance()
 				.getListaCenarios();
 		painel.getComboBoxModel().removeAllElements();
 		for (Cenario cenario : e) {

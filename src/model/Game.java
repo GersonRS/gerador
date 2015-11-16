@@ -16,22 +16,6 @@ public class Game {
 		listaCenarios = new ArrayList<Cenario>();
 	}
 
-	public Elemento getElementoPorNome(String nome) {
-		for (Elemento elemento : listaElementos) {
-			if (elemento.getNome().equalsIgnoreCase(nome))
-				return elemento;
-		}
-		return null;
-	}
-
-	public Cenario getCenarioPorNome(String nome) {
-		for (Cenario cenario : listaCenarios) {
-			if (cenario.getNome().equalsIgnoreCase(nome))
-				return cenario;
-		}
-		return null;
-	}
-
 	public ArrayList<Elemento> getListaElementos() {
 		return listaElementos;
 	}

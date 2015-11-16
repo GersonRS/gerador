@@ -13,7 +13,7 @@ import javax.swing.JFileChooser;
 
 import model.Cenario;
 import model.Elemento;
-import model.Gerador;
+import model.Facada;
 import view.WindowFrame;
 
 public class ControllerWindowFrame implements ActionListener, ItemListener {
@@ -40,7 +40,7 @@ public class ControllerWindowFrame implements ActionListener, ItemListener {
 		}
 		if(e.getSource()==frame.getMntmCarregarBase()){
 			if (frame.getFc().showOpenDialog(frame) == JFileChooser.APPROVE_OPTION) {
-				Gerador.getInstance().loadXMLFile(frame.getFc().getSelectedFile());
+				Facada.getInstance().loadXMLFile(frame.getFc().getSelectedFile());
 				atualizaComponentes();
 				atualizaTelaInicial();
 			}
@@ -50,7 +50,7 @@ public class ControllerWindowFrame implements ActionListener, ItemListener {
 				String nomeArq = frame.getFc().getSelectedFile().getAbsolutePath();
 				if (!nomeArq.endsWith(".uml"))   
 					nomeArq += ".uml"; 
-				Gerador.getInstance().generateXMLFile(new File(nomeArq));
+				Facada.getInstance().generateXMLFile(new File(nomeArq));
 			}
 		}
 		if(e.getSource()==frame.getMntmSair()){
@@ -72,8 +72,9 @@ public class ControllerWindowFrame implements ActionListener, ItemListener {
 			ControllerPainelCenario.getInstance(frame.getPanel_3()).updateList();
 		}
 		if(e.getSource()==frame.getMntmGerarCodigo()){
-			Gerador.getInstance().generateXMLFile(null);
-			new Thread(Gerador.getInstance()).start();
+			if (frame.getGeneration().showSaveDialog(frame) == JFileChooser.APPROVE_OPTION) {
+				Facada.getInstance().gerarCodigo(frame.getGeneration().getSelectedFile());
+			}
 		}
 	}
 
@@ -81,44 +82,44 @@ public class ControllerWindowFrame implements ActionListener, ItemListener {
 	public void itemStateChanged(ItemEvent e) {
 		if(e.getSource()==frame.getChckbxmntmMouse()){
 			if (frame.getChckbxmntmMouse().isSelected()) {
-				Gerador.getInstance().getGame().setInteracoes_mouse(true);
+				Facada.getInstance().setInteracoes_mouse(true);
 				frame.getPanel().getLblMouse().setIcon(new ImageIcon(getClass().getClassLoader()
 						.getResource("images/confirm.png")));
 			} else {
-				Gerador.getInstance().getGame().setInteracoes_mouse(false);
+				Facada.getInstance().setInteracoes_mouse(false);
 				frame.getPanel().getLblMouse().setIcon(new ImageIcon(getClass().getClassLoader()
 						.getResource("images/excluir.png")));
 			}
 		}
 		if(e.getSource()==frame.getChckbxmntmTeclado()){
 			if (frame.getChckbxmntmTeclado().isSelected()) {
-				Gerador.getInstance().getGame().setInteracoes_teclado(true);
+				Facada.getInstance().setInteracoes_teclado(true);
 				frame.getPanel().getLblTeclado().setIcon(new ImageIcon(getClass().getClassLoader()
 						.getResource("images/confirm.png")));
 			} else {
-				Gerador.getInstance().getGame().setInteracoes_teclado(false);
+				Facada.getInstance().setInteracoes_teclado(false);
 				frame.getPanel().getLblTeclado().setIcon(new ImageIcon(getClass().getClassLoader()
 						.getResource("images/excluir.png")));
 			}
 		}
 		if(e.getSource()==frame.getChckbxmntmColiso()){
 			if (frame.getChckbxmntmColiso().isSelected()) {
-				Gerador.getInstance().getGame().setAcoes_colisao(true);
+				Facada.getInstance().setAcoes_colisao(true);
 				frame.getPanel().getLblColiso().setIcon(new ImageIcon(getClass().getClassLoader()
 						.getResource("images/confirm.png")));
 			} else {
-				Gerador.getInstance().getGame().setAcoes_colisao(false);
+				Facada.getInstance().setAcoes_colisao(false);
 				frame.getPanel().getLblColiso().setIcon(new ImageIcon(getClass().getClassLoader()
 						.getResource("images/excluir.png")));
 			}
 		}
 		if(e.getSource()==frame.getChckbxmntmMovimento()){
 			if (frame.getChckbxmntmMovimento().isSelected()) {
-				Gerador.getInstance().getGame().setAcoes_movimento(true);
+				Facada.getInstance().setAcoes_movimento(true);
 				frame.getPanel().getLblMovimento().setIcon(new ImageIcon(getClass().getClassLoader()
 						.getResource("images/confirm.png")));
 			} else {
-				Gerador.getInstance().getGame().setAcoes_movimento(false);
+				Facada.getInstance().setAcoes_movimento(false);
 				frame.getPanel().getLblMovimento().setIcon(new ImageIcon(getClass().getClassLoader()
 						.getResource("images/excluir.png")));
 			}
@@ -126,10 +127,10 @@ public class ControllerWindowFrame implements ActionListener, ItemListener {
 	}
 
 	public void atualizaComponentes(){
-		frame.getChckbxmntmColiso().setSelected(Gerador.getInstance().getGame().isAcoes_colisao());
-		frame.getChckbxmntmMovimento().setSelected(Gerador.getInstance().getGame().isAcoes_movimento());
-		frame.getChckbxmntmMouse().setSelected(Gerador.getInstance().getGame().isInteracoes_mouse());
-		frame.getChckbxmntmTeclado().setSelected(Gerador.getInstance().getGame().isInteracoes_teclado());
+		frame.getChckbxmntmColiso().setSelected(Facada.getInstance().isAcoes_colisao());
+		frame.getChckbxmntmMovimento().setSelected(Facada.getInstance().isAcoes_movimento());
+		frame.getChckbxmntmMouse().setSelected(Facada.getInstance().isInteracoes_mouse());
+		frame.getChckbxmntmTeclado().setSelected(Facada.getInstance().isInteracoes_teclado());
 	}
 	
 	public void atualizaTelaInicial(){
@@ -138,13 +139,13 @@ public class ControllerWindowFrame implements ActionListener, ItemListener {
 		ImageIcon confirm = new ImageIcon(getClass().getClassLoader()
 				.getResource("images/confirm.png"));
 		
-		frame.getPanel().getLblMovimento().setIcon(Gerador.getInstance().getGame().isAcoes_movimento()?confirm:excluir);
-		frame.getPanel().getLblColiso().setIcon(Gerador.getInstance().getGame().isAcoes_colisao()?confirm:excluir);
-		frame.getPanel().getLblMouse().setIcon(Gerador.getInstance().getGame().isInteracoes_mouse()?confirm:excluir);
-		frame.getPanel().getLblTeclado().setIcon(Gerador.getInstance().getGame().isInteracoes_teclado()?confirm:excluir);
+		frame.getPanel().getLblMovimento().setIcon(Facada.getInstance().isAcoes_movimento()?confirm:excluir);
+		frame.getPanel().getLblColiso().setIcon(Facada.getInstance().isAcoes_colisao()?confirm:excluir);
+		frame.getPanel().getLblMouse().setIcon(Facada.getInstance().isInteracoes_mouse()?confirm:excluir);
+		frame.getPanel().getLblTeclado().setIcon(Facada.getInstance().isInteracoes_teclado()?confirm:excluir);
 		
-		ArrayList<Elemento> e = Gerador.getInstance().getGame().getListaElementos();
-		ArrayList<Cenario> c = Gerador.getInstance().getGame().getListaCenarios();
+		ArrayList<Elemento> e = Facada.getInstance().getListaElementos();
+		ArrayList<Cenario> c = Facada.getInstance().getListaCenarios();
 		
 		frame.getPanel().getListModel().removeAllElements();
 		frame.getPanel().getListModel_1().removeAllElements();

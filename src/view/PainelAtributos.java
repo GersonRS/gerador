@@ -17,7 +17,6 @@ import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
-import model.Elemento;
 import controller.ControllerPainelAtributos;
 
 public class PainelAtributos extends JPanel {
@@ -32,7 +31,6 @@ public class PainelAtributos extends JPanel {
 	private JList<String> list_1;
 	private DefaultListModel<String> listModel_1;
 	private JPanel panel_3;
-	private Elemento elemento;
 	private JComboBox<String> comboBox;
 	private DefaultComboBoxModel<String> comboBoxModel;
 	private JComboBox<String> comboBox_2;
@@ -173,10 +171,6 @@ public class PainelAtributos extends JPanel {
 		return panel_3;
 	}
 
-	public Elemento getElemento() {
-		return elemento;
-	}
-
 	public JComboBox<String> getComboBox() {
 		return comboBox;
 	}
@@ -195,10 +189,6 @@ public class PainelAtributos extends JPanel {
 
 	public JButton getBtnAdicionarAtributo() {
 		return btnAdicionarAtributo;
-	}
-
-	public void setElemento(Elemento elemento) {
-		this.elemento = elemento;
 	}
 
 }

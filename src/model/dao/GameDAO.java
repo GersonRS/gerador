@@ -1,5 +1,6 @@
 package model.dao;
 
+import model.Facada;
 import model.Game;
 import model.Gerador;
 
@@ -81,7 +82,7 @@ public class GameDAO {
 		return game;
 	}
 
-	public static void inserirGame(Document doc) {
+	public static void setGame(Document doc) {
 
 		Element docElement = doc.getDocumentElement();
 
@@ -120,7 +121,7 @@ public class GameDAO {
 			}
 		}
 
-		if (Gerador.getInstance().getGame().isInteracoes_mouse()) {
+		if (Facada.getInstance().isInteracoes_mouse()) {
 			boolean tem = false;
 			NodeList generalization = interacao
 					.getElementsByTagName("generalization");
@@ -149,7 +150,7 @@ public class GameDAO {
 			}
 		}
 
-		if (Gerador.getInstance().getGame().isInteracoes_teclado()) {
+		if (Facada.getInstance().isInteracoes_teclado()) {
 			boolean tem = false;
 			NodeList generalization = interacao
 					.getElementsByTagName("generalization");
@@ -178,7 +179,7 @@ public class GameDAO {
 			}
 		}
 
-		if (Gerador.getInstance().getGame().isAcoes_colisao()) {
+		if (Facada.getInstance().isAcoes_colisao()) {
 			boolean tem = false;
 			NodeList generalization = acoes
 					.getElementsByTagName("generalization");
@@ -205,7 +206,7 @@ public class GameDAO {
 			}
 		}
 
-		if (Gerador.getInstance().getGame().isAcoes_movimento()) {
+		if (Facada.getInstance().isAcoes_movimento()) {
 			boolean tem = false;
 			NodeList generalization = acoes
 					.getElementsByTagName("generalization");
@@ -234,7 +235,7 @@ public class GameDAO {
 			}
 		}
 
-		ElementoDAO.inserirElementos(doc, packagedGame);
+		ElementoDAO.setElementos(doc, packagedGame);
 
 	}
 

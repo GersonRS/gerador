@@ -5,8 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import javax.swing.JOptionPane;
+import java.util.concurrent.RejectedExecutionException;
 
 import model.dao.Conection;
 import model.dao.GameDAO;
@@ -17,28 +16,44 @@ import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.w3c.dom.Document;
 
-public class Gerador implements Runnable {
-	private static Gerador instance = null;
+import exceptions.ExceptionArquivoGerado;
+import exceptions.ExceptionArquivoNull;
+import exceptions.ExceptionProcessoErro;
+
+public class Gerador implements Runnable{
+	
 	private Game game;
-
-	private Gerador() {
-		game = new Game();
+	private File localGeneration;
+	
+	public Gerador(Game game) {
+		this.game = game;
 	}
 
-	public static synchronized Gerador getInstance() {
-		if (instance == null)
-			instance = new Gerador();
-		return instance;
+	@Override
+	public void run() {
+		if (localGeneration != null) {
+			try {
+				gerador(localGeneration);
+			} catch (ExceptionArquivoNull e) {
+			} catch (ExceptionProcessoErro e) {
+			} catch (ExceptionArquivoGerado e) {
+			}
+		} else {
+			new ExceptionArquivoNull();
+		}
+		localGeneration = null;
 	}
-
-	public Game getGame() {
-		return game;
-	}
-
-	public void generateXMLFile(File f){
+	
+	public void generateXMLFile(File f) {
 		Document doc = Conection.getConection().abrirDefault();
-		GameDAO.inserirGame(doc);
+		GameDAO.setGame(doc);
 		Conection.getConection().salvar(doc, f);
+	}
+
+	public void gerarCodigo(File f) {
+		generateXMLFile(null);
+		this.localGeneration = f;
+		new Thread(this).start();
 	}
 
 	public void loadXMLFile(File f) {
@@ -60,26 +75,26 @@ public class Gerador implements Runnable {
 		return retorno;
 	}
 
-	@Override
-	public void run() {
+	public void gerador(File f) throws ExceptionArquivoNull,
+			ExceptionProcessoErro, ExceptionArquivoGerado {
 		URI modelURI = URI.createFileURI(new File("resource/model/model.uml")
 				.getAbsolutePath());
-		File folder = new File("C:/Users/Gerson/workspaceMM/Generation/src");
 		List<String> arguments = new ArrayList<String>();
 		try {
-			GenerateJava generator = new GenerateJava(modelURI, folder,
-					arguments);
+			GenerateJava generator = new GenerateJava(modelURI, f, arguments);
 			generator.doGenerate(new BasicMonitor());
-
-			JOptionPane.showMessageDialog(null, "Você gerou com sucesso.");
+			throw new ExceptionArquivoGerado();
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new ExceptionArquivoNull();
 		} catch (AcceleoRuntimeException e) {
-			JOptionPane
-					.showMessageDialog(
-							null,
-							"a geração dos Arquivos anteriores ainda esta sendo processada. Espera um pouco");
+			throw new ExceptionProcessoErro();
+		} catch (RejectedExecutionException e) {
+			throw new ExceptionProcessoErro();
+		} finally {
 		}
 	}
 
+	public Game getGame() {
+		return game;
+	}
 }
