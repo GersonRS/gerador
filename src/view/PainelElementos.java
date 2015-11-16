@@ -2,10 +2,6 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -20,8 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.TitledBorder;
 
-import model.Elemento;
-import model.Gerador;
+import controller.ControllerPainelElementos;
 
 public class PainelElementos extends JPanel {
 	/**
@@ -34,6 +29,7 @@ public class PainelElementos extends JPanel {
 	private DefaultListModel<String> listModel;
 	private DefaultComboBoxModel<String> comboBoxModel;
 	protected JButton btnRemover;
+	private JButton btnAdicionar;
 
 	/**
 	 * Create the panel.
@@ -58,45 +54,10 @@ public class PainelElementos extends JPanel {
 		scrollPane.setViewportView(list);
 
 		btnRemover = new JButton("Remover");
-		btnRemover.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/user_blue_delete.png")));
+		btnRemover.setIcon(new ImageIcon(getClass().getClassLoader()
+				.getResource("images/user_blue_delete.png")));
 		panel.add(btnRemover, BorderLayout.SOUTH);
-		btnRemover.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent event) {
-				int index = list.getSelectedIndex();
-				if (index < 0) {
-					Toolkit.getDefaultToolkit().beep();
-					return;
-				}
-
-				ArrayList<Elemento> e = Gerador.getInstance().getGame()
-						.getListaElementos();
-				for (int i = 0; i < e.size(); i++) {
-					if (e.get(i).getNome()
-							.equalsIgnoreCase(listModel.get(index))) {
-						Gerador.getInstance().getGame().getListaElementos()
-								.remove(i);
-					}
-				}
-				listModel.remove(index);
-
-				int size = listModel.getSize();
-
-				if (size == 0) { // Nobody's left, disable firing.
-					btnRemover.setEnabled(false);
-
-				} else { // Select an index.
-					if (index == listModel.getSize()) {
-						// removed item in last position
-						index--;
-					}
-
-					list.setSelectedIndex(index);
-					list.ensureIndexIsVisible(index);
-				}
-				updateComboBox();
-			}
-		});
+		btnRemover.addActionListener(ControllerPainelElementos.getInstance(this));
 
 		JPanel panel_1 = new JPanel();
 		add(panel_1, BorderLayout.CENTER);
@@ -110,15 +71,7 @@ public class PainelElementos extends JPanel {
 		textField = new JTextField();
 		textField.setBounds(97, 11, 154, 20);
 		panel_1.add(textField);
-		textField.addKeyListener(new java.awt.event.KeyAdapter() {
-			@Override
-			public void keyTyped(java.awt.event.KeyEvent evt) {
-				String caracteres = "!@#$%¨&*()_+-`{^}^?:><'\"\\";
-				if (caracteres.contains(evt.getKeyChar() + "")) {
-					evt.consume();
-				}
-			}
-		});
+		textField.addKeyListener(ControllerPainelElementos.getInstance(this));
 
 		JLabel lblUm = new JLabel("\u00E9 um:");
 		lblUm.setBounds(28, 64, 59, 20);
@@ -129,76 +82,37 @@ public class PainelElementos extends JPanel {
 		comboBox.setBounds(97, 64, 154, 20);
 		panel_1.add(comboBox);
 
-
-		JButton btnAdicionar = new JButton("Adicionar");
-		btnAdicionar.setIcon(new ImageIcon(getClass().getClassLoader().getResource("images/user_blue_add2.png")));
+		btnAdicionar = new JButton("Adicionar");
+		btnAdicionar.setIcon(new ImageIcon(getClass().getClassLoader()
+				.getResource("images/user_blue_add2.png")));
 		btnAdicionar.setBounds(28, 121, 223, 25);
 		panel_1.add(btnAdicionar);
-		btnAdicionar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				String name = textField.getText();
-
-				if (name.equals("") || alreadyInList(name)) {
-					Toolkit.getDefaultToolkit().beep();
-					textField.requestFocusInWindow();
-					textField.selectAll();
-					return;
-				}
-
-				String nome = textField.getText().substring(0,1).toUpperCase().concat(textField.getText().substring(1));
-				String extend = comboBox.getItemAt(comboBox.getSelectedIndex());
-
-				listModel.addElement(nome);
-				
-				Gerador.getInstance()
-						.getGame()
-						.getListaElementos()
-						.add(new Elemento(nome, extend));
-
-				textField.requestFocusInWindow();
-				textField.setText("");
-				btnRemover.setEnabled(true);
-				updateComboBox();
-			}
-		});
+		btnAdicionar.addActionListener(ControllerPainelElementos.getInstance(this));
 
 	}
 
-	private boolean alreadyInList(String name) {
-		for (int i = 0; i < listModel.getSize(); i++) {
-			if (listModel.getElementAt(i).equalsIgnoreCase(name)) {
-				return true;
-			}
-		}
-		return false;
+	public JComboBox<String> getComboBox() {
+		return comboBox;
 	}
 
-	public void updateList() {
-		ArrayList<Elemento> e = Gerador.getInstance().getGame()
-				.getListaElementos();
-		listModel.removeAllElements();
-		for (Elemento elemento : e) {
-			listModel.addElement(elemento.getNome());
-		}
-		if(e.size()>0)
-			btnRemover.setEnabled(true);
-		else
-			btnRemover.setEnabled(false);
-		updateComboBox();
+	public JList<String> getList() {
+		return list;
 	}
 
-	private void updateComboBox() {
-		ArrayList<Elemento> e = Gerador.getInstance().getGame()
-				.getListaElementos();
-		String[] elementos = { "","Elemento", "Personagem", "Obstaculo" };
-		comboBoxModel.removeAllElements();
-		for (int i = 0; i < elementos.length; i++) {
-			comboBoxModel.addElement(elementos[i]);
-		}
-		for (Elemento elemento : e) {
-			comboBoxModel.addElement(elemento.getNome());
-		}
+	public DefaultListModel<String> getListModel() {
+		return listModel;
+	}
+
+	public DefaultComboBoxModel<String> getComboBoxModel() {
+		return comboBoxModel;
+	}
+
+	public JButton getBtnRemover() {
+		return btnRemover;
+	}
+
+	public JButton getBtnAdicionar() {
+		return btnAdicionar;
 	}
 
 	public JTextField getTextField() {

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><uml:Model xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" name="Model" xmi:id="_3BOj0IkDEeW68-rLcCPRqw" xmi:version="2.1">
+  <packageImport xmi:id="_3BOj0YkDEeW68-rLcCPRqw">
+    <importedPackage href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0" xmi:type="uml:Model"/>
+  </packageImport>
+  <packageImport xmi:id="_Ew3WYIoyEeWHBL_-Do4-fg">
+    <importedPackage href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#_0" xmi:type="uml:Model"/>
+  </packageImport>
+  <packagedElement name="core" xmi:id="_OCdPoIoIEeWhMZXom0l9CQ" xmi:type="uml:Package">
+    <packagedElement name="KeyListener" xmi:id="KeyListener" xmi:type="uml:Interface"/>
+    <packagedElement name="MouseInputListener" xmi:id="MouseInputListener" xmi:type="uml:Interface"/>
+    <packagedElement name="Interacao" xmi:id="_QWLVEIlgEeW8q8DTHKD6Ow" xmi:type="uml:Interface">
+      <generalization general="KeyListener" xmi:id="_x7urMIlnEeW895OJNim2Fg"/>
+      <generalization general="MouseInputListener" xmi:id="_yZMqUIlnEeW895OJNim2Fg"/>
+    </packagedElement>
+    <packagedElement clientDependency="_ISgYkIlrEeW895OJNim2Fg _BboJkIraEeWsdOYnHSCEsQ" isAbstract="true" name="GameBase" xmi:id="_qBZ48IlnEeW895OJNim2Fg" xmi:type="uml:Class">
+      <interfaceRealization client="_qBZ48IlnEeW895OJNim2Fg" contract="_QWLVEIlgEeW8q8DTHKD6Ow" name="InterfaceRealization1" supplier="_QWLVEIlgEeW8q8DTHKD6Ow" xmi:id="_ISgYkIlrEeW895OJNim2Fg"/>
+      <interfaceRealization client="_qBZ48IlnEeW895OJNim2Fg" contract="_4xDL8IlhEeW8q8DTHKD6Ow" name="InterfaceRealization2" supplier="_4xDL8IlhEeW8q8DTHKD6Ow" xmi:id="_BboJkIraEeWsdOYnHSCEsQ"/>
+    </packagedElement>
+    <packagedElement name="Cenario" xmi:id="_xeanoIloEeW895OJNim2Fg" xmi:type="uml:Class"/>
+    <packagedElement name="" xmi:id="_XeXysIlTEeWD0pc--njHrg" xmi:type="uml:PrimitiveType"/>
+    <packagedElement name="Point" xmi:id="_SfGuoImbEeWT2f6xJE3WMg" xmi:type="uml:PrimitiveType"/>
+    <packagedElement name="Movimento" xmi:id="Movimento" xmi:type="uml:Interface">
+      <ownedOperation name="mover" xmi:id="_cnK6sIliEeW8q8DTHKD6Ow">
+        <ownedParameter isUnique="false" name="i" type="_QWLVEIlgEeW8q8DTHKD6Ow" xmi:id="_htCoUIliEeW8q8DTHKD6Ow"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement name="Colisao" xmi:id="Colisao" xmi:type="uml:Interface">
+      <ownedComment xmi:id="_U0YdIIoNEeWhMZXom0l9CQ">
+        <body>java.awt.geom.Rectangle2D</body>
+      </ownedComment>
+      <ownedOperation name="getColisao" xmi:id="_mM43wIliEeW8q8DTHKD6Ow">
+        <ownedComment xmi:id="_lBVXoIozEeWHBL_-Do4-fg">
+          <body>retorna a area de colis�o do elemento.</body>
+        </ownedComment>
+        <ownedParameter direction="return" isUnique="false" name="return" type="_cGim4IozEeWHBL_-Do4-fg" xmi:id="_vAVqYIliEeW8q8DTHKD6Ow"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement name="Acoes" xmi:id="_4xDL8IlhEeW8q8DTHKD6Ow" xmi:type="uml:Interface">
+      <generalization general="Movimento" xmi:id="_wXq3cIlnEeW895OJNim2Fg"/>
+      <generalization general="Colisao" xmi:id="_xD0y0IlnEeW895OJNim2Fg"/>
+    </packagedElement>
+    <packagedElement clientDependency="_L91a0IlrEeW895OJNim2Fg" isAbstract="true" name="Elemento" xmi:id="Elemento" xmi:type="uml:Class">
+      <interfaceRealization client="Elemento" contract="_4xDL8IlhEeW8q8DTHKD6Ow" name="InterfaceRealization1" supplier="_4xDL8IlhEeW8q8DTHKD6Ow" xmi:id="_L91a0IlrEeW895OJNim2Fg"/>
+      <ownedOperation isAbstract="true" name="update" xmi:id="_aTz-sIlnEeW895OJNim2Fg">
+        <ownedParameter isUnique="false" name="currentTick" type="int" xmi:id="_d5K70IlnEeW895OJNim2Fg"/>
+      </ownedOperation>
+      <ownedOperation isAbstract="true" name="render" xmi:id="_eXyKcIlnEeW895OJNim2Fg">
+        <ownedParameter isUnique="false" name="g" type="_RW1nMIloEeW895OJNim2Fg" xmi:id="_iH17sIlnEeW895OJNim2Fg"/>
+      </ownedOperation>
+    </packagedElement>
+    <packagedElement name="Obstaculo" xmi:id="Obstaculo" xmi:type="uml:Class">
+      <generalization general="Elemento" xmi:id="_m7l-kIlnEeW895OJNim2Fg"/>
+    </packagedElement>
+    <packagedElement isAbstract="true" name="Personagem" xmi:id="Personagem" xmi:type="uml:Class">
+      <generalization general="Elemento" xmi:id="_mfRO8IlnEeW895OJNim2Fg"/>
+    </packagedElement>
+    <packagedElement name="Graphics2D" xmi:id="_RW1nMIloEeW895OJNim2Fg" xmi:type="uml:PrimitiveType"/>
+    <packagedElement name="Rectangle2D.Double" xmi:id="_cGim4IozEeWHBL_-Do4-fg" xmi:type="uml:PrimitiveType"/>
+    <packagedElement name="Audio" xmi:id="_wYOsgIo1EeWHBL_-Do4-fg" xmi:type="uml:Class"/>
+    <packagedElement name="String" xmi:id="String" xmi:type="uml:PrimitiveType"/>
+    <packagedElement name="int" xmi:id="int" xmi:type="uml:PrimitiveType"/>
+    <packagedElement name="int" xmi:id="Integer" xmi:type="uml:PrimitiveType"/>
+    <packagedElement name="double" xmi:id="Decimal" xmi:type="uml:PrimitiveType"/>
+    <packagedElement name="boolean" xmi:id="Boolean" xmi:type="uml:PrimitiveType"/>
+  </packagedElement>
+  <packagedElement name="game" xmi:id="_uxClsIoIEeWhMZXom0l9CQ" xmi:type="uml:Package">
+    <packagedElement name="Jogo" xmi:id="_huaOIIoOEeWhMZXom0l9CQ" xmi:type="uml:Class">
+      <generalization general="_qBZ48IlnEeW895OJNim2Fg" xmi:id="_jj8MYIoOEeWhMZXom0l9CQ"/>
+    <ownedOperation name="loadCenario" xmi:id="mUGN516M_ysM81xqoX2h49i"><ownedParameter name="numsei" xmi:id="Lo1FgN4pYN4p0aYWEVohXcZ"/></ownedOperation><ownedOperation name="addTeleport" xmi:id="pG1wcwdJjwyPE324qG0p5s0"><ownedParameter name="numsei" xmi:id="ct9635i67F4r-Je72r8Z64f"/><ownedParameter name="numsei" xmi:id="81hhuIUg81f80F-NoAV90x4"/><ownedParameter direction="return" name="2" xmi:id="66dWdkbgScw53QErW7J792j"/></ownedOperation><ownedOperation name="configLayerInferior" xmi:id="2wutYzob40k6RyZp_95of0T"><ownedParameter name="numsei" xmi:id="11nq90foyjt0tY882mjP3vv"/><ownedParameter name="areia" xmi:id="xJvZz5a0WT1_wM8xVHt8Y75"/></ownedOperation><ownedOperation name="configLayerSuperior" xmi:id="6113Tvmx0zTU-izftK2JW07"><ownedParameter name="numsei" xmi:id="S03rYd1goGAjH4L7XnP5JvE"/><ownedParameter name="folhsa" xmi:id="6VF3L3Tu04P9jucw450SIFy"/></ownedOperation><ownedOperation name="configLayerInferior" xmi:id="1wpoQoK829d07aFTy1yoQ88"><ownedParameter name="numsei" xmi:id="9W-Z3h66I730V2Z6v23EI1B"/><ownedParameter name="grama" xmi:id="ZeT19Kfc05j6ZcbtoA38HN5"/></ownedOperation></packagedElement>
+  <packagedElement name="Hahahahahaaaa" xmi:id="Hahahahahaaaa" xmi:type="uml:Class"><generalization general="Personagem" xmi:id="ndiLCCBoz5D6qH3p56m7Q0P"/><ownedComment xmi:id="jedT54Gk24ar04z359FL59u"><body>core.Personagem</body></ownedComment><ownedComment xmi:id="T15G4ubx3T5uLH3Rmp6v58o"><body>java.awt.geom.Rectangle2D</body></ownedComment><ownedComment xmi:id="cwK1Dn9FMwrQ439qk58FVY4"><body>core.Interacao</body></ownedComment><ownedComment xmi:id="I868007f84Ha-JroQ81U69X"><body>java.awt.Graphics2D</body></ownedComment><ownedAttribute name="seila" type="String"><defaultValue value="&quot;a&quot;" xmi:type="uml:LiteralString"/></ownedAttribute></packagedElement></packagedElement>
+</uml:Model>

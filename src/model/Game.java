@@ -72,4 +72,12 @@ public class Game {
 		this.acoes_colisao = acoes_colisao;
 	}
 
+	public void setListaElementos(ArrayList<Elemento> listaElementos) {
+		this.listaElementos = listaElementos;
+	}
+
+	public void setListaCenarios(ArrayList<Cenario> listaCenarios) {
+		this.listaCenarios = listaCenarios;
+	}
+
 }
